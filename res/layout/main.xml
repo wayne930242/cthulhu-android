@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView android:id="@+id/message" android:textStyle="bold" android:layout_width="fill_parent" android:gravity="center_horizontal" android:layout_height="wrap_content" android:text="Roll your characteristics" android:textColor="#ff0000" android:background="@drawable/border" android:layout_marginBottom="10px"></TextView>
+	<TextView android:id="@+id/textView1" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Characteristics &amp; Rolls:" android:layout_marginBottom="20px"></TextView>
+	<TableLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/tableLayout1">
+		<TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<TextView android:id="@+id/textViewStr" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="STR"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_str"></TextView>
+
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewApp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="APP"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_app"></TextView>
+			
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewSan" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SAN"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_san"></TextView>			
+
+			<TextView android:paddingLeft="40px" android:id="@+id/textViewHP" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hit Points"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_hp"></TextView>			
+		</TableRow>
+		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<TextView android:id="@+id/textViewCon" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CON"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_con"></TextView>
+
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewInt" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="INT"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_int"></TextView>
+		
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewIdea" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Idea"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_idea"></TextView>
+			
+			<TextView android:paddingLeft="40px" android:id="@+id/textViewDam" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dam Bonus"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_dam"></TextView>			
+		</TableRow>
+		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<TextView android:id="@+id/textViewSiz" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SIZ"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_siz"></TextView>
+
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewPow" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="POW"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_pow"></TextView>
+		
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewLuck" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Luck"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_luck"></TextView>
+
+			<TextView android:paddingLeft="40px" android:id="@+id/textViewPointsOcc" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Occ. Points"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_points_occ"></TextView>			
+		</TableRow>
+		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<TextView android:id="@+id/textViewDex" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DEX"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_dex"></TextView>
+
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewEdu" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="EDU"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_edu"></TextView>
+		
+			<TextView android:paddingLeft="20px" android:id="@+id/textViewKnow" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Know"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_know"></TextView>
+
+			<TextView android:paddingLeft="40px" android:id="@+id/textViewPointsPer" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Per. Points"></TextView>
+			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_points_per"></TextView>			
+		</TableRow>
+	</TableLayout>
+	<Button android:layout_marginTop="20px" android:text="Roll" android:id="@+id/btn_roll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="rerollAttributes">
+	
+	</Button>
+	<LinearLayout android:layout_marginTop="20px" android:layout_width="match_parent" android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:gravity="center_vertical">
+			<TextView android:id="@+id/textViewAge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Age: "></TextView>
+			<Spinner android:id="@+id/tv_age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:prompt="@string/prompt_age"></Spinner>	
+	</LinearLayout>
+	<TableLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/modAttributes" android:visibility="visible">
+		<TableRow android:id="@+id/tableRow5" android:gravity="center_vertical" android:layout_height="wrap_content">
+			<TextView android:id="@+id/textViewStrMod" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="STR"></TextView>			
+			<Spinner android:id="@+id/mod_str" android:layout_width="wrap_content" android:layout_height="wrap_content" android:prompt="@string/prompt_age"></Spinner>			 			 		
+			 
+		</TableRow>
+		
+		<TableRow android:id="@+id/tableRow6" android:layout_width="wrap_content" android:layout_height="wrap_content">
+		</TableRow>
+		
+		<TableRow android:id="@+id/tableRow7" android:layout_width="wrap_content" android:layout_height="wrap_content">
+		</TableRow>
+		
+		<TableRow android:id="@+id/tableRow8" android:layout_width="wrap_content" android:layout_height="wrap_content">
+		</TableRow>
+	</TableLayout>
+</LinearLayout>

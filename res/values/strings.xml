@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, CallofCthulhuActivity!</string>
+    <string name="app_name">Call of Cthulhu</string>
+    <string name="new_character">Create a new character</string>
+    <string name="load_character">Load an existing character</string>
+    <string name="slash"> - </string>
+    <string name="prompt_age">Select you age</string>
+</resources>
