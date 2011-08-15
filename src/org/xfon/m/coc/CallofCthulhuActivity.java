@@ -29,9 +29,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 	private CocDatabaseAdapter dbAdapter;
 	private Investigator investigator;
 	
-	private SortedMap<Integer,String> strDamBonus;
-	private String errorMessage = null; 
-	
+	private String errorMessage = null; 	
 	private MediaPlayer player = null;
 	
 	private int mustDrop = -1;
@@ -42,16 +40,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
         super.onCreate(savedInstanceState);
         dbAdapter = new CocDatabaseAdapter(this);
         Age age = new Age( this, R.id.tv_ageStart, R.id.tv_age );
-        investigator = new Investigator( this, age );
-        strDamBonus = new TreeMap<Integer,String>();
-        strDamBonus.put( 12, "-1d6" );
-        strDamBonus.put( 16, "-1d4" );
-        strDamBonus.put( 24, "+0" );
-        strDamBonus.put( 32, "+1d4" );
-        strDamBonus.put( 40, "+1d6" );
-        strDamBonus.put( 56, "+2d6" );
-        strDamBonus.put( 72, "+3d6" );
-        strDamBonus.put( 88, "+4d6" );        
+        investigator = new Investigator( this, age );            
         clearErrors();                       
         setContentView(R.layout.main);                       
     }          
@@ -166,15 +155,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	setIntValue( R.id.tv_hp, roundUpDiv( attrSiz + attrCon, 2 ) );
     	
     	// Str bonus
-    	Iterator<Integer> it = strDamBonus.keySet().iterator();
-    	while ( it.hasNext() ) {
-    		int value = it.next();
-    		if ( attrStr + attrSiz <= value ) {
-    			String bonus = strDamBonus.get( value );
-    			((TextView)findViewById( R.id.tv_dam ) ).setText( bonus );
-    			break;
-    		}
-    	}
+		((TextView)findViewById( R.id.tv_dam ) ).setText( investigator.getDamBonus() );
     	
     	// Points
     	setIntValue( R.id.tv_points_occ, 20 * attrEdu );

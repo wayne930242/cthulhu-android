@@ -19,6 +19,8 @@ public class Investigator  implements OnChangedListener {
 	private Dice dice_2d6p6 = new Dice( 2,6,6 );
 	private Dice dice_3d6p3 = new Dice( 3,6,3 );
 	
+	private StrengthDamageBonus strDamBonus = new StrengthDamageBonus();
+	
 	private Attribute attrStr, attrCon, attrSiz, attrDex;
 	private Attribute attrApp, attrInt, attrPow, attrEdu;
 	private Attribute[] baseAttributes, ageModifiableAttributes;
@@ -102,6 +104,10 @@ public class Investigator  implements OnChangedListener {
 		int sum = 0;
     	for ( int i = 0; i < ageModifiableAttributes.length; i++ ) sum += ageModifiableAttributes[ i ].getMod();
     	return sum;
+	}
+	
+	public String getDamBonus() {
+		return strDamBonus.getBonus( attrStr.getTotal(), attrSiz.getTotal() );
 	}
 
 	@Override
