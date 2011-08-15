@@ -6,4 +6,32 @@
     <string name="load_character">Load an existing character</string>
     <string name="slash"> - </string>
     <string name="prompt_age">Select you age</string>
+    
+    
+    <string name="sqlCreateAttributes">
+    CREATE TABLE attributes (
+    	_id integer primary key autoincrement,
+    	name string not null,
+    	
+    	base_str integer not null,
+    	base_con integer not null,
+    	base_siz integer not null,
+    	base_dex integer not null,
+    	base_app integer not null,
+    	base_int integer not null,
+    	base_pow integer not null,
+    	base_edu integer not null,
+
+    	mod_str integer not null,
+    	mod_con integer not null,
+    	mod_siz integer not null,
+    	mod_dex integer not null,
+    	mod_app integer not null,
+    	mod_int integer not null,
+    	mod_pow integer not null,
+    	mod_edu integer not null,
+    	
+    	age integer not null    
+    );
+    </string>   
 </resources>

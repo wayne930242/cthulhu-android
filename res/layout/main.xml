@@ -58,9 +58,13 @@
 			<TextView android:paddingLeft="5px" android:gravity="right" android:text=" - " android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tv_points_per"></TextView>			
 		</TableRow>
 	</TableLayout>
-	<Button android:layout_marginTop="15px" android:text="Roll" android:id="@+id/btn_roll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="rerollAttributes">
 	
-	</Button>
+	
+	<LinearLayout android:layout_marginTop="15px" android:layout_width="match_parent" android:id="@+id/buttonsLayout" android:layout_height="wrap_content" android:gravity="center_vertical">
+		<Button android:text="Roll" android:id="@+id/btn_roll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="rerollAttributes"></Button>
+		<Button android:layout_marginLeft="10px" android:text="Save" android:id="@+id/btn_save" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="saveAttributes"></Button>
+		<Button android:layout_marginLeft="10px" android:text="Load" android:id="@+id/btn_load" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="loadAttributes"></Button>
+	</LinearLayout>	
 	
 	<!-- Age -->	
 	<LinearLayout android:layout_marginTop="0px" android:layout_width="match_parent" android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:gravity="center_vertical">
@@ -70,33 +74,10 @@
 			<org.xfon.m.coc.CustomNumberPicker android:id="@+id/tv_age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="invisible"></org.xfon.m.coc.CustomNumberPicker>
 	</LinearLayout>
 
-	<LinearLayout android:layout_marginTop="5px" android:layout_width="match_parent" android:id="@+id/modAttributesLayout" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="vertical" android:visibility="invisible">
+	<LinearLayout android:layout_marginTop="5px" android:layout_width="match_parent" android:id="@+id/modAttributesLayout" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="vertical" android:visibility="visible">
 		<TextView android:id="@+id/textViewModAttributes" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lower attributes due to age:" android:layout_marginBottom="20px"></TextView>		
-		<TableLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/modAttributesTable">
-			<TableRow android:id="@+id/tableRow5" android:gravity="center_vertical" android:layout_height="wrap_content">
-				<TextView android:id="@+id/textViewStrMod" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="STR:"></TextView>
-				<TextView android:paddingLeft="20px" android:id="@+id/tv_mod_str" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" - "></TextView>
-				<SeekBar android:paddingLeft="20px" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:max="5" android:layout_marginRight="40px" android:id="@+id/sb_mod_str"></SeekBar>			
-			</TableRow>		
-
-			<TableRow android:id="@+id/tableRow6" android:gravity="center_vertical" android:layout_height="wrap_content">
-				<TextView android:id="@+id/textViewConMod" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CON:"></TextView>
-				<TextView android:paddingLeft="20px" android:id="@+id/tv_mod_con" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" - "></TextView>
-				<SeekBar android:paddingLeft="20px" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:max="5" android:layout_marginRight="40px" android:id="@+id/sb_mod_con"></SeekBar>			
-			</TableRow>		
-
-			<TableRow android:id="@+id/tableRow7" android:gravity="center_vertical" android:layout_height="wrap_content">
-				<TextView android:id="@+id/textViewDexMod" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DEX:"></TextView>
-				<TextView android:paddingLeft="20px" android:id="@+id/tv_mod_dex" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" - "></TextView>
-				<SeekBar android:paddingLeft="20px" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:max="5" android:layout_marginRight="40px" android:id="@+id/sb_mod_dex"></SeekBar>			
-			</TableRow>		
-
-			<TableRow android:id="@+id/tableRow8" android:gravity="center_vertical" android:layout_height="wrap_content">
-				<TextView android:id="@+id/textViewAppMod" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="APP:"></TextView>
-				<TextView android:paddingLeft="20px" android:id="@+id/tv_mod_app" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" - "></TextView>
-				<SeekBar android:paddingLeft="20px" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:max="5" android:layout_marginRight="40px" android:id="@+id/sb_mod_app"></SeekBar>			
-			</TableRow>		
-
+		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/modAttributesTable" android:visibility="visible">
+			<!-- Programmatically filled -->
 		</TableLayout>
 	</LinearLayout>
 	<!-- 

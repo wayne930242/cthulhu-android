@@ -65,54 +65,45 @@ containing a value of this type.
         public static final int timepicker_up_selected=0x7f020013;
     }
     public static final class id {
-        public static final int btn_roll=0x7f07002a;
+        public static final int btn_load=0x7f07002d;
+        public static final int btn_roll=0x7f07002b;
+        public static final int btn_save=0x7f07002c;
+        public static final int buttonsLayout=0x7f07002a;
         public static final int decrement=0x7f070002;
         public static final int increment=0x7f070000;
-        public static final int linearLayout1=0x7f07002b;
-        public static final int menu_about=0x7f070043;
+        public static final int linearLayout1=0x7f07002e;
+        public static final int menu_about=0x7f070036;
         public static final int message=0x7f070003;
-        public static final int modAttributesLayout=0x7f070030;
-        public static final int modAttributesTable=0x7f070032;
-        public static final int sb_mod_app=0x7f070042;
-        public static final int sb_mod_con=0x7f07003a;
-        public static final int sb_mod_dex=0x7f07003e;
-        public static final int sb_mod_str=0x7f070036;
+        public static final int modAttributesLayout=0x7f070033;
+        public static final int modAttributesTable=0x7f070035;
         public static final int tableLayout1=0x7f070005;
         public static final int tableRow1=0x7f070006;
         public static final int tableRow2=0x7f07000f;
         public static final int tableRow3=0x7f070018;
         public static final int tableRow4=0x7f070021;
-        public static final int tableRow5=0x7f070033;
-        public static final int tableRow6=0x7f070037;
-        public static final int tableRow7=0x7f07003b;
-        public static final int tableRow8=0x7f07003f;
         public static final int textView1=0x7f070004;
-        public static final int textViewAge=0x7f07002e;
-        public static final int textViewAgeStart=0x7f07002c;
+        public static final int textViewAge=0x7f070031;
+        public static final int textViewAgeStart=0x7f07002f;
         public static final int textViewApp=0x7f070009;
-        public static final int textViewAppMod=0x7f070040;
         public static final int textViewCon=0x7f070010;
-        public static final int textViewConMod=0x7f070038;
         public static final int textViewDam=0x7f070016;
         public static final int textViewDex=0x7f070022;
-        public static final int textViewDexMod=0x7f07003c;
         public static final int textViewEdu=0x7f070024;
         public static final int textViewHP=0x7f07000d;
         public static final int textViewIdea=0x7f070014;
         public static final int textViewInt=0x7f070012;
         public static final int textViewKnow=0x7f070026;
         public static final int textViewLuck=0x7f07001d;
-        public static final int textViewModAttributes=0x7f070031;
+        public static final int textViewModAttributes=0x7f070034;
         public static final int textViewPointsOcc=0x7f07001f;
         public static final int textViewPointsPer=0x7f070028;
         public static final int textViewPow=0x7f07001b;
         public static final int textViewSan=0x7f07000b;
         public static final int textViewSiz=0x7f070019;
         public static final int textViewStr=0x7f070007;
-        public static final int textViewStrMod=0x7f070034;
         public static final int timepicker_input=0x7f070001;
-        public static final int tv_age=0x7f07002f;
-        public static final int tv_ageStart=0x7f07002d;
+        public static final int tv_age=0x7f070032;
+        public static final int tv_ageStart=0x7f070030;
         public static final int tv_app=0x7f07000a;
         public static final int tv_con=0x7f070011;
         public static final int tv_dam=0x7f070017;
@@ -123,10 +114,6 @@ containing a value of this type.
         public static final int tv_int=0x7f070013;
         public static final int tv_know=0x7f070027;
         public static final int tv_luck=0x7f07001e;
-        public static final int tv_mod_app=0x7f070041;
-        public static final int tv_mod_con=0x7f070039;
-        public static final int tv_mod_dex=0x7f07003d;
-        public static final int tv_mod_str=0x7f070035;
         public static final int tv_points_occ=0x7f070020;
         public static final int tv_points_per=0x7f070029;
         public static final int tv_pow=0x7f07001c;
@@ -151,6 +138,7 @@ containing a value of this type.
         public static final int new_character=0x7f050002;
         public static final int prompt_age=0x7f050005;
         public static final int slash=0x7f050004;
+        public static final int sqlCreateAttributes=0x7f050006;
     }
     public static final class styleable {
         /** Attributes that can be used with a numberpicker.

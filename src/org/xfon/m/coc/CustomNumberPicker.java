@@ -193,6 +193,13 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
         mCurrent = current;
         updateView();
     }
+    
+    public void setCurrentAndNotify(int current) {
+        mCurrent = current;
+        notifyChange();
+        updateView();
+    }
+
 
     /**
      * The speed (in milliseconds) at which the numbers will scroll

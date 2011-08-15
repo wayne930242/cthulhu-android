@@ -10,23 +10,21 @@ final public class Attribute {
 	private String name;	
 	
 	private int baseTextViewId;
-	private int modTextViewId;
-	private int seekBarId;
 	
 	private int unmodifiedValue;
 	private int mod;
 	
 	private Dice rollingDice;
+	//private AttributeReducer reducer;
 	
-	public Attribute(Activity activity, String name, int baseTextViewId, int modTextViewId, int seekBarId, Dice rollingDice ) {
+	public Attribute(Activity activity, String name, int baseTextViewId, Dice rollingDice ) {
 		super();
 		this.activity = activity;
 		this.name = name;
 		this.baseTextViewId = baseTextViewId;
-		this.modTextViewId = modTextViewId;
-		this.seekBarId = seekBarId;
 		this.rollingDice = rollingDice;
 		
+		//this.reducer = null;
 		this.unmodifiedValue = 0;
 		this.mod = 0;
 	}
@@ -46,7 +44,6 @@ final public class Attribute {
 	public void setMod( int mod ) {
 		int oldMod = this.mod;
 		this.mod = mod;
-		if ( modTextViewId != 0 ) setIntValue( modTextViewId, -mod );
 		if ( baseTextViewId != 0 ) setIntValue( baseTextViewId, unmodifiedValue + mod );
 		
 		TextView tv = (TextView)activity.findViewById( baseTextViewId );
@@ -63,10 +60,9 @@ final public class Attribute {
 		return this.mod;
 	}
 	
-	public int getSeekBarId() {
-		return this.seekBarId;
-	}
-	
+    public String getName() {
+    	return this.name;
+    }
 	
     private void setIntValue( int id, int value ) {
     	((TextView)activity.findViewById( id )).setText( "" + value );
@@ -77,11 +73,11 @@ final public class Attribute {
     }
     
     public int roll() {
+    	if ( rollingDice == null ) return -1;
     	int result = rollingDice.roll();
-    	unmodifiedValue = result;
-    	if ( baseTextViewId != 0 ) setIntValue( baseTextViewId, unmodifiedValue );
-    	if ( modTextViewId != 0 ) setIntValue( modTextViewId, unmodifiedValue + mod );
+    	setUnmodifiedValue( result );
+    	setMod( 0 );
     	return result;
-    }
+    }       
 
 }

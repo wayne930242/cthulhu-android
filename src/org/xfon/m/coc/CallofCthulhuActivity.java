@@ -14,52 +14,36 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeListener {
-	private Dice dice_3d6 = new Dice( 3,6 );
-	private Dice dice_2d6p6 = new Dice( 2,6,6 );
-	private Dice dice_3d6p3 = new Dice( 3,6,3 );
-		
-	private Attribute attrStr = new Attribute( this, "STR", R.id.tv_str, R.id.tv_mod_str, R.id.sb_mod_str, dice_3d6 );
-	private Attribute attrCon = new Attribute( this, "CON", R.id.tv_con, R.id.tv_mod_con, R.id.sb_mod_con, dice_3d6 );
-	private Attribute attrSiz = new Attribute( this, "SIZ", R.id.tv_siz, 0, 0, dice_2d6p6 );
-	private Attribute attrDex = new Attribute( this, "DEX", R.id.tv_dex, R.id.tv_mod_dex, R.id.sb_mod_dex, dice_3d6 );
+public class CallofCthulhuActivity extends Activity implements OnAttributeChangedListener, OnAgeChangedListener {
 	
-	private Attribute attrApp = new Attribute( this, "APP", R.id.tv_app, R.id.tv_mod_app, R.id.sb_mod_app, dice_3d6 );
-	private Attribute attrInt = new Attribute( this, "INT", R.id.tv_int, 0, 0, dice_2d6p6 );
-	private Attribute attrPow = new Attribute( this, "POW", R.id.tv_pow, 0, 0, dice_3d6 );
-	private Attribute attrEdu = new Attribute( this, "EDU", R.id.tv_edu, 0, 0, dice_3d6p3 );	
-	
-	private Attribute[] ageModifiableAttributes = {
-			attrStr, attrCon, attrDex, attrApp
-	};
-	
-	private Attribute[] baseAttributes = {
-			attrStr, attrCon, attrSiz, attrDex,
-			attrApp, attrInt, attrPow, attrEdu
-	};
+	private CocDatabaseAdapter dbAdapter;
+	private Investigator investigator;
 	
 	private SortedMap<Integer,String> strDamBonus;
-	final static int MAX_AGE = 90;
 	private String errorMessage = null; 
 	
-	private int mustDrop = -1;
-	
 	private MediaPlayer player = null;
+	
+	private int mustDrop = -1;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbAdapter = new CocDatabaseAdapter(this);
+        Age age = new Age( this, R.id.tv_ageStart, R.id.tv_age );
+        //age.addAgeChangedListener( this );
+        investigator = new Investigator( this, age );
         strDamBonus = new TreeMap<Integer,String>();
         strDamBonus.put( 12, "-1d6" );
         strDamBonus.put( 16, "-1d4" );
@@ -71,7 +55,12 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
         strDamBonus.put( 88, "+4d6" );        
         clearErrors();                       
         setContentView(R.layout.main);        
-    }           
+    }          
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,17 +92,33 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     }
             
     public void rerollAttributes( View view ) {
-    	int i;    	
-    	
     	if ( view.getId() != R.id.btn_roll ) return;
     	notifyUser();
     	rerollBasicAttributes();
-    	calculateDerivedAttributes();  
+    	calculateDerivedAttributes();
+    	
+    	mustDrop = -1;
+    	hideSeekBars();
+    	resetSeekBars();
     	initializeAge();
-    	initializeSeekBars();
-    	updateMustDrop();
+    	
     	clearErrors();  
     	((Button)findViewById( R.id.btn_roll )).setText( "Reroll" );    	
+    }
+    
+    public void saveAttributes( View view ) {
+    	dbAdapter.saveInvestigator(investigator, "-");
+    }
+    
+    public void loadAttributes( View view ) {    	
+    	dbAdapter.loadInvestigator(investigator, "-" );
+    	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );     	
+    	initializeAge();
+		CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.tv_age );	
+		picker.setCurrentAndNotify( investigator.getAge() );	
+    	resetSeekBars();
+    	calculateDerivedAttributes();      	
+    	updateMustDrop();
     }
     
     private void notifyUser() {
@@ -124,30 +129,31 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     }
     
     private void rerollBasicAttributes() {
-    	int i;
-    	for ( i = 0; i < baseAttributes.length; i++ ) {
-    		baseAttributes[i].roll();
-    	}
-    	    	
-    	((TextView)findViewById( R.id.tv_edu )).setTextColor( Color.LTGRAY );
-    	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );
-    	mustDrop = -1;  	
+    	investigator.rerollBasicAttributes();
+    	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );     	
     }
     
-    private void calculateDerivedAttributes() { 	   
-    	setIntValue( R.id.tv_san, 5 * attrPow.getTotal() );
-    	setIntValue( R.id.tv_idea, 5 * attrInt.getTotal() );
-    	setIntValue( R.id.tv_luck, 5 * attrPow.getTotal() );
-    	setIntValue( R.id.tv_know, Math.min( 99, 5 * attrEdu.getTotal() ) );
+    private void calculateDerivedAttributes() {
+    	int attrPow = investigator.getAttribute( "POW" ).getTotal();
+    	int attrSiz = investigator.getAttribute( "SIZ" ).getTotal();
+    	int attrStr = investigator.getAttribute( "STR" ).getTotal();
+    	int attrCon = investigator.getAttribute( "CON" ).getTotal();
+    	int attrInt = investigator.getAttribute( "INT" ).getTotal();
+    	int attrEdu = investigator.getAttribute( "EDU" ).getTotal();
+    	
+    	setIntValue( R.id.tv_san, 5 * attrPow );
+    	setIntValue( R.id.tv_idea, 5 * attrInt );
+    	setIntValue( R.id.tv_luck, 5 * attrPow );
+    	setIntValue( R.id.tv_know, Math.min( 99, 5 * attrEdu ) );
 
     	// Hit points
-    	setIntValue( R.id.tv_hp, roundUpDiv( attrSiz.getTotal() + attrCon.getTotal(), 2 ) );
+    	setIntValue( R.id.tv_hp, roundUpDiv( attrSiz + attrCon, 2 ) );
     	
     	// Str bonus
     	Iterator<Integer> it = strDamBonus.keySet().iterator();
     	while ( it.hasNext() ) {
     		int value = it.next();
-    		if ( attrStr.getTotal() + attrSiz.getTotal() <= value ) {
+    		if ( attrStr + attrSiz <= value ) {
     			String bonus = strDamBonus.get( value );
     			((TextView)findViewById( R.id.tv_dam ) ).setText( bonus );
     			break;
@@ -155,33 +161,22 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     	}
     	
     	// Points
-    	setIntValue( R.id.tv_points_occ, 20 * attrEdu.getTotal() );
-    	setIntValue( R.id.tv_points_per, 10 * attrInt.getTotal() );
+    	setIntValue( R.id.tv_points_occ, 20 * attrEdu );
+    	setIntValue( R.id.tv_points_per, 10 * attrInt );
     }
     
     private void initializeAge() {
-    	int val_edu = getIntValue( R.id.tv_edu );
-    	final int baseAge = 6 + val_edu;
-    	int size = MAX_AGE - baseAge + 1;
-    	
-    	setIntValue( R.id.tv_ageStart, baseAge );
+    	final Attribute attrEdu = investigator.getAttribute( "EDU" );
+    	final int baseAge = 6 + attrEdu.getUnmodifiedValue();
     	CustomNumberPicker agePicker = (CustomNumberPicker)findViewById( R.id.tv_age );    	
-    	agePicker.setCurrent( baseAge );
-    	agePicker.setRange( baseAge, MAX_AGE );
-    	final Activity activity = this;
     	agePicker.setOnChangeListener( new OnChangedListener() {
 
     		@Override
 			public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {
+    			investigator.setAge( newVal );
 				int selectedAge = newVal;
 				int ageDiff = selectedAge - baseAge;
 				int extraEdu = ageDiff / 10;
-				if ( extraEdu > 0 ) {
-					((TextView)findViewById( R.id.tv_edu )).setTextColor( Color.GREEN );
-				}
-				else {
-					((TextView)findViewById( R.id.tv_edu )).setTextColor( Color.LTGRAY );
-				}
 				attrEdu.setMod( extraEdu );				
 				calculateDerivedAttributes();
 				int newMustDrop = Math.max( 0, ( selectedAge / 10 ) - 3 );
@@ -191,20 +186,13 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
 				}								
 			}
 		});    	    
-    }
+    }       
     
     public void updateMustDrop() {
     	// TODO: optimize
-    	setDebug( "Called updateMustDrop" );
-    	int totalMods = - getTotalMods();
-    	
-    	// TODO: Use dropped
-    	if ( mustDrop <= 0 ) {
-    		initializeSeekBars();
-    		((LinearLayout)findViewById( R.id.modAttributesLayout )).setVisibility( View.INVISIBLE );
-    		clearErrors();
-    	}
-    	else if ( mustDrop == totalMods ) {
+    	int totalMods = - investigator.getTotalAgeMods();    	
+ 
+    	if ( mustDrop == totalMods ) {
     		clearErrors();
     	}
     	else if ( mustDrop > totalMods ){    		
@@ -219,34 +207,27 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     	}
     }
     
-    private int getTotalMods() {
-    	int sum = 0;
-    	for ( int i = 0; i < ageModifiableAttributes.length; i++ ) sum += ageModifiableAttributes[ i ].getMod();
-    	return sum;
+    private void hideSeekBars() {
+    	//((LinearLayout)findViewById( R.id.modAttributesLayout )).setVisibility( View.INVISIBLE );
     }
     
-    private void initializeSeekBars ( ) {
+    
+    private void resetSeekBars ( ) {
+    	TableLayout table = (TableLayout)findViewById( R.id.modAttributesTable );
+    	table.removeAllViews();
+    	Attribute[] ageModifiableAttributes = investigator.getAgeModifiableAttribute();    	
     	for ( int i = 0; i < ageModifiableAttributes.length; i++ ) {
-    		SeekBar sb = (SeekBar)findViewById( ageModifiableAttributes[ i ].getSeekBarId() );
-    		sb.setMax( 5 );
-    		sb.setProgress( 0 );
-    		sb.setOnSeekBarChangeListener( this );
-    		ageModifiableAttributes[ i ].setMod( 0 );
+    		Attribute attr = ageModifiableAttributes[ i ];
+    		AttributeReducer reducer = new AttributeReducer( this, attr );
+    		reducer.addOnAttributeChangedListener( this );
+    		table.addView( reducer );
     	}
+    	table.setColumnStretchable( 2, true );
     }
 
-    
-    private int getIntValue( int id ) {
-    	return Integer.parseInt(((TextView)findViewById( id )).getText().toString());
-    }
-    
     private void setIntValue( int id, int value ) {
     	((TextView)findViewById( id )).setText( "" + value );
     }
-    
-    private void setDebug( String value ) {
-    	//((TextView)findViewById( R.id.debug )).setText( value );
-    }     
     
     private int roundUpDiv( int x, int y ) {
     	int ret = x / y;
@@ -278,28 +259,14 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     }
 
 	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-		int id = seekBar.getId();
-		int pos;
-		for ( pos = 0; pos < ageModifiableAttributes.length; pos++ ) {
-			if ( ageModifiableAttributes[ pos ].getSeekBarId() == id ) break;
-		}
-		ageModifiableAttributes[ pos ].setMod( - progress );
-		if ( fromUser ) {
-			calculateDerivedAttributes();
-			updateMustDrop();
-		}
+	public void attributeChanged(Attribute attribute) {
+		calculateDerivedAttributes();
+		updateMustDrop();
 	}
 
 	@Override
-	public void onStartTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStopTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void ageChanged(int age) {
+		calculateDerivedAttributes();
+		updateMustDrop();		
+	}    
 }
