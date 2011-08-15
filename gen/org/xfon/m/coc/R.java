@@ -9,72 +9,224 @@ package org.xfon.m.coc;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int defaultValue=0x7f010002;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int endRange=0x7f010001;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int maxValue=0x7f010003;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int startRange=0x7f010000;
     }
     public static final class drawable {
         public static final int border=0x7f020000;
-        public static final int icon=0x7f020001;
+        public static final int ic_menu_refresh=0x7f020001;
+        public static final int icon=0x7f020002;
+        public static final int timepicker_down_btn=0x7f020003;
+        public static final int timepicker_down_disabled=0x7f020004;
+        public static final int timepicker_down_disabled_focused=0x7f020005;
+        public static final int timepicker_down_normal=0x7f020006;
+        public static final int timepicker_down_pressed=0x7f020007;
+        public static final int timepicker_down_selected=0x7f020008;
+        public static final int timepicker_input=0x7f020009;
+        public static final int timepicker_input_disabled=0x7f02000a;
+        public static final int timepicker_input_normal=0x7f02000b;
+        public static final int timepicker_input_pressed=0x7f02000c;
+        public static final int timepicker_input_selected=0x7f02000d;
+        public static final int timepicker_up_btn=0x7f02000e;
+        public static final int timepicker_up_disabled=0x7f02000f;
+        public static final int timepicker_up_disabled_focused=0x7f020010;
+        public static final int timepicker_up_normal=0x7f020011;
+        public static final int timepicker_up_pressed=0x7f020012;
+        public static final int timepicker_up_selected=0x7f020013;
     }
     public static final class id {
-        public static final int btn_roll=0x7f050027;
-        public static final int linearLayout1=0x7f050028;
-        public static final int message=0x7f050000;
-        public static final int modAttributes=0x7f05002b;
-        public static final int mod_str=0x7f05002e;
-        public static final int tableLayout1=0x7f050002;
-        public static final int tableRow1=0x7f050003;
-        public static final int tableRow2=0x7f05000c;
-        public static final int tableRow3=0x7f050015;
-        public static final int tableRow4=0x7f05001e;
-        public static final int tableRow5=0x7f05002c;
-        public static final int tableRow6=0x7f05002f;
-        public static final int tableRow7=0x7f050030;
-        public static final int tableRow8=0x7f050031;
-        public static final int textView1=0x7f050001;
-        public static final int textViewAge=0x7f050029;
-        public static final int textViewApp=0x7f050006;
-        public static final int textViewCon=0x7f05000d;
-        public static final int textViewDam=0x7f050013;
-        public static final int textViewDex=0x7f05001f;
-        public static final int textViewEdu=0x7f050021;
-        public static final int textViewHP=0x7f05000a;
-        public static final int textViewIdea=0x7f050011;
-        public static final int textViewInt=0x7f05000f;
-        public static final int textViewKnow=0x7f050023;
-        public static final int textViewLuck=0x7f05001a;
-        public static final int textViewPointsOcc=0x7f05001c;
-        public static final int textViewPointsPer=0x7f050025;
-        public static final int textViewPow=0x7f050018;
-        public static final int textViewSan=0x7f050008;
-        public static final int textViewSiz=0x7f050016;
-        public static final int textViewStr=0x7f050004;
-        public static final int textViewStrMod=0x7f05002d;
-        public static final int tv_age=0x7f05002a;
-        public static final int tv_app=0x7f050007;
-        public static final int tv_con=0x7f05000e;
-        public static final int tv_dam=0x7f050014;
-        public static final int tv_dex=0x7f050020;
-        public static final int tv_edu=0x7f050022;
-        public static final int tv_hp=0x7f05000b;
-        public static final int tv_idea=0x7f050012;
-        public static final int tv_int=0x7f050010;
-        public static final int tv_know=0x7f050024;
-        public static final int tv_luck=0x7f05001b;
-        public static final int tv_points_occ=0x7f05001d;
-        public static final int tv_points_per=0x7f050026;
-        public static final int tv_pow=0x7f050019;
-        public static final int tv_san=0x7f050009;
-        public static final int tv_siz=0x7f050017;
-        public static final int tv_str=0x7f050005;
+        public static final int btn_roll=0x7f07002a;
+        public static final int decrement=0x7f070002;
+        public static final int increment=0x7f070000;
+        public static final int linearLayout1=0x7f07002b;
+        public static final int menu_about=0x7f070043;
+        public static final int message=0x7f070003;
+        public static final int modAttributesLayout=0x7f070030;
+        public static final int modAttributesTable=0x7f070032;
+        public static final int sb_mod_app=0x7f070042;
+        public static final int sb_mod_con=0x7f07003a;
+        public static final int sb_mod_dex=0x7f07003e;
+        public static final int sb_mod_str=0x7f070036;
+        public static final int tableLayout1=0x7f070005;
+        public static final int tableRow1=0x7f070006;
+        public static final int tableRow2=0x7f07000f;
+        public static final int tableRow3=0x7f070018;
+        public static final int tableRow4=0x7f070021;
+        public static final int tableRow5=0x7f070033;
+        public static final int tableRow6=0x7f070037;
+        public static final int tableRow7=0x7f07003b;
+        public static final int tableRow8=0x7f07003f;
+        public static final int textView1=0x7f070004;
+        public static final int textViewAge=0x7f07002e;
+        public static final int textViewAgeStart=0x7f07002c;
+        public static final int textViewApp=0x7f070009;
+        public static final int textViewAppMod=0x7f070040;
+        public static final int textViewCon=0x7f070010;
+        public static final int textViewConMod=0x7f070038;
+        public static final int textViewDam=0x7f070016;
+        public static final int textViewDex=0x7f070022;
+        public static final int textViewDexMod=0x7f07003c;
+        public static final int textViewEdu=0x7f070024;
+        public static final int textViewHP=0x7f07000d;
+        public static final int textViewIdea=0x7f070014;
+        public static final int textViewInt=0x7f070012;
+        public static final int textViewKnow=0x7f070026;
+        public static final int textViewLuck=0x7f07001d;
+        public static final int textViewModAttributes=0x7f070031;
+        public static final int textViewPointsOcc=0x7f07001f;
+        public static final int textViewPointsPer=0x7f070028;
+        public static final int textViewPow=0x7f07001b;
+        public static final int textViewSan=0x7f07000b;
+        public static final int textViewSiz=0x7f070019;
+        public static final int textViewStr=0x7f070007;
+        public static final int textViewStrMod=0x7f070034;
+        public static final int timepicker_input=0x7f070001;
+        public static final int tv_age=0x7f07002f;
+        public static final int tv_ageStart=0x7f07002d;
+        public static final int tv_app=0x7f07000a;
+        public static final int tv_con=0x7f070011;
+        public static final int tv_dam=0x7f070017;
+        public static final int tv_dex=0x7f070023;
+        public static final int tv_edu=0x7f070025;
+        public static final int tv_hp=0x7f07000e;
+        public static final int tv_idea=0x7f070015;
+        public static final int tv_int=0x7f070013;
+        public static final int tv_know=0x7f070027;
+        public static final int tv_luck=0x7f07001e;
+        public static final int tv_mod_app=0x7f070041;
+        public static final int tv_mod_con=0x7f070039;
+        public static final int tv_mod_dex=0x7f07003d;
+        public static final int tv_mod_str=0x7f070035;
+        public static final int tv_points_occ=0x7f070020;
+        public static final int tv_points_per=0x7f070029;
+        public static final int tv_pow=0x7f07001c;
+        public static final int tv_san=0x7f07000c;
+        public static final int tv_siz=0x7f07001a;
+        public static final int tv_str=0x7f070008;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
+        public static final int custom_number_picker=0x7f030000;
+        public static final int main=0x7f030001;
+    }
+    public static final class menu {
+        public static final int menu=0x7f060000;
+    }
+    public static final class raw {
+        public static final int dice=0x7f040000;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040000;
-        public static final int load_character=0x7f040003;
-        public static final int new_character=0x7f040002;
-        public static final int prompt_age=0x7f040005;
-        public static final int slash=0x7f040004;
+        public static final int app_name=0x7f050001;
+        public static final int hello=0x7f050000;
+        public static final int load_character=0x7f050003;
+        public static final int new_character=0x7f050002;
+        public static final int prompt_age=0x7f050005;
+        public static final int slash=0x7f050004;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a numberpicker.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #numberpicker_defaultValue org.xfon.m.coc:defaultValue}</code></td><td></td></tr>
+           <tr><td><code>{@link #numberpicker_endRange org.xfon.m.coc:endRange}</code></td><td></td></tr>
+           <tr><td><code>{@link #numberpicker_maxValue org.xfon.m.coc:maxValue}</code></td><td></td></tr>
+           <tr><td><code>{@link #numberpicker_startRange org.xfon.m.coc:startRange}</code></td><td></td></tr>
+           </table>
+           @see #numberpicker_defaultValue
+           @see #numberpicker_endRange
+           @see #numberpicker_maxValue
+           @see #numberpicker_startRange
+         */
+        public static final int[] numberpicker = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#defaultValue}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:defaultValue
+        */
+        public static final int numberpicker_defaultValue = 2;
+        /**
+          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#endRange}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:endRange
+        */
+        public static final int numberpicker_endRange = 1;
+        /**
+          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#maxValue}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:maxValue
+        */
+        public static final int numberpicker_maxValue = 3;
+        /**
+          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#startRange}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:startRange
+        */
+        public static final int numberpicker_startRange = 0;
+    };
 }
