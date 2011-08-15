@@ -1,14 +1,8 @@
 package org.xfon.m.coc;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Random;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.logging.ErrorManager;
 
 import org.xfon.m.coc.CustomNumberPicker.OnChangedListener;
 
@@ -16,43 +10,42 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeListener {
-	private Random random;
-	private int[] d3_6 = {
-			R.id.tv_str, R.id.tv_con, R.id.tv_pow, R.id.tv_dex, R.id.tv_app 
+	private Dice dice_3d6 = new Dice( 3,6 );
+	private Dice dice_2d6p6 = new Dice( 2,6,6 );
+	private Dice dice_3d6p3 = new Dice( 3,6,3 );
+		
+	private Attribute attrStr = new Attribute( this, "STR", R.id.tv_str, R.id.tv_mod_str, R.id.sb_mod_str, dice_3d6 );
+	private Attribute attrCon = new Attribute( this, "CON", R.id.tv_con, R.id.tv_mod_con, R.id.sb_mod_con, dice_3d6 );
+	private Attribute attrSiz = new Attribute( this, "SIZ", R.id.tv_siz, 0, 0, dice_2d6p6 );
+	private Attribute attrDex = new Attribute( this, "DEX", R.id.tv_dex, R.id.tv_mod_dex, R.id.sb_mod_dex, dice_3d6 );
+	
+	private Attribute attrApp = new Attribute( this, "APP", R.id.tv_app, R.id.tv_mod_app, R.id.sb_mod_app, dice_3d6 );
+	private Attribute attrInt = new Attribute( this, "INT", R.id.tv_int, 0, 0, dice_2d6p6 );
+	private Attribute attrPow = new Attribute( this, "POW", R.id.tv_pow, 0, 0, dice_3d6 );
+	private Attribute attrEdu = new Attribute( this, "EDU", R.id.tv_edu, 0, 0, dice_3d6p3 );	
+	
+	private Attribute[] ageModifiableAttributes = {
+			attrStr, attrCon, attrDex, attrApp
 	};
-	private int[] d2_6_p6 = {
-			R.id.tv_siz, R.id.tv_int     	
-	};
-	private int[] d3_6_p3 = {
-			R.id.tv_edu
-	};
-	private ModifiableAttribute mod_str = new ModifiableAttribute( this, R.id.tv_str, R.id.tv_mod_str, R.id.sb_mod_str );
-	private ModifiableAttribute mod_con = new ModifiableAttribute( this, R.id.tv_con, R.id.tv_mod_con, R.id.sb_mod_con );
-	private ModifiableAttribute mod_dex = new ModifiableAttribute( this, R.id.tv_dex, R.id.tv_mod_dex, R.id.sb_mod_dex );
-	private ModifiableAttribute mod_app = new ModifiableAttribute( this, R.id.tv_app, R.id.tv_mod_app, R.id.sb_mod_app );
-	private ModifiableAttribute[] mod_attrs = {
-		mod_str, mod_con, mod_dex, mod_app
+	
+	private Attribute[] baseAttributes = {
+			attrStr, attrCon, attrSiz, attrDex,
+			attrApp, attrInt, attrPow, attrEdu
 	};
 	
 	private SortedMap<Integer,String> strDamBonus;
@@ -68,7 +61,6 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        random = new Random();
         strDamBonus = new TreeMap<Integer,String>();
         strDamBonus.put( 12, "-1d6" );
         strDamBonus.put( 16, "-1d4" );
@@ -77,7 +69,7 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
         strDamBonus.put( 40, "+1d6" );
         strDamBonus.put( 56, "+2d6" );
         strDamBonus.put( 72, "+3d6" );
-        strDamBonus.put( 88, "+4d6" );    
+        strDamBonus.put( 88, "+4d6" );        
         clearErrors();                       
         setContentView(R.layout.main);        
     }           
@@ -134,51 +126,30 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     
     private void rerollBasicAttributes() {
     	int i;
-    	for ( i = 0; i < d3_6.length; i++ ) {
-    		TextView tv = (TextView)findViewById( d3_6[ i ] );
-    		tv.setText( "" + roll( 3, 6, 0 ) );
+    	for ( i = 0; i < baseAttributes.length; i++ ) {
+    		baseAttributes[i].roll();
     	}
-    	for ( i = 0; i < d2_6_p6.length; i++ ) {
-    		TextView tv = (TextView)findViewById( d2_6_p6[ i ] );
-    		tv.setText( "" + roll( 2, 6, 6 ) );
-    	}
-    	for ( i = 0; i < d3_6_p3.length; i++ ) {
-    		TextView tv = (TextView)findViewById( d3_6_p3[ i ] );
-    		tv.setText( "" + roll( 3, 6, 3 ) );
-    	}   	
-    	
+    	    	
     	((TextView)findViewById( R.id.tv_edu )).setTextColor( Color.LTGRAY );
     	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );
-    	mustDrop = -1;
-    	mod_str.setUnmodifiedValue( getIntValue( R.id.tv_str ) );
-    	mod_con.setUnmodifiedValue( getIntValue( R.id.tv_con ) );
-    	mod_dex.setUnmodifiedValue( getIntValue( R.id.tv_dex ) );
-    	mod_app.setUnmodifiedValue( getIntValue( R.id.tv_app ) );
-    	
+    	mustDrop = -1;  	
     	unmod_edu = getIntValue( R.id.tv_edu );    	
     }
     
-    private void calculateDerivedAttributes() {
-    	int val_pow = getIntValue( R.id.tv_pow );
-    	int val_int = getIntValue( R.id.tv_int );
-    	int val_edu = getIntValue( R.id.tv_edu );
-    	int val_con = getIntValue( R.id.tv_con );
-    	int val_siz = getIntValue( R.id.tv_siz );
-    	int val_str = getIntValue( R.id.tv_str );    	   
-    	
-    	setIntValue( R.id.tv_san, 5 * val_pow );
-    	setIntValue( R.id.tv_idea, 5 * val_int );
-    	setIntValue( R.id.tv_luck, 5 * val_pow );
-    	setIntValue( R.id.tv_know, 5 * val_edu );
+    private void calculateDerivedAttributes() { 	   
+    	setIntValue( R.id.tv_san, 5 * attrPow.getTotal() );
+    	setIntValue( R.id.tv_idea, 5 * attrInt.getTotal() );
+    	setIntValue( R.id.tv_luck, 5 * attrPow.getTotal() );
+    	setIntValue( R.id.tv_know, Math.min( 99, 5 * attrEdu.getTotal() ) );
 
     	// Hit points
-    	setIntValue( R.id.tv_hp, roundUpDiv( val_siz + val_con, 2 ) );
+    	setIntValue( R.id.tv_hp, roundUpDiv( attrSiz.getTotal() + attrCon.getTotal(), 2 ) );
     	
     	// Str bonus
     	Iterator<Integer> it = strDamBonus.keySet().iterator();
     	while ( it.hasNext() ) {
     		int value = it.next();
-    		if ( val_str + val_siz <= value ) {
+    		if ( attrStr.getTotal() + attrSiz.getTotal() <= value ) {
     			String bonus = strDamBonus.get( value );
     			((TextView)findViewById( R.id.tv_dam ) ).setText( bonus );
     			break;
@@ -186,8 +157,8 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     	}
     	
     	// Points
-    	setIntValue( R.id.tv_points_occ, 20 * val_edu );
-    	setIntValue( R.id.tv_points_per, 10 * val_int );
+    	setIntValue( R.id.tv_points_occ, 20 * attrEdu.getTotal() );
+    	setIntValue( R.id.tv_points_per, 10 * attrInt.getTotal() );
     }
     
     private void initializeAge() {
@@ -250,17 +221,17 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     
     private int getTotalMods() {
     	int sum = 0;
-    	for ( int i = 0; i < mod_attrs.length; i++ ) sum += mod_attrs[ i ].getMod();
+    	for ( int i = 0; i < ageModifiableAttributes.length; i++ ) sum += ageModifiableAttributes[ i ].getMod();
     	return sum;
     }
     
     private void initializeSeekBars ( ) {
-    	for ( int i = 0; i < mod_attrs.length; i++ ) {
-    		SeekBar sb = (SeekBar)findViewById( mod_attrs[ i ].getSeekBarId() );
+    	for ( int i = 0; i < ageModifiableAttributes.length; i++ ) {
+    		SeekBar sb = (SeekBar)findViewById( ageModifiableAttributes[ i ].getSeekBarId() );
     		sb.setMax( 5 );
     		sb.setProgress( 0 );
     		sb.setOnSeekBarChangeListener( this );
-    		mod_attrs[ i ].setMod( 0 );
+    		ageModifiableAttributes[ i ].setMod( 0 );
     	}
     }
 
@@ -275,16 +246,7 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     
     private void setDebug( String value ) {
     	//((TextView)findViewById( R.id.debug )).setText( value );
-    }
-    
-    private int roll( int count, int sides, int plus ) {
-    	int sum = 0;
-    	if ( count <= 0 || sides <= 0 ) return -1;
-    	for ( int i = 0; i < count; i++ ) {
-    		sum += random.nextInt( sides ) + 1;
-    	}
-    	return sum + plus;
-    }
+    }     
     
     private int roundUpDiv( int x, int y ) {
     	int ret = x / y;
@@ -319,10 +281,10 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 		int id = seekBar.getId();
 		int pos;
-		for ( pos = 0; pos < mod_attrs.length; pos++ ) {
-			if ( mod_attrs[ pos ].getSeekBarId() == id ) break;
+		for ( pos = 0; pos < ageModifiableAttributes.length; pos++ ) {
+			if ( ageModifiableAttributes[ pos ].getSeekBarId() == id ) break;
 		}
-		mod_attrs[ pos ].setMod( progress );
+		ageModifiableAttributes[ pos ].setMod( progress );
 		if ( fromUser ) {
 			calculateDerivedAttributes();
 			updateMustDrop();
