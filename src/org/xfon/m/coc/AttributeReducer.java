@@ -32,20 +32,17 @@ public class AttributeReducer extends TableRow implements OnSeekBarChangeListene
 		onAttributeChangedListeners = new HashSet<OnAttributeChangedListener>();
 		 
 		int value = - linkedAttribute.getMod();
-		
-		Log.i(AttributeReducer.class.getName(), "Creating title" );
+				
 		mTitle = new TextView( context );
 		mTitle.setText( linkedAttribute.getName() + ": " );
 		mTitle.setTypeface( Typeface.DEFAULT_BOLD );
 		mTitle.setLayoutParams( new LayoutParams( TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT ) );
 			
-		Log.i(AttributeReducer.class.getName(), "Creating value" );
 		mValue = new TextView( context );
 		mValue.setText( "" + value );
 		mValue.setPadding( 20, 0, 0, 0 );
 		mValue.setLayoutParams( new LayoutParams( TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT ) );
-		
-		Log.i(AttributeReducer.class.getName(), "Creating bar" );
+			
 		mSeekBar = new SeekBar( context );
 		mSeekBar.setMax( 5 );
 		mSeekBar.setProgress( value );
@@ -56,8 +53,6 @@ public class AttributeReducer extends TableRow implements OnSeekBarChangeListene
 		
 		mSeekBar.setOnSeekBarChangeListener( this );
 		
-		Log.i(AttributeReducer.class.getName(), "Adding views" );
-				
 		setGravity( Gravity.CENTER_VERTICAL );
 		setLayoutParams(new LayoutParams( TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT ) );
 		addView( mTitle );

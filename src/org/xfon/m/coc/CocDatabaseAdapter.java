@@ -25,9 +25,9 @@ public class CocDatabaseAdapter {
 		String table = dbHelper.getAttributesTable();
 		boolean exists = false;
 		long result;
-		
+						
 		// Check if exists
-		Cursor c = db.query( true, table, new String[] { "_id" }, "name='-'", null, null, null, null, null );
+		Cursor c = db.query( true, table, new String[] { "_id" }, "name='" + saveName + "'", null, null, null, null, null );
 		if ( c.moveToFirst() ) exists = true;					
 		c.close();
 		
@@ -68,6 +68,11 @@ public class CocDatabaseAdapter {
 		
 		Cursor c = db.query( table, columns.toArray( new String[0] ), "name='" + saveName + "'", null, null, null, null, null );
 		boolean exists = c.moveToFirst();
+		if ( !exists ) {
+			db.close();
+			return;
+		}
+		
 		for ( int i = 0; i < attributes.length; i++ ) {
 			Attribute attr = attributes[ i ];
 			String name = attr.getName().toLowerCase();

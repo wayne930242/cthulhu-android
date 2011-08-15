@@ -42,7 +42,6 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
         super.onCreate(savedInstanceState);
         dbAdapter = new CocDatabaseAdapter(this);
         Age age = new Age( this, R.id.tv_ageStart, R.id.tv_age );
-        //age.addAgeChangedListener( this );
         investigator = new Investigator( this, age );
         strDamBonus = new TreeMap<Integer,String>();
         strDamBonus.put( 12, "-1d6" );
@@ -54,12 +53,21 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
         strDamBonus.put( 72, "+3d6" );
         strDamBonus.put( 88, "+4d6" );        
         clearErrors();                       
-        setContentView(R.layout.main);        
+        setContentView(R.layout.main);                       
     }          
     
     @Override
     public void onPause() {
     	super.onPause();
+    	Log.i("APP", "onPause called" );
+    	saveInvestigator(investigator, "_ONPAUSE_" );
+    }
+    
+    @Override
+    public void onStart() {
+    	super.onStart();
+    	Log.i("APP", "onStart called" );
+    	loadInvestigator(investigator, "_ONPAUSE_" );
     }
     
     @Override
@@ -107,11 +115,19 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     }
     
     public void saveAttributes( View view ) {
-    	dbAdapter.saveInvestigator(investigator, "-");
+    	saveInvestigator(investigator, "-" );
     }
     
-    public void loadAttributes( View view ) {    	
-    	dbAdapter.loadInvestigator(investigator, "-" );
+    private void saveInvestigator( Investigator investigator, String saveName ) {
+    	dbAdapter.saveInvestigator(investigator, saveName );
+    }
+    
+    public void loadAttributes( View view ) {
+    	loadInvestigator( investigator, "-" );
+    }
+    
+    private void loadInvestigator( Investigator investigator, String saveName ) {    	
+    	dbAdapter.loadInvestigator(investigator, saveName );
     	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );     	
     	initializeAge();
 		CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.tv_age );	
