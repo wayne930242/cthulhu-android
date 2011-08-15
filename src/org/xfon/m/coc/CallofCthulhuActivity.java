@@ -211,11 +211,13 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     	}
     	else if ( mustDrop > totalMods ){    		
     		((LinearLayout)findViewById( R.id.modAttributesLayout )).setVisibility( View.VISIBLE );
-    		setError( "You must drop " + ( mustDrop - totalMods ) + " attribute(s)" );    	
+    		int count = mustDrop - totalMods;
+    		setError( "You must lower " + count + " attribute" + ( count > 1 ? "s" : "" ) );    	
     	}
     	else if ( mustDrop < totalMods ){    		
     		((LinearLayout)findViewById( R.id.modAttributesLayout )).setVisibility( View.VISIBLE );
-    		setError( "You must raise " + ( totalMods - mustDrop ) + " attribute(s)" );
+    		int count = totalMods - mustDrop;
+    		setError( "You must raise " + count + " attribute" + ( count > 1 ? "s" : "" ) );
     	}
     }
     
@@ -284,7 +286,7 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
 		for ( pos = 0; pos < ageModifiableAttributes.length; pos++ ) {
 			if ( ageModifiableAttributes[ pos ].getSeekBarId() == id ) break;
 		}
-		ageModifiableAttributes[ pos ].setMod( progress );
+		ageModifiableAttributes[ pos ].setMod( - progress );
 		if ( fromUser ) {
 			calculateDerivedAttributes();
 			updateMustDrop();

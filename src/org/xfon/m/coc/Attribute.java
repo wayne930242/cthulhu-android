@@ -45,7 +45,7 @@ final public class Attribute {
 	public void setMod( int mod ) {
 		this.mod = mod;
 		setIntValue( modTextViewId, -mod );
-		setIntValue( baseTextViewId, unmodifiedValue - mod );
+		setIntValue( baseTextViewId, unmodifiedValue + mod );
 	}
 	
 	public int getMod() {
@@ -62,14 +62,14 @@ final public class Attribute {
     }
     
     public int getTotal() {
-    	return unmodifiedValue - mod;
+    	return unmodifiedValue + mod;
     }
     
     public int roll() {
     	int result = rollingDice.roll();
     	unmodifiedValue = result;
     	if ( baseTextViewId != 0 ) setIntValue( baseTextViewId, unmodifiedValue );
-    	if ( modTextViewId != 0 ) setIntValue( modTextViewId, unmodifiedValue - mod );
+    	if ( modTextViewId != 0 ) setIntValue( modTextViewId, unmodifiedValue + mod );
     	return result;
     }
 
