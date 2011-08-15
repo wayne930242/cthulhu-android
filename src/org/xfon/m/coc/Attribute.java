@@ -1,6 +1,7 @@
 package org.xfon.m.coc;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.widget.TextView;
 
 final public class Attribute {
@@ -43,9 +44,19 @@ final public class Attribute {
 	}
 
 	public void setMod( int mod ) {
+		int oldMod = this.mod;
 		this.mod = mod;
-		setIntValue( modTextViewId, -mod );
-		setIntValue( baseTextViewId, unmodifiedValue + mod );
+		if ( modTextViewId != 0 ) setIntValue( modTextViewId, -mod );
+		if ( baseTextViewId != 0 ) setIntValue( baseTextViewId, unmodifiedValue + mod );
+		
+		TextView tv = (TextView)activity.findViewById( baseTextViewId );
+		if ( tv == null ) return;
+		
+		if ( mod == 0 && oldMod != 0 ) {
+			tv.setTextColor( Color.LTGRAY );
+		}		
+		else if ( mod > 0 ) tv.setTextColor( Color.GREEN );
+		else if ( mod < 0 ) tv.setTextColor( Color.RED ); 		
 	}
 	
 	public int getMod() {

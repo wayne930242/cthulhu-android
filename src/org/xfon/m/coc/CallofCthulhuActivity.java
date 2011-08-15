@@ -53,7 +53,6 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
 	private String errorMessage = null; 
 	
 	private int mustDrop = -1;
-	private int unmod_edu;	
 	
 	private MediaPlayer player = null;
 	
@@ -133,7 +132,6 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     	((TextView)findViewById( R.id.tv_edu )).setTextColor( Color.LTGRAY );
     	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );
     	mustDrop = -1;  	
-    	unmod_edu = getIntValue( R.id.tv_edu );    	
     }
     
     private void calculateDerivedAttributes() { 	   
@@ -184,7 +182,7 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
 				else {
 					((TextView)findViewById( R.id.tv_edu )).setTextColor( Color.LTGRAY );
 				}
-				setIntValue( R.id.tv_edu, unmod_edu + extraEdu );
+				attrEdu.setMod( extraEdu );				
 				calculateDerivedAttributes();
 				int newMustDrop = Math.max( 0, ( selectedAge / 10 ) - 3 );
 				if ( newMustDrop != mustDrop ) {
@@ -198,7 +196,7 @@ public class CallofCthulhuActivity extends Activity implements OnSeekBarChangeLi
     public void updateMustDrop() {
     	// TODO: optimize
     	setDebug( "Called updateMustDrop" );
-    	int totalMods = getTotalMods();
+    	int totalMods = - getTotalMods();
     	
     	// TODO: Use dropped
     	if ( mustDrop <= 0 ) {
