@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/tabHost"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"    
+    >
+    
+<TabWidget android:id="@android:id/tabs"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+/>
+
+<FrameLayout android:id="@android:id/tabcontent"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+>
+
+<!--  Main area -->
+<LinearLayout
+     android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tab1"
+    android:orientation="vertical"
+    android:paddingTop="90px"
+>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"	
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
@@ -80,21 +105,19 @@
 	
 	</org.xfon.m.coc.gui.FoldingLayout>
 	
-	<!-- 
-	<LinearLayout android:layout_marginTop="5px" android:layout_width="match_parent" android:id="@+id/modAttributesLayout" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="vertical" android:visibility="visible">
-		<TextView android:id="@+id/textViewModAttributes" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lower attributes due to age:" android:layout_marginBottom="20px"></TextView>		
-	</LinearLayout>
-	 -->
-	
-	<!-- 	
-	<LinearLayout android:layout_marginTop="5px" android:layout_width="match_parent" android:id="@+id/skillsLayout" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="vertical" android:visibility="visible">
-		<TextView android:id="@+id/textViewSkills" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Skills:" android:layout_marginBottom="20px"></TextView>		
-		
-		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/skillsTable" android:visibility="visible">
-	
-		</TableLayout>
-	</LinearLayout>
-	 -->
-	
 </LinearLayout>
 </ScrollView>
+</LinearLayout>
+
+<LinearLayout
+     android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tab2"
+    android:orientation="vertical"
+    android:paddingTop="90px"
+>
+
+</LinearLayout>
+
+</FrameLayout>
+</TabHost>

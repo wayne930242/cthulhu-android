@@ -25,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -46,7 +48,21 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
         Age age = new Age( this, R.id.tv_ageStart, R.id.tv_age );
         investigator = new Investigator( this, age );            
         clearErrors();                       
-        setContentView(R.layout.main);                       
+        
+        setContentView(R.layout.main);
+        TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
+        tabHost.setup();
+        
+        TabSpec spec1=tabHost.newTabSpec("Main");
+        spec1.setContent(R.id.tab1 );        
+        spec1.setIndicator("Main");
+
+        TabSpec spec2=tabHost.newTabSpec("Skills");
+        spec2.setContent(R.id.tab2 );
+        spec2.setIndicator("Skills");
+        
+        tabHost.addTab(spec1);
+        tabHost.addTab(spec2);
     }          
     
     @Override
