@@ -4,7 +4,10 @@ import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.xfon.m.coc.CustomNumberPicker.OnChangedListener;
+import org.xfon.m.coc.gui.AttributeReducer;
+import org.xfon.m.coc.gui.CustomNumberPicker;
+import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
+import org.xfon.m.coc.gui.FoldingLayout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -89,18 +93,24 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     }
             
     public void rerollAttributes( View view ) {
-    	if ( view.getId() != R.id.btn_roll ) return;
+    	if ( view.getId() != R.id.btn_roll ) return;    	
     	notifyUser();
     	rerollBasicAttributes();
     	calculateDerivedAttributes();
     	
     	mustDrop = -1;
-    	hideSeekBars();
     	resetSeekBars();
     	initializeAge();
     	
     	clearErrors();  
-    	((Button)findViewById( R.id.btn_roll )).setText( "Reroll" );    	
+    	((Button)findViewById( R.id.btn_roll )).setText( "Reroll" );
+    	
+		//TEST
+    	//LinearLayout ll = (LinearLayout)findViewById( R.id.folding );
+    	//ll.addView( new FoldingLayout( this, "TEST" ) );
+/*		Skill sk = new Skill( "archaeology", "Archaeology", 10 );
+		ViewGroup vg = (ViewGroup)findViewById( R.id.skillsTable );
+		sk.addToView( this, vg );*/
     }
     
     public void saveAttributes( View view ) {
@@ -193,33 +203,31 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     		clearErrors();
     	}
     	else if ( mustDrop > totalMods ){    		
-    		((LinearLayout)findViewById( R.id.modAttributesLayout )).setVisibility( View.VISIBLE );
     		int count = mustDrop - totalMods;
     		setError( "You must lower " + count + " attribute" + ( count > 1 ? "s" : "" ) );    	
     	}
     	else if ( mustDrop < totalMods ){    		
-    		((LinearLayout)findViewById( R.id.modAttributesLayout )).setVisibility( View.VISIBLE );
     		int count = totalMods - mustDrop;
     		setError( "You must raise " + count + " attribute" + ( count > 1 ? "s" : "" ) );
     	}
-    }
-    
-    private void hideSeekBars() {
-    	//((LinearLayout)findViewById( R.id.modAttributesLayout )).setVisibility( View.INVISIBLE );
-    }
-    
+    }  
     
     private void resetSeekBars ( ) {
-    	TableLayout table = (TableLayout)findViewById( R.id.modAttributesTable );
-    	table.removeAllViews();
-    	Attribute[] ageModifiableAttributes = investigator.getAgeModifiableAttribute();    	
-    	for ( int i = 0; i < ageModifiableAttributes.length; i++ ) {
-    		Attribute attr = ageModifiableAttributes[ i ];
-    		AttributeReducer reducer = new AttributeReducer( this, attr );
-    		reducer.addOnAttributeChangedListener( this );
-    		table.addView( reducer );
-    	}
-    	table.setColumnStretchable( 2, true );
+    	FoldingLayout fold = (FoldingLayout)findViewById( R.id.modAttributesLayout );
+    	LinearLayout lo = (LinearLayout)fold.findViewById( R.id.mainPanel );
+    	fold.setTitle( "Lower attributes due to age" );
+   		lo.removeAllViews();
+    	AttributeReducer reducer = new AttributeReducer( this );    	
+    	reducer.addOnAttributeChangedListener( this );
+    	reducer.addAttributes( investigator.getAgeModifiableAttribute() );
+    	Log.i( "ATTRS", "Adding view" );
+    	lo.addView( reducer );
+    	lo.requestLayout();
+    }    
+    
+    private void resetSkills( ) {
+    	//TableLayout table = (TableLayout)findViewById( R.id.skillsTable );
+    	//table.removeAllViews();    	
     }
 
     private void setIntValue( int id, int value ) {

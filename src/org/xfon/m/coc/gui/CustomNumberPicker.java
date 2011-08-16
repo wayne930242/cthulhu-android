@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-package org.xfon.m.coc;
+package org.xfon.m.coc.gui;
+
+import org.xfon.m.coc.R;
+import org.xfon.m.coc.R.id;
+import org.xfon.m.coc.R.layout;
 
 import android.content.Context;
 import android.os.Handler;

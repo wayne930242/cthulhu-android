@@ -2,7 +2,8 @@ package org.xfon.m.coc;
 
 import java.util.LinkedHashMap;
 
-import org.xfon.m.coc.CustomNumberPicker.OnChangedListener;
+import org.xfon.m.coc.gui.CustomNumberPicker;
+import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
 
 import android.app.Activity;
 import android.content.Context;
@@ -59,7 +60,7 @@ public class Investigator  implements OnChangedListener {
 			baseAttributesMap.put( baseAttributes[ i ].getName(), baseAttributes[ i ] );
 		}
 	}
-	
+		
 	public Attribute[] getBaseAttributes() {
 		return baseAttributes;
 	}

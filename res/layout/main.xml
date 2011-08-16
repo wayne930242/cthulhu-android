@@ -73,14 +73,28 @@
 			<TextView android:id="@+id/textViewAgeStart" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Starting age: "></TextView>
 			<TextView android:id="@+id/tv_ageStart" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" - "></TextView>
 			<TextView android:paddingLeft="40px" android:id="@+id/textViewAge" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Current age: "></TextView>
-			<org.xfon.m.coc.CustomNumberPicker android:id="@+id/tv_age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="invisible"></org.xfon.m.coc.CustomNumberPicker>
+			<org.xfon.m.coc.gui.CustomNumberPicker android:id="@+id/tv_age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="invisible"/>
 	</LinearLayout>
 
+	<org.xfon.m.coc.gui.FoldingLayout android:id="@+id/modAttributesLayout" android:layout_width="match_parent" android:layout_height="wrap_content" >
+	
+	</org.xfon.m.coc.gui.FoldingLayout>
+	
+	<!-- 
 	<LinearLayout android:layout_marginTop="5px" android:layout_width="match_parent" android:id="@+id/modAttributesLayout" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="vertical" android:visibility="visible">
 		<TextView android:id="@+id/textViewModAttributes" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lower attributes due to age:" android:layout_marginBottom="20px"></TextView>		
-		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/modAttributesTable" android:visibility="visible">
-			<!-- Programmatically filled -->
+	</LinearLayout>
+	 -->
+	
+	<!-- 	
+	<LinearLayout android:layout_marginTop="5px" android:layout_width="match_parent" android:id="@+id/skillsLayout" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="vertical" android:visibility="visible">
+		<TextView android:id="@+id/textViewSkills" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Skills:" android:layout_marginBottom="20px"></TextView>		
+		
+		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/skillsTable" android:visibility="visible">
+	
 		</TableLayout>
 	</LinearLayout>
+	 -->
+	
 </LinearLayout>
 </ScrollView>
