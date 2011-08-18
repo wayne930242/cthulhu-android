@@ -1,9 +1,5 @@
 package org.xfon.m.coc;
 
-import java.util.Iterator;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
 import org.xfon.m.coc.gui.AttributeReducer;
 import org.xfon.m.coc.gui.CustomNumberPicker;
 import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
@@ -50,20 +46,25 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
         clearErrors();                       
         
         setContentView(R.layout.main);
-        TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
+        initializeTabs();
+    }
+
+	private void initializeTabs() {
+		final int TAB_HEIGHT = 40;
+		int[] tabContentId = { R.id.tab1, R.id.tab2 };
+		String[] tabLabels = { "Main", "Skills" };
+				
+		TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
         
-        TabSpec spec1=tabHost.newTabSpec("Main");
-        spec1.setContent(R.id.tab1 );        
-        spec1.setIndicator("Main");
-
-        TabSpec spec2=tabHost.newTabSpec("Skills");
-        spec2.setContent(R.id.tab2 );
-        spec2.setIndicator("Skills");
-        
-        tabHost.addTab(spec1);
-        tabHost.addTab(spec2);
-    }          
+        for ( int i = 0; i < tabContentId.length; i++ ) {
+        	TabSpec spec=tabHost.newTabSpec( tabLabels[ i ] );
+        	spec.setContent( tabContentId[ i ] );
+        	spec.setIndicator( tabLabels[ i ] );
+        	tabHost.addTab( spec );
+        	tabHost.getTabWidget().getChildAt( i ).getLayoutParams().height = TAB_HEIGHT;
+        }
+	}          
     
     @Override
     public void onPause() {
