@@ -2,6 +2,7 @@
 
 
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+		 xmlns:xfon="http://schemas.android.com/apk/res/org.xfon.m.coc"
 	android:id="@+id/tabHost"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"    
@@ -101,7 +102,7 @@
 			<org.xfon.m.coc.gui.CustomNumberPicker android:id="@+id/tv_age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="invisible"/>
 	</LinearLayout>
 
-	<org.xfon.m.coc.gui.FoldingLayout android:id="@+id/modAttributesLayout" android:layout_width="match_parent" android:layout_height="wrap_content" >
+	<org.xfon.m.coc.gui.FoldingLayout android:id="@+id/modAttributesLayout" android:layout_width="match_parent" android:layout_height="wrap_content" xfon:isCollapsed="true">
 	
 	</org.xfon.m.coc.gui.FoldingLayout>
 	

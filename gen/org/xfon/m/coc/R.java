@@ -25,6 +25,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int endRange=0x7f010001;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int isCollapsed=0x7f010004;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -149,6 +157,33 @@ containing a value of this type.
         public static final int sqlCreateAttributes=0x7f050006;
     }
     public static final class styleable {
+        /** Attributes that can be used with a FoldingLayout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #FoldingLayout_isCollapsed org.xfon.m.coc:isCollapsed}</code></td><td></td></tr>
+           </table>
+           @see #FoldingLayout_isCollapsed
+         */
+        public static final int[] FoldingLayout = {
+            0x7f010004
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#isCollapsed}
+          attribute's value can be found in the {@link #FoldingLayout} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:isCollapsed
+        */
+        public static final int FoldingLayout_isCollapsed = 0;
         /** Attributes that can be used with a numberpicker.
            <p>Includes the following attributes:</p>
            <table>

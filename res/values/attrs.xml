@@ -23,5 +23,8 @@
 		<attr name="defaultValue" format="integer" />
 		<attr name="maxValue" format="integer" />
     </declare-styleable>
+    <declare-styleable name="FoldingLayout">
+    	<attr name="isCollapsed" format="boolean"/>
+    </declare-styleable>
 </resources>
 

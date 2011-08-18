@@ -3,6 +3,7 @@ package org.xfon.m.coc.gui;
 import org.xfon.m.coc.R;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,10 @@ public class FoldingLayout extends LinearLayout implements OnClickListener {
         
         btnSwitch = (Button)this.findViewById( R.id.btnSwitch );        
         btnSwitch.setOnClickListener( this );
+        
+        TypedArray a = context.obtainStyledAttributes( attrs, R.styleable.FoldingLayout );
+        boolean collapsed = a.getBoolean( R.styleable.FoldingLayout_isCollapsed, false );
+        if ( collapsed ) collapse();
 	}
 
 	public void setTitle( String title ) {
@@ -40,13 +45,22 @@ public class FoldingLayout extends LinearLayout implements OnClickListener {
 		if ( v != btnSwitch ) return;
 		ViewGroup vg = (ViewGroup)this.findViewById( R.id.mainPanel );
 		if ( vg.getVisibility() ==  View.VISIBLE ) {
-			vg.setVisibility( View.GONE );
-			btnSwitch.setBackgroundResource( R.drawable.down );
+			collapse();
 		}
 		else {
-			vg.setVisibility( View.VISIBLE );
-			btnSwitch.setBackgroundResource( R.drawable.up );			
+			expand();
 		}
 	}	
 	
+	private void expand() {
+		ViewGroup vg = (ViewGroup)this.findViewById( R.id.mainPanel );
+		vg.setVisibility( View.VISIBLE );
+		btnSwitch.setBackgroundResource( R.drawable.up );			
+	}
+
+	private void collapse() {
+		ViewGroup vg = (ViewGroup)this.findViewById( R.id.mainPanel );
+		vg.setVisibility( View.GONE );
+		btnSwitch.setBackgroundResource( R.drawable.down );
+	}
 }
