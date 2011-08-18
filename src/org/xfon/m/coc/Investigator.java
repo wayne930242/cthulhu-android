@@ -82,7 +82,7 @@ public class Investigator  implements OnChangedListener {
 	}
 	
 	public void setBaseAge() {
-		age.setBaseAge( attrEdu.getTotal() + 6 );
+		age.setBaseAge( attrEdu.getUnmodifiedValue() + 6 );
 	}
 	
 	public int getAge() {
