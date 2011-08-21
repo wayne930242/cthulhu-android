@@ -28,6 +28,7 @@ import android.text.Spanned;
 import android.text.method.NumberKeyListener;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -118,7 +119,8 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
     @SuppressWarnings({"UnusedDeclaration"})
     public CustomNumberPicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
-        setOrientation(VERTICAL);
+        //setOrientation(VERTICAL);
+        setGravity(  Gravity.CENTER_VERTICAL );
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.custom_number_picker, this, true);
         mHandler = new Handler();

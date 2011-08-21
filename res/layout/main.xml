@@ -96,10 +96,9 @@
 	
 	<!-- Age -->	
 	<LinearLayout android:layout_marginTop="0px" android:layout_width="match_parent" android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:gravity="center_vertical">
-			<TextView android:id="@+id/textViewAgeStart" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Starting age: "></TextView>
-			<TextView android:id="@+id/tv_ageStart" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" - "></TextView>
-			<TextView android:paddingLeft="40px" android:id="@+id/textViewAge" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Current age: "></TextView>
+			<TextView android:id="@+id/textViewAgeStart" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Age: "></TextView>			
 			<org.xfon.m.coc.gui.CustomNumberPicker android:id="@+id/tv_age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="invisible"/>
+			<TextView android:id="@+id/tv_ageStart" android:paddingLeft="10px" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" - "></TextView>
 	</LinearLayout>
 
 	<org.xfon.m.coc.gui.FoldingLayout android:id="@+id/modAttributesLayout" android:layout_width="match_parent" android:layout_height="wrap_content" xfon:isCollapsed="true">
@@ -117,6 +116,10 @@
     android:orientation="vertical"
     android:paddingTop="90px"
 >
+
+	<TableLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/tableSkills">
+
+	</TableLayout>
 
 </LinearLayout>
 

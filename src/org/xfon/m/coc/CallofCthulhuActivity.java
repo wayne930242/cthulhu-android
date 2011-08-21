@@ -4,6 +4,7 @@ import org.xfon.m.coc.gui.AttributeReducer;
 import org.xfon.m.coc.gui.CustomNumberPicker;
 import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
 import org.xfon.m.coc.gui.FoldingLayout;
+import org.xfon.m.coc.gui.SkillEditor;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -78,11 +79,15 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	super.onStart();
     	Log.i("APP", "onStart called" );
     	loadInvestigator(investigator, "_ONPAUSE_" );
+    	
+    	TableLayout tableSkills = (TableLayout)findViewById( R.id.tableSkills );
+    	tableSkills.addView( new SkillEditor( this, new Skill( "test", "Test Skill", 10 ) ) );
+    	tableSkills.addView( new SkillEditor( this, new Skill( "shotgun", "Shotgun", 20 ) ) );
     }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
+    	MenuInflater inflater = getMenuInflater();    	
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
