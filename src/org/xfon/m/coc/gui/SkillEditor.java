@@ -37,6 +37,8 @@ public class SkillEditor extends LinearLayout implements OnClickListener {
         
         CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.skillValue );
        	picker.setRange( skill.getBaseValue(), 99 );
+       	picker.setSpeed( 150 );
+       	picker.setWrap( false );
         
         btnAddSkill = (Button)findViewById( R.id.skillBtnAddSkill );
         if ( skill.isCategory() ) {

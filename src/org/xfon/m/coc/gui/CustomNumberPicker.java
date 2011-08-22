@@ -17,8 +17,6 @@
 package org.xfon.m.coc.gui;
 
 import org.xfon.m.coc.R;
-import org.xfon.m.coc.R.id;
-import org.xfon.m.coc.R.layout;
 
 import android.content.Context;
 import android.os.Handler;
@@ -27,16 +25,15 @@ import android.text.InputType;
 import android.text.Spanned;
 import android.text.method.NumberKeyListener;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnLongClickListener;
-import android.widget.TextView;
-import android.widget.LinearLayout;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * This class has been pulled from the Android platform source code, its an internal widget that hasn't been
@@ -103,6 +100,7 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
     protected int mPrevious;
     private OnChangedListener mListener;
     private Formatter mFormatter;
+    private boolean mWrap = true;
     private long mSpeed = 300;
 
     private boolean mIncrement;
@@ -177,6 +175,15 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
         mCurrent = start;
         updateView();
     }
+    
+    /**
+     * Specify if numbers should wrap after the edge has been reached.
+     * 
+     * @param wrap values
+     */
+    public void setWrap( boolean wrap ) {
+    	mWrap = wrap;
+    }
 
     /**
      * Set the range of numbers allowed for the number picker. The current
@@ -220,9 +227,9 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
         if (!mText.hasFocus()) mText.requestFocus();
 
         // now perform the increment/decrement
-        if (R.id.increment == v.getId()) {
+        if (R.id.increment == v.getId()) {        	
             changeCurrent(mCurrent + 1);
-        } else if (R.id.decrement == v.getId()) {
+        } else if (R.id.decrement == v.getId()) {        	
             changeCurrent(mCurrent - 1);
         }
     }
@@ -233,13 +240,12 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
                 : String.valueOf(value);
     }
 
-    protected void changeCurrent(int current) {
-
-        // Wrap around the values if we go past the start or end
-        if (current > mEnd) {
-            current = mStart;
+    protected void changeCurrent(int current) {      	
+        // Wrap around the values if we go past the start or end    	
+        if (current > mEnd) {        	        	
+            current = mWrap ? mStart : mEnd;
         } else if (current < mStart) {
-            current = mEnd;
+            current = mWrap ? mEnd : mStart;
         }
         mPrevious = mCurrent;
         mCurrent = current;
