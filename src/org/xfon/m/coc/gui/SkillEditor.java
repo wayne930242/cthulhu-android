@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class SkillEditor extends LinearLayout implements OnClickListener {	
 	private Button btnAddSkill;
-	private ISkill skill;
+	private ISkill skill;	
 	
 	public SkillEditor(Context context) {
 		super(context);
@@ -31,12 +31,14 @@ public class SkillEditor extends LinearLayout implements OnClickListener {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.skill_editor, this, true);
         if ( !isEnabled() ) setEnabled( true );
-        
-        setBaseValue( skill.getBaseValue() );
+                
         setValue( skill.getValue() );
         setName( skill.getName() );
         
-        btnAddSkill = (Button)findViewById( R.id.btnAddSkill );
+        CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.skillValue );
+       	picker.setRange( skill.getBaseValue(), 99 );
+        
+        btnAddSkill = (Button)findViewById( R.id.skillBtnAddSkill );
         if ( skill.isCategory() ) {
         	btnAddSkill.setOnClickListener( this );
         }
@@ -47,18 +49,13 @@ public class SkillEditor extends LinearLayout implements OnClickListener {
 	
 
 	private void setName( String title ) {
-		TextView tv = (TextView)this.findViewById( R.id.name );		
+		TextView tv = (TextView)this.findViewById( R.id.skillName );		
 		tv.setText( title );
 	}
 	
-	private void setBaseValue( int baseValue ) {
-		TextView tv = (TextView)this.findViewById( R.id.baseValue );
-		tv.setText( "[" + baseValue + "]" );
-	}
-	
-	private void setValue( int baseValue ) {
-		EditText edit = (EditText)this.findViewById( R.id.value );
-		edit.setText( "" + baseValue );
+	private void setValue( int value ) {
+		CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.skillValue );		
+		picker.setCurrent( value );
 	}
 
 	@Override

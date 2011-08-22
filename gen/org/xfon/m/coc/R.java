@@ -80,8 +80,6 @@ containing a value of this type.
         public static final int up=0x7f02001a;
     }
     public static final class id {
-        public static final int baseValue=0x7f07003d;
-        public static final int btnAddSkill=0x7f07003a;
         public static final int btnSwitch=0x7f070004;
         public static final int btn_load=0x7f070032;
         public static final int btn_roll=0x7f070030;
@@ -89,22 +87,24 @@ containing a value of this type.
         public static final int buttonsLayout=0x7f07002f;
         public static final int decrement=0x7f070000;
         public static final int increment=0x7f070002;
-        public static final int isOccupational=0x7f07003b;
         public static final int linearLayout1=0x7f070033;
         public static final int mainPanel=0x7f070005;
-        public static final int menu_about=0x7f07003f;
+        public static final int menu_about=0x7f07003d;
         public static final int message=0x7f070008;
-        public static final int modAttributesLayout=0x7f070037;
-        public static final int name=0x7f07003c;
+        public static final int modAttributesLayout=0x7f070036;
+        public static final int skillBtnAddSkill=0x7f070039;
+        public static final int skillIsOccupational=0x7f07003a;
+        public static final int skillName=0x7f07003b;
+        public static final int skillValue=0x7f07003c;
         public static final int tab1=0x7f070007;
-        public static final int tab2=0x7f070038;
+        public static final int tab2=0x7f070037;
         public static final int tabHost=0x7f070006;
         public static final int tableLayout1=0x7f07000a;
         public static final int tableRow1=0x7f07000b;
         public static final int tableRow2=0x7f070014;
         public static final int tableRow3=0x7f07001d;
         public static final int tableRow4=0x7f070026;
-        public static final int tableSkills=0x7f070039;
+        public static final int tableSkills=0x7f070038;
         public static final int textView1=0x7f070009;
         public static final int textViewAgeStart=0x7f070034;
         public static final int textViewApp=0x7f07000e;
@@ -126,7 +126,6 @@ containing a value of this type.
         public static final int timepicker_input=0x7f070001;
         public static final int title=0x7f070003;
         public static final int tv_age=0x7f070035;
-        public static final int tv_ageStart=0x7f070036;
         public static final int tv_app=0x7f07000f;
         public static final int tv_con=0x7f070016;
         public static final int tv_dam=0x7f07001c;
@@ -143,7 +142,6 @@ containing a value of this type.
         public static final int tv_san=0x7f070011;
         public static final int tv_siz=0x7f07001f;
         public static final int tv_str=0x7f07000d;
-        public static final int value=0x7f07003e;
     }
     public static final class layout {
         public static final int custom_number_picker=0x7f030000;

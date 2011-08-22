@@ -10,8 +10,7 @@ import android.app.Activity;
 import android.widget.TextView;
 
 public class Age {
-	private Activity activity;
-	private int baseAgeTextViewId;
+	private Activity activity;	
 	private int ageNumberPickerId;
 	
 	private int baseAge;
@@ -20,10 +19,9 @@ public class Age {
 	
 	public static final int MAX_AGE = 90;
 	
-	public Age(Activity activity, int baseAgeTextViewId, int ageNumberPickerId) {
+	public Age(Activity activity, int ageNumberPickerId) {
 		super();
-		this.activity = activity;
-		this.baseAgeTextViewId = baseAgeTextViewId;
+		this.activity = activity;		
 		this.ageNumberPickerId = ageNumberPickerId;
 		baseAge = age = 0;
 		ageChangedListeners = new HashSet<OnAgeChangedListener>();
@@ -41,9 +39,9 @@ public class Age {
 	public void setBaseAge( int baseAge ) {
 		this.baseAge = baseAge;
 		age = baseAge;
-		setIntValue( baseAgeTextViewId, baseAge );
 		CustomNumberPicker picker = (CustomNumberPicker)activity.findViewById( ageNumberPickerId );
 		picker.setCurrent( baseAge );
+		picker.setRange( baseAge, MAX_AGE );
 	}
 	
 	public int getBaseAge() {
@@ -51,20 +49,15 @@ public class Age {
 	}
 	
 	public void setAge( int age ) {
-		this.age = age;
+		this.age = age;		
+		CustomNumberPicker picker = (CustomNumberPicker)activity.findViewById( ageNumberPickerId );
+		picker.setCurrent( age );		
 		notifyAgeChangedListeners();
-		//CustomNumberPicker picker = (CustomNumberPicker)activity.findViewById( ageNumberPickerId );
-		//picker.setCurrent( baseAge );		
-		//notifyAgeChangedListeners();
 	}
 	
 	public int getAge() {
 		return age;
 	}
-	
-    private void setIntValue( int id, int value ) {
-    	((TextView)activity.findViewById( id )).setText( "" + value );
-    }
     
     public boolean isAgeNumberPicker( CustomNumberPicker picker ) {
     	return picker.getId() == this.ageNumberPickerId;

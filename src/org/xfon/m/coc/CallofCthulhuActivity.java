@@ -42,7 +42,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbAdapter = new CocDatabaseAdapter(this);
-        Age age = new Age( this, R.id.tv_ageStart, R.id.tv_age );
+        Age age = new Age( this, R.id.tv_age );
         investigator = new Investigator( this, age );            
         clearErrors();                       
         

@@ -51,7 +51,7 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
 
     private static final String TAG = "NumberPicker";
     private static final int DEFAULT_MAX = 200;
-    private static final int DEFAULT_MIN = 0;
+    private static final int DEFAULT_MIN = 0;    
 
     public interface OnChangedListener {
         void onChanged(CustomNumberPicker picker, int oldVal, int newVal);
