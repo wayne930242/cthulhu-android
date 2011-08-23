@@ -35,7 +35,7 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
         if ( !isEnabled() ) setEnabled( true );
                 
         setName( category.getName() );        
-        btnAddSkill = (Button)findViewById( R.id.skillCategoryBtnAddSkill );
+        btnAddSkill = (Button)findViewById( R.id.btnAddSkill );
        	btnAddSkill.setOnClickListener( this );
        	
        	childrenCount = 0;
@@ -43,7 +43,7 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
 	
 
 	private void setName( String title ) {
-		TextView tv = (TextView)this.findViewById( R.id.skillCategoryName );		
+		TextView tv = (TextView)this.findViewById( R.id.name );		
 		tv.setText( title );
 	}
 	
@@ -52,10 +52,9 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
 		if ( v != btnAddSkill ) return;
 		int index = getIndexInParent();
 		Skill newSkill = new Skill( category, childrenCount++ );		
-		SkillEditor editor = new SkillEditor( context, newSkill );		
+		EditableSkillEditor editor = new EditableSkillEditor( context, newSkill );		
 		TableLayout table = (TableLayout)this.getParent();
-		table.addView( editor, index );
-		editor.setEditable( true );
+		table.addView( editor, index );		
 	}
 	
 	private int getIndexInParent() {		

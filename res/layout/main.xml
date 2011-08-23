@@ -162,12 +162,11 @@
 									android:layout_width="wrap_content" android:id="@+id/tv_points_per"></TextView>
 							</TableRow>
 						</TableLayout>
-					
+
 						<!-- Age -->
 						<LinearLayout android:layout_width="fill_parent"
 							android:layout_height="fill_parent" android:gravity="center_vertical"
-							android:layout_marginTop="10dp"
-							>
+							android:layout_marginTop="10dp">
 							<TextView android:id="@+id/textViewAgeStart"
 								android:textStyle="bold" android:layout_width="wrap_content"
 								android:layout_height="wrap_content" android:text="Age: "></TextView>
@@ -178,9 +177,7 @@
 
 						<!-- Buttons -->
 						<LinearLayout android:layout_width="wrap_content"
-							android:layout_height="fill_parent"
-							android:layout_marginTop="20dp"
-							>
+							android:layout_height="fill_parent" android:layout_marginTop="20dp">
 							<Button android:text="Roll" android:id="@+id/btn_roll"
 								android:layout_width="wrap_content" android:layout_height="wrap_content"
 								android:onClick="rerollAttributes"></Button>
@@ -209,10 +206,15 @@
 			android:layout_height="wrap_content" android:id="@+id/tab2"
 			android:orientation="vertical" android:paddingTop="40px">
 
-			<TableLayout android:layout_width="match_parent"
-				android:layout_height="wrap_content" android:id="@+id/tableSkills">
+			<ScrollView android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
 
-			</TableLayout>
+				<TableLayout android:layout_width="match_parent"
+					android:layout_height="wrap_content" android:id="@+id/tableSkills">
+
+				</TableLayout>
+
+			</ScrollView>
 
 		</LinearLayout>
 

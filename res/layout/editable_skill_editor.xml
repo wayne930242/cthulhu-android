@@ -6,21 +6,29 @@
 	android:gravity="center_vertical"
 	android:layout_marginBottom="5px"
 >	
-	<Button 
+	<Button android:id="@+id/btnRemoveSkill" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
-		android:background="@drawable/button_cancel"
-		android:visibility="invisible"
+		android:background="@drawable/button_cancel"		
 		/>
-	<CheckBox android:id="@+id/isOccupational" 
+	<CheckBox android:id="@+id/isLocked" 
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" 		
+		android:layout_height="wrap_content" 	
+		android:button="@drawable/lockbox"	
+		android:gravity="center"
 		/>
 	<TextView android:id="@+id/name"
 		android:layout_width="220sp"
 		android:layout_height="wrap_content" 
 		android:layout_marginRight="10px"
 		android:singleLine="false"
+		android:visibility="gone"
+		/>
+	<EditText android:id="@+id/editableName"
+		android:layout_width="220sp"
+		android:layout_height="wrap_content" 
+		android:layout_marginRight="10px"
+		android:singleLine="true"		
 		/>
 	<org.xfon.m.coc.gui.CustomNumberPicker android:id="@+id/value" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 	
