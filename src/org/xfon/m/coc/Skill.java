@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class Skill implements ISkill {
+public class Skill {
 	private String id;
 	private String name;
 	private int baseValue;
@@ -33,12 +33,10 @@ public class Skill implements ISkill {
 		this.category = category;
 	}
 
-	@Override
 	public String getId() {
 		return id;
 	}
 	
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -47,40 +45,31 @@ public class Skill implements ISkill {
 		this.name = name;
 	}
 	
-	@Override
 	public int getBaseValue() {
 		return baseValue;
 	}
 
-	@Override
 	public int getValue() {
 		return value;
 	}
 
-	@Override
 	public void setValue() {
 		this.value = value;
 	}
 
-	@Override
+	
 	public void setOccupational(boolean occupational) {
 		this.occupational = occupational;		
 	}
 
-	@Override
 	public boolean isOccupational() {
 		return occupational;
 	}
 
-	@Override
 	public boolean isCategory() {
 		return false;
 	}
 
-	@Override
-	public List<ISkill> getSkills() {
-		return null;
-	}
 
 	public SkillCategory getCategory() {
 		return category;
