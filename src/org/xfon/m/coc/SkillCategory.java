@@ -3,23 +3,17 @@ package org.xfon.m.coc;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillCategory {
-	private String id;
+public class SkillCategory implements ISkill {
 	private String name;
 	private int baseValue;		
 	private boolean occupational;
 	private List<Skill> skills;
 	
-	public SkillCategory( String id, String name, int baseValue ) {
-		this.id = id;
+	public SkillCategory( String name, int baseValue ) {
 		this.name = name;
 		this.baseValue = baseValue;			
 		this.occupational = false;
 		skills = new ArrayList<Skill>();
-	}
-	
-	public String getId() {
-		return id;
 	}
 
 	public String getName() {

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -19,7 +18,6 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
 	private Context context;
 	private Button btnAddSkill;
 	private SkillCategory category;
-	int childrenCount;
 	
 	public SkillCategoryEditor(Context context) {
 		super(context);
@@ -37,8 +35,6 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
         setName( category.getName() );        
         btnAddSkill = (Button)findViewById( R.id.btnAddSkill );
        	btnAddSkill.setOnClickListener( this );
-       	
-       	childrenCount = 0;
 	}
 	
 
@@ -51,7 +47,7 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
 	public void onClick(View v) {
 		if ( v != btnAddSkill ) return;
 		int index = getIndexInParent();
-		Skill newSkill = new Skill( category, childrenCount++ );		
+		Skill newSkill = new Skill( category );		
 		EditableSkillEditor editor = new EditableSkillEditor( context, newSkill );		
 		TableLayout table = (TableLayout)this.getParent();
 		table.addView( editor, index );		

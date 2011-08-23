@@ -1,22 +1,14 @@
 package org.xfon.m.coc;
 
-import java.util.List;
 
-import android.content.Context;
-import android.view.ViewGroup;
-import android.widget.TableRow;
-import android.widget.TextView;
-
-public class Skill {
-	private String id;
+public class Skill implements ISkill {
 	private String name;
 	private int baseValue;
 	private int value;
 	private boolean occupational;
 	private SkillCategory category;
 	
-	public Skill( String id, String name, int baseValue ) {
-		this.id = id;
+	public Skill( String name, int baseValue ) {
 		this.name = name;
 		this.baseValue = baseValue;
 		this.value = baseValue;
@@ -24,17 +16,12 @@ public class Skill {
 		this.category = null;
 	}
 	
-	public Skill( SkillCategory category, int index ) {
-		this.id = category.getId() + "_" + index;
+	public Skill( SkillCategory category ) {
 		this.name = " -NEW ";
 		this.baseValue = category.getBaseValue();
 		this.value = this.baseValue;
 		this.occupational = false;
 		this.category = category;
-	}
-
-	public String getId() {
-		return id;
 	}
 	
 	public String getName() {

@@ -85,9 +85,9 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	tableSkills.setShrinkAllColumns( false );
     	tableSkills.setStretchAllColumns( false );
     	//tableSkills.setStretchAllColumns( true );
-    	tableSkills.addView( new SkillEditor( this, new Skill( "test", "Test Skill", 10 ) ) );
-    	tableSkills.addView( new SkillEditor( this, new Skill( "shotgun", "Shotgun", 20 ) ) );
-    	tableSkills.addView( new SkillCategoryEditor( this, new SkillCategory( "other_lang", "Other Language", 10 ) ) );
+    	tableSkills.addView( new SkillEditor( this, new Skill( "Test Skill", 10 ) ) );
+    	tableSkills.addView( new SkillEditor( this, new Skill( "Shotgun", 20 ) ) );
+    	tableSkills.addView( new SkillCategoryEditor( this, new SkillCategory( "Other Language", 10 ) ) );
     	
     }
     
