@@ -1,5 +1,7 @@
 package org.xfon.m.coc;
 
+import java.util.List;
+
 import org.xfon.m.coc.gui.AttributeReducer;
 import org.xfon.m.coc.gui.CustomNumberPicker;
 import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
@@ -81,14 +83,21 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	Log.i("APP", "onStart called" );
     	loadInvestigator(investigator, "_ONPAUSE_" );
     	
+    	populateSkillsTable( SkillFactory.getCoreSkills(investigator));
+    }
+    
+    private void populateSkillsTable( List<ISkill> skills ) {
     	TableLayout tableSkills = (TableLayout)findViewById( R.id.tableSkills );
     	tableSkills.setShrinkAllColumns( false );
     	tableSkills.setStretchAllColumns( false );
-    	//tableSkills.setStretchAllColumns( true );
-    	tableSkills.addView( new SkillEditor( this, new Skill( "Test Skill", 10 ) ) );
-    	tableSkills.addView( new SkillEditor( this, new Skill( "Shotgun", 20 ) ) );
-    	tableSkills.addView( new SkillCategoryEditor( this, new SkillCategory( "Other Language", 10 ) ) );
-    	
+    	for ( ISkill skill: skills ) {
+    		if ( skill.isCategory() ) {
+    			tableSkills.addView( new SkillCategoryEditor( this, (SkillCategory)skill ) );
+    		}
+    		else {
+    			tableSkills.addView( new SkillEditor( this, (Skill)skill ) );
+    		}
+    	}
     }
     
     @Override

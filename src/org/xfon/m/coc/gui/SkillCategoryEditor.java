@@ -5,6 +5,7 @@ import org.xfon.m.coc.Skill;
 import org.xfon.m.coc.SkillCategory;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,14 +51,15 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
 		Skill newSkill = new Skill( category );		
 		EditableSkillEditor editor = new EditableSkillEditor( context, newSkill );		
 		TableLayout table = (TableLayout)this.getParent();
-		table.addView( editor, index );		
+		table.addView( editor, index + 1 );
+		editor.setEditFocus();
 	}
 	
 	private int getIndexInParent() {		
 		ViewGroup parent = (ViewGroup)this.getParent();
 		int count = parent.getChildCount();
 		for ( int i = 0; i < count; i++ ) {
-			View child = parent.getChildAt( 0 );
+			View child = parent.getChildAt( i );
 			if ( child == (View)this ) {				
 				return i;
 			}

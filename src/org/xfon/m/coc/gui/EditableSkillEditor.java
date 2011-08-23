@@ -82,6 +82,11 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
 		CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.value );		
 		picker.setCurrent( value );
 	}
+	
+	public void setEditFocus() {
+		final EditText edit = (EditText)this.findViewById( R.id.editableName );
+		edit.requestFocus();
+	}
 
 	@Override
 	public void onClick(View v) {		

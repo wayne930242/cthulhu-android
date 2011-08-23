@@ -17,7 +17,7 @@ public class Skill implements ISkill {
 	}
 	
 	public Skill( SkillCategory category ) {
-		this.name = " -NEW ";
+		this.name = "";
 		this.baseValue = category.getBaseValue();
 		this.value = this.baseValue;
 		this.occupational = false;
