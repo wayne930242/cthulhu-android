@@ -4,7 +4,7 @@
 	android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
-	android:layout_marginBottom="5px"
+	android:layout_marginBottom="0.5dp"
 >
 	<Button android:id="@+id/btnAddSkill" 
 		android:layout_width="wrap_content"

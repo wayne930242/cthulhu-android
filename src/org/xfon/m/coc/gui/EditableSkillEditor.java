@@ -7,11 +7,13 @@ import android.content.Context;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TableLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -82,8 +84,9 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
 	}
 
 	@Override
-	public void onClick(View v) {
-		
+	public void onClick(View v) {		
+		TableLayout table = (TableLayout)this.getParent();
+		table.removeView( this );
 	}
 	
 }
