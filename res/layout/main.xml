@@ -206,6 +206,13 @@
 			android:layout_height="wrap_content" android:id="@+id/tab2"
 			android:orientation="vertical" android:paddingTop="40px">
 
+			<!-- Status message -->
+			<TextView android:id="@+id/messageSkills" android:textStyle="bold"
+				android:layout_width="fill_parent" android:gravity="center_horizontal"
+				android:layout_height="wrap_content" android:text=""
+				android:textColor="#ff0000" android:background="@drawable/border"
+				android:layout_marginBottom="10dp"></TextView>
+
 			<ScrollView android:layout_width="fill_parent"
 				android:layout_height="fill_parent">
 

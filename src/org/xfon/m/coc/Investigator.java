@@ -1,6 +1,7 @@
 package org.xfon.m.coc;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.xfon.m.coc.gui.CustomNumberPicker;
 import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
@@ -27,6 +28,7 @@ public class Investigator  implements OnChangedListener {
 	private Attribute[] baseAttributes, ageModifiableAttributes;
 	
 	private LinkedHashMap<String,Attribute> baseAttributesMap;
+	private Skills skills;
 	private int mustDrop;	
 	
 	public Investigator( Activity activity, Age age ) {
@@ -59,6 +61,8 @@ public class Investigator  implements OnChangedListener {
 		for ( int i = 0; i < baseAttributes.length; i++ ) {
 			baseAttributesMap.put( baseAttributes[ i ].getName(), baseAttributes[ i ] );
 		}
+		
+		skills = new Skills( SkillFactory.getCoreSkills( this ) );
 	}
 		
 	public Attribute[] getBaseAttributes() {
@@ -125,6 +129,10 @@ public class Investigator  implements OnChangedListener {
 			mustDrop = newMustDrop;
 			//updateMustDrop();
 		}						
+	}
+	
+	public Skills getSkills() {
+		return skills;
 	}
 	
 }

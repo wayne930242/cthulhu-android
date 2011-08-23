@@ -83,14 +83,14 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	Log.i("APP", "onStart called" );
     	loadInvestigator(investigator, "_ONPAUSE_" );
     	
-    	populateSkillsTable( SkillFactory.getCoreSkills(investigator));
+    	populateSkillsTable( );
     }
     
-    private void populateSkillsTable( List<ISkill> skills ) {
+    private void populateSkillsTable() {
     	TableLayout tableSkills = (TableLayout)findViewById( R.id.tableSkills );
     	tableSkills.setShrinkAllColumns( false );
     	tableSkills.setStretchAllColumns( false );
-    	for ( ISkill skill: skills ) {
+    	for ( ISkill skill: investigator.getSkills().list() ) {
     		if ( skill.isCategory() ) {
     			tableSkills.addView( new SkillCategoryEditor( this, (SkillCategory)skill ) );
     		}

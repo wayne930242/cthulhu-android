@@ -86,7 +86,7 @@ containing a value of this type.
         public static final int up=0x7f020020;
     }
     public static final class id {
-        public static final int btnAddSkill=0x7f07003b;
+        public static final int btnAddSkill=0x7f07003c;
         public static final int btnRemoveSkill=0x7f070003;
         public static final int btnSwitch=0x7f070009;
         public static final int btn_load=0x7f070037;
@@ -96,10 +96,11 @@ containing a value of this type.
         public static final int editableName=0x7f070006;
         public static final int increment=0x7f070002;
         public static final int isLocked=0x7f070004;
-        public static final int isOccupational=0x7f07003c;
+        public static final int isOccupational=0x7f07003d;
         public static final int mainPanel=0x7f07000a;
-        public static final int menu_about=0x7f07003d;
+        public static final int menu_about=0x7f07003e;
         public static final int message=0x7f07000d;
+        public static final int messageSkills=0x7f07003a;
         public static final int modAttributesLayout=0x7f070038;
         public static final int name=0x7f070005;
         public static final int tab1=0x7f07000c;
@@ -110,7 +111,7 @@ containing a value of this type.
         public static final int tableRow2=0x7f070018;
         public static final int tableRow3=0x7f070021;
         public static final int tableRow4=0x7f07002a;
-        public static final int tableSkills=0x7f07003a;
+        public static final int tableSkills=0x7f07003b;
         public static final int textViewAgeStart=0x7f070033;
         public static final int textViewApp=0x7f070012;
         public static final int textViewCon=0x7f070019;

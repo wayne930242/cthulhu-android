@@ -50,7 +50,7 @@ public class Skill implements ISkill {
 	}
 
 	public boolean isOccupational() {
-		return occupational;
+		return occupational || ( category != null && category.isOccupational() );
 	}
 
 	public boolean isCategory() {
