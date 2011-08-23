@@ -25,6 +25,7 @@ import android.text.InputType;
 import android.text.Spanned;
 import android.text.method.NumberKeyListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -223,6 +224,7 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
     }
 
     public void onClick(View v) {
+    	Log.i("CHANGE FOCUS: ", mText.toString() );
         validateInput(mText);
         if (!mText.hasFocus()) mText.requestFocus();
 
@@ -319,7 +321,7 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
          * trigger the on focus changed and any typed values to be pulled.
          */
         mText.clearFocus();
-
+        mText.requestFocus();
         if (R.id.increment == v.getId()) {
             mIncrement = true;
             mHandler.post(mRunnable);
@@ -327,6 +329,7 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
             mDecrement = true;
             mHandler.post(mRunnable);
         }
+        
         return true;
     }
 

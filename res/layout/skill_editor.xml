@@ -4,18 +4,31 @@
 	android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
->
+	android:layout_marginBottom="5px"
+>	
 	<Button android:id="@+id/skillBtnAddSkill" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 		android:background="@drawable/add"
+		android:visibility="invisible"
 		/>
 	<CheckBox android:id="@+id/skillIsOccupational" 
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content" 		
+		/>
 	<TextView android:id="@+id/skillName"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" />
+		android:layout_width="220sp"
+		android:layout_height="wrap_content" 
+		android:layout_marginRight="10px"
+		android:singleLine="false"
+		/>
+	<EditText android:id="@+id/skillEditableName"
+		android:layout_width="220sp"
+		android:layout_height="wrap_content" 
+		android:layout_marginRight="10px"
+		android:singleLine="true"
+		android:visibility="gone"
+		/>
 	<org.xfon.m.coc.gui.CustomNumberPicker android:id="@+id/skillValue" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 	
 </TableRow>

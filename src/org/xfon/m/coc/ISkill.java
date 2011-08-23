@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface ISkill {
 	public String getName();
+	public String getId();
 	public int getBaseValue();
 	public int getValue();
 	public void setValue();

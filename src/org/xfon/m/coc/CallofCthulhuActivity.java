@@ -4,6 +4,7 @@ import org.xfon.m.coc.gui.AttributeReducer;
 import org.xfon.m.coc.gui.CustomNumberPicker;
 import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
 import org.xfon.m.coc.gui.FoldingLayout;
+import org.xfon.m.coc.gui.SkillCategoryEditor;
 import org.xfon.m.coc.gui.SkillEditor;
 
 import android.app.Activity;
@@ -81,8 +82,13 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	loadInvestigator(investigator, "_ONPAUSE_" );
     	
     	TableLayout tableSkills = (TableLayout)findViewById( R.id.tableSkills );
+    	tableSkills.setShrinkAllColumns( false );
+    	tableSkills.setStretchAllColumns( false );
+    	//tableSkills.setStretchAllColumns( true );
     	tableSkills.addView( new SkillEditor( this, new Skill( "test", "Test Skill", 10 ) ) );
     	tableSkills.addView( new SkillEditor( this, new Skill( "shotgun", "Shotgun", 20 ) ) );
+    	tableSkills.addView( new SkillCategoryEditor( this, new SkillCategory( "other_lang", "Other Language", 10 ) ) );
+    	
     }
     
     @Override
@@ -234,10 +240,8 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	}
     }  
     
-    private void resetSeekBars ( ) {
-    	FoldingLayout fold = (FoldingLayout)findViewById( R.id.modAttributesLayout );
-    	LinearLayout lo = (LinearLayout)fold.findViewById( R.id.mainPanel );
-    	fold.setTitle( "Lower attributes due to age" );
+    private void resetSeekBars ( ) {    	
+    	LinearLayout lo = (LinearLayout)findViewById( R.id.modAttributesLayout );
    		lo.removeAllViews();
     	AttributeReducer reducer = new AttributeReducer( this );    	
     	reducer.addOnAttributeChangedListener( this );

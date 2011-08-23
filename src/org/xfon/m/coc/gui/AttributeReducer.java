@@ -68,7 +68,7 @@ public class AttributeReducer extends TableLayout {
 		mSeekBar.setProgress( value );
 		mSeekBar.setPadding( 20, 0, 0, 0 );
 		TableRow.LayoutParams lp = new TableRow.LayoutParams( TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT );
-		lp.setMargins( 0, 0, 40, 0 );
+		lp.setMargins( 0, 0, 20, 0 );
 		mSeekBar.setLayoutParams( lp );
 		
 		mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
