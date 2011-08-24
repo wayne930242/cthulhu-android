@@ -4,35 +4,16 @@ import org.xfon.m.coc.R;
 import org.xfon.m.coc.Skill;
 
 import android.content.Context;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SkillEditor extends LinearLayout {
-	private Context context;
-	private Skill skill;
-	private boolean isEditable;
-	final private static int NAME_INDEX = 2;
-	
+public class SkillEditor extends BaseSkillEditor {
 	public SkillEditor(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+		super(context, -1, null); 
 	}
 	
 	public SkillEditor(Context context, Skill skill ) {
-		super(context);
-		this.context = context;
-		this.skill = skill;
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.skill_editor, this, true);
-        if ( !isEnabled() ) setEnabled( true );
-                
+		super(context, R.layout.skill_editor, skill);
+
         setValue( skill.getValue() );
         setName( skill.getName() );
         
@@ -40,9 +21,7 @@ public class SkillEditor extends LinearLayout {
        	picker.setRange( skill.getBaseValue(), 99 );
        	picker.setSpeed( 150 );
        	picker.setWrap( false );
-       	
-       	isEditable = false;
-	}
+    }
 		
 	private void setName( String title ) {
 		TextView tv = (TextView)this.findViewById( R.id.name );		

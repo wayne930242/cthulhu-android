@@ -5,34 +5,23 @@ import org.xfon.m.coc.Skill;
 import org.xfon.m.coc.SkillCategory;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class SkillCategoryEditor extends LinearLayout implements OnClickListener {
-	private Context context;
+public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListener {
 	private Button btnAddSkill;
-	private SkillCategory category;
 	
 	public SkillCategoryEditor(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+		super(context, -1, null);
 	}
 	
 	public SkillCategoryEditor(Context context, SkillCategory category ) {
-		super(context);
-		this.context = context;
-		this.category = category;
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.skill_category_editor, this, true);
-        if ( !isEnabled() ) setEnabled( true );
-                
+		super(context, R.layout.skill_category_editor, category);
+		                
         setName( category.getName() );        
         btnAddSkill = (Button)findViewById( R.id.btnAddSkill );
        	btnAddSkill.setOnClickListener( this );
@@ -48,8 +37,8 @@ public class SkillCategoryEditor extends LinearLayout implements OnClickListener
 	public void onClick(View v) {
 		if ( v != btnAddSkill ) return;
 		int index = getIndexInParent();
-		Skill newSkill = new Skill( category );		
-		EditableSkillEditor editor = new EditableSkillEditor( context, newSkill );		
+		Skill newSkill = new Skill( (SkillCategory)getSkill() );		
+		EditableSkillEditor editor = new EditableSkillEditor( getContext(), newSkill );		
 		TableLayout table = (TableLayout)this.getParent();
 		table.addView( editor, index + 1 );
 		editor.setEditFocus();

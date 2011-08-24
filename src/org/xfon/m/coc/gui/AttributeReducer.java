@@ -58,7 +58,7 @@ public class AttributeReducer extends TableLayout {
 		mTitle.setText( attr.getName() + ": " );
 		mTitle.setTypeface( Typeface.DEFAULT_BOLD );
 		mTitle.setLayoutParams( new TableRow.LayoutParams( TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT ) );
-		public
+		
 		mValue = new TextView( context );
 		mValue.setText( "" + value );
 		mValue.setPadding( 20, 0, 0, 0 );

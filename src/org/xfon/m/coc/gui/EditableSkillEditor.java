@@ -1,47 +1,27 @@
 package org.xfon.m.coc.gui;
 
-import java.util.Iterator;
-import java.util.Set;
-
-import org.xfon.m.coc.OnAttributeChangedListener;
-import org.xfon.m.coc.OnSkillChangedListener;
 import org.xfon.m.coc.R;
 import org.xfon.m.coc.Skill;
 
 import android.content.Context;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TableLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class EditableSkillEditor extends LinearLayout implements OnClickListener {
-	private Context context;
-	private Skill skill;
-	
-	private Set<OnSkillChangedListener> onSkillChangedListeners;
-	
+public class EditableSkillEditor extends BaseSkillEditor implements OnClickListener {
+
 	public EditableSkillEditor(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+		super(context, -1, null);
 	}
 	
 	public EditableSkillEditor(Context context, final Skill skill ) {
-		super(context);
-		this.context = context;
-		this.skill = skill;
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.editable_skill_editor, this, true);
-        if ( !isEnabled() ) setEnabled( true );
+		super(context, R.layout.editable_skill_editor, skill);		
                 
         setValue( skill.getValue() );
         setName( skill.getName() );
@@ -50,18 +30,11 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
        	picker.setRange( skill.getBaseValue(), 99 );
        	picker.setSpeed( 150 );
        	picker.setWrap( false );
-       	picker.setOnChangeListener( new CustomNumberPicker.OnChangedListener() {
-			
-			@Override
-			public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {
-				notifyOnSkillChangedListeners();
-			}
-		});
        	
        	final TextView tv = (TextView)this.findViewById( R.id.name );
 		final EditText edit = (EditText)this.findViewById( R.id.editableName );
 		final Button btn = (Button)this.findViewById( R.id.btnRemoveSkill );
-		final CheckBox lockBox = (CheckBox)this.findViewById( R.id.isLocked );		
+		final CheckBox lockBox = (CheckBox)this.findViewById( R.id.isLocked );				
 		lockBox.setOnCheckedChangeListener( new OnCheckedChangeListener() {
 			
 			@Override
@@ -82,7 +55,7 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
 			}
 		});
        			
-		btn.setOnClickListener( this );                    	
+		btn.setOnClickListener( this );
 	}
 
 	private void setName( String title ) {
@@ -101,18 +74,10 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
 		final EditText edit = (EditText)this.findViewById( R.id.editableName );
 		edit.requestFocus();
 	}
-	
-	public void addOnSkillChangedListener( OnSkillChangedListener listener ) {
-		onSkillChangedListeners.add( listener );
-	}
-	
-	private void notifyOnSkillChangedListeners() {
-		Iterator<OnSkillChangedListener> it = onSkillChangedListeners.iterator();
-		while ( it.hasNext() ) it.next().skillChanged( skill );
-	}
+
 
 	@Override
-	public void onClick(View v) {		
+	public void onClick(View v) {			
 		TableLayout table = (TableLayout)this.getParent();
 		table.removeView( this );
 	}
