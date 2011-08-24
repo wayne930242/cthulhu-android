@@ -18,9 +18,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class AttributeReducer extends TableLayout {	
-	private Context context;
-	
-	public Set<OnAttributeChangedListener> onAttributeChangedListeners;
+	private Context context;	
+	private Set<OnAttributeChangedListener> onAttributeChangedListeners;
 
 	public AttributeReducer(Context context ) {
 		super(context);
@@ -59,7 +58,7 @@ public class AttributeReducer extends TableLayout {
 		mTitle.setText( attr.getName() + ": " );
 		mTitle.setTypeface( Typeface.DEFAULT_BOLD );
 		mTitle.setLayoutParams( new TableRow.LayoutParams( TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT ) );
-			
+		public
 		mValue = new TextView( context );
 		mValue.setText( "" + value );
 		mValue.setPadding( 20, 0, 0, 0 );

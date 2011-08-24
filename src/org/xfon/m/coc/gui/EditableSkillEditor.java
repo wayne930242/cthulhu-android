@@ -1,5 +1,10 @@
 package org.xfon.m.coc.gui;
 
+import java.util.Iterator;
+import java.util.Set;
+
+import org.xfon.m.coc.OnAttributeChangedListener;
+import org.xfon.m.coc.OnSkillChangedListener;
 import org.xfon.m.coc.R;
 import org.xfon.m.coc.Skill;
 
@@ -23,6 +28,8 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
 	private Context context;
 	private Skill skill;
 	
+	private Set<OnSkillChangedListener> onSkillChangedListeners;
+	
 	public EditableSkillEditor(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
@@ -43,6 +50,13 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
        	picker.setRange( skill.getBaseValue(), 99 );
        	picker.setSpeed( 150 );
        	picker.setWrap( false );
+       	picker.setOnChangeListener( new CustomNumberPicker.OnChangedListener() {
+			
+			@Override
+			public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {
+				notifyOnSkillChangedListeners();
+			}
+		});
        	
        	final TextView tv = (TextView)this.findViewById( R.id.name );
 		final EditText edit = (EditText)this.findViewById( R.id.editableName );
@@ -86,6 +100,15 @@ public class EditableSkillEditor extends LinearLayout implements OnClickListener
 	public void setEditFocus() {
 		final EditText edit = (EditText)this.findViewById( R.id.editableName );
 		edit.requestFocus();
+	}
+	
+	public void addOnSkillChangedListener( OnSkillChangedListener listener ) {
+		onSkillChangedListeners.add( listener );
+	}
+	
+	private void notifyOnSkillChangedListeners() {
+		Iterator<OnSkillChangedListener> it = onSkillChangedListeners.iterator();
+		while ( it.hasNext() ) it.next().skillChanged( skill );
 	}
 
 	@Override

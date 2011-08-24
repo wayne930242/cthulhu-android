@@ -59,6 +59,9 @@ public class SkillCategory implements ISkill {
 		if ( cat == null ) {
 			return name.compareTo( sk.getName() );
 		}
+		else if ( cat == this ) {
+			return -1;
+		}
 		else {
 			return name.compareTo( cat.getName() );
 		}
