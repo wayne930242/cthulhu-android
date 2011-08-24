@@ -49,8 +49,11 @@ public class AttributeReducer extends TableLayout {
 		int value = - attr.getMod();
 		
 		row = new TableRow( context );
+		
+		TableLayout.LayoutParams rp = new TableLayout.LayoutParams( TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT );
+		rp.setMargins( 0, 0, 0, 25 );
 		row.setGravity( Gravity.CENTER_VERTICAL );
-		row.setLayoutParams(new LayoutParams( TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT ) );
+		row.setLayoutParams( rp );		
 				
 		mTitle = new TextView( context );
 		mTitle.setText( attr.getName() + ": " );
