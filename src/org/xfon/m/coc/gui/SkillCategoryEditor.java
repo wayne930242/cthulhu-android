@@ -33,6 +33,9 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 		tv.setText( title );
 	}
 	
+	/**
+	 * Add a new skill in this category
+	 */
 	@Override
 	public void onClick(View v) {
 		if ( v != btnAddSkill ) return;
@@ -41,6 +44,7 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 		EditableSkillEditor editor = new EditableSkillEditor( getContext(), newSkill );		
 		TableLayout table = (TableLayout)this.getParent();
 		table.addView( editor, index + 1 );
+		editor.addOnSkillChangedListeners( getOnSkillChangedListeners() );		
 		editor.setEditFocus();
 	}
 	

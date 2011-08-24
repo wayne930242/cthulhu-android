@@ -16,20 +16,36 @@ public class Skills {
 	
 	public int getOccupationalPoints() {
 		int sum = 0;
-		for ( ISkill skill: skills ) {
-			if ( skill.isCategory() ) continue;
+		for ( ISkill skill: skills ) {			
+			if ( skill.isCategory() ) {
+				SkillCategory cat = (SkillCategory)skill;
+				if ( !cat.isOccupational() ) continue;
+				for ( Skill sk: cat.getSkills() ) {
+					sum += sk.getValue() - sk.getBaseValue();
+				}
+				continue;
+			}
 			Skill sk = (Skill)skill;
+			if ( sk.getCategory() != null ) continue; // don't count twice
 			if ( !sk.isOccupational()) continue;
 			sum += sk.getValue() - sk.getBaseValue();
 		}
 		return sum;
 	}
 	
-	public int getNonOccupationalPoints() {
+	public int getPersonalPoints() {
 		int sum = 0;
 		for ( ISkill skill: skills ) {
-			if ( skill.isCategory() ) continue;
+			if ( skill.isCategory() ) {
+				SkillCategory cat = (SkillCategory)skill;
+				if ( cat.isOccupational() ) continue;
+				for ( Skill sk: cat.getSkills() ) {
+					sum += sk.getValue() - sk.getBaseValue();
+				}
+				continue;
+			}
 			Skill sk = (Skill)skill;
+			if ( sk.getCategory() != null ) continue; // don't count twice
 			if ( sk.isOccupational()) continue;
 			sum += sk.getValue() - sk.getBaseValue();
 		}
@@ -39,8 +55,15 @@ public class Skills {
 	public int getTotalPoints() {
 		int sum = 0;
 		for ( ISkill skill: skills ) {
-			if ( skill.isCategory() ) continue;
+			if ( skill.isCategory() ) {
+				SkillCategory cat = (SkillCategory)skill;				
+				for ( Skill sk: cat.getSkills() ) {
+					sum += sk.getValue() - sk.getBaseValue();
+				}
+				continue;
+			}
 			Skill sk = (Skill)skill;			
+			if ( sk.getCategory() != null ) continue; // don't count twice
 			sum += sk.getValue() - sk.getBaseValue();
 		}
 		return sum;

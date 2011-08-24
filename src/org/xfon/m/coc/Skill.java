@@ -26,6 +26,7 @@ public class Skill implements ISkill {
 		this.value = this.baseValue;
 		this.occupational = false;
 		this.category = category;
+		category.addSkill( this );
 	}
 	
 	public String getName() {
@@ -44,10 +45,9 @@ public class Skill implements ISkill {
 		return value;
 	}
 
-	public void setValue() {
+	public void setValue( int value ) {
 		this.value = value;
 	}
-
 	
 	public void setOccupational(boolean occupational) {
 		this.occupational = occupational;		

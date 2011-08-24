@@ -115,6 +115,14 @@ public class Investigator  implements OnChangedListener {
 	public String getDamBonus() {
 		return strDamBonus.getBonus( attrStr.getTotal(), attrSiz.getTotal() );
 	}
+	
+	public int getAvailableOccupationalPoints() {
+		return 20 * attrEdu.getTotal();
+	}
+	
+	public int getAvailablePersonalPoints() {
+		return 10 * attrInt.getTotal();
+	}
 
 	@Override
 	public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {

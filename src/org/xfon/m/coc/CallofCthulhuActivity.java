@@ -30,7 +30,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class CallofCthulhuActivity extends Activity implements OnAttributeChangedListener, OnAgeChangedListener {
+public class CallofCthulhuActivity extends Activity implements OnAttributeChangedListener, OnAgeChangedListener, OnSkillChangedListener {
 	
 	private CocDatabaseAdapter dbAdapter;
 	private Investigator investigator;
@@ -92,12 +92,17 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	tableSkills.setStretchAllColumns( false );
     	for ( ISkill skill: investigator.getSkills().list() ) {
     		if ( skill.isCategory() ) {
-    			tableSkills.addView( new SkillCategoryEditor( this, (SkillCategory)skill ) );
+    			SkillCategoryEditor editor = new SkillCategoryEditor( this, (SkillCategory)skill );
+    			editor.addOnSkillChangedListener( this );
+    			tableSkills.addView(  editor );
     		}
     		else {
-    			tableSkills.addView( new SkillEditor( this, (Skill)skill ) );
+    			SkillEditor editor = new SkillEditor( this, (Skill)skill );
+    			editor.addOnSkillChangedListener( this );
+    			tableSkills.addView( editor );
     		}
     	}
+    	skillChanged( null );
     }
     
     @Override
@@ -308,5 +313,29 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 	public void ageChanged(int age) {
 		calculateDerivedAttributes();
 		updateMustDrop();		
+	}
+
+	@Override
+	public void skillChanged(ISkill skill) {
+		TextView tv = (TextView)findViewById( R.id.messageSkills );
+		int pointsOccupationalUsed = investigator.getSkills().getOccupationalPoints();
+		int pointsPersonalUsed = investigator.getSkills().getPersonalPoints();
+		int pointsOccupationalAvail = investigator.getAvailableOccupationalPoints();
+		int pointsPersonalAvail = investigator.getAvailablePersonalPoints();
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append( "Occ. skills: " + pointsOccupationalUsed + "/" + pointsOccupationalAvail );
+		buffer.append( "    " );
+		buffer.append( "Pers. skills: " + pointsPersonalUsed + "/" + pointsPersonalAvail );
+		tv.setText( buffer.toString() );
+		
+		if ( pointsPersonalUsed > pointsPersonalAvail || 
+			pointsOccupationalUsed > pointsOccupationalAvail ) 
+		{
+			tv.setTextColor( Color.RED );
+		}
+		else {
+			tv.setTextColor( Color.GREEN );
+		}
 	}    
 }

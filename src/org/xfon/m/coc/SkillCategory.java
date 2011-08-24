@@ -47,6 +47,10 @@ public class SkillCategory implements ISkill {
 	public List<Skill> getSkills() {
 		return skills;
 	}
+	
+	public void addSkill( Skill skill ) {
+		skills.add( skill );
+	}
 
 	@Override
 	public int compareTo(ISkill another) {
