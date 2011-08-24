@@ -1,5 +1,6 @@
 package org.xfon.m.coc;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Skills {
@@ -43,5 +44,10 @@ public class Skills {
 			sum += sk.getValue() - sk.getBaseValue();
 		}
 		return sum;
+	}
+	
+	public Skills sort() {
+		Collections.sort( skills );
+		return this;
 	}
 }

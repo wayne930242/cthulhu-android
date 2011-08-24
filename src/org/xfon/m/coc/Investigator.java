@@ -63,6 +63,7 @@ public class Investigator  implements OnChangedListener {
 		}
 		
 		skills = new Skills( SkillFactory.getCoreSkills( this ) );
+		skills.sort();
 	}
 		
 	public Attribute[] getBaseAttributes() {

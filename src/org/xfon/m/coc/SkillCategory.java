@@ -48,4 +48,19 @@ public class SkillCategory implements ISkill {
 		return skills;
 	}
 
+	@Override
+	public int compareTo(ISkill another) {
+		if ( another.isCategory() ) {
+			return name.compareTo( another.getName() );
+		}
+		
+		Skill sk = (Skill)another;
+		SkillCategory cat = sk.getCategory();
+		if ( cat == null ) {
+			return name.compareTo( sk.getName() );
+		}
+		else {
+			return name.compareTo( cat.getName() );
+		}
+	}		
 }

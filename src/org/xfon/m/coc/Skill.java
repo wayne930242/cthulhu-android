@@ -16,6 +16,10 @@ public class Skill implements ISkill {
 		this.category = null;
 	}
 	
+	public Skill( String name ) {
+		this( name, 1 );
+	}
+	
 	public Skill( SkillCategory category ) {
 		this.name = "";
 		this.baseValue = category.getBaseValue();
@@ -61,8 +65,35 @@ public class Skill implements ISkill {
 	public SkillCategory getCategory() {
 		return category;
 	}
+	
+	public boolean inSameCategoryAs( Skill skill ) {
+		if ( category == null && skill.getCategory() == null ) return true;
+		if ( category == null || skill.getCategory() == null ) return false;
+		return category.getName().equals( skill.getCategory().getName() );
+	}	
 
 	public void setCategory(SkillCategory category) {
 		this.category = category;
+	}
+
+	@Override
+	public int compareTo(ISkill another) {
+		if ( another.isCategory() ) {
+			return name.compareTo( another.getName() );
+		}
+		
+		Skill sk = (Skill)another;
+		SkillCategory cat = sk.getCategory();
+		if ( this.inSameCategoryAs( sk ) ) {
+			return name.compareTo( sk.getName() );
+		}
+		else {
+			if ( cat == null ) {
+				return getCategory().getName().compareTo( sk.getName() );
+			}
+			else {
+				return name.compareTo( cat.getName() );
+			}
+		}
 	}		
 }
