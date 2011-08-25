@@ -62,7 +62,7 @@ public class Investigator  implements OnChangedListener {
 			baseAttributesMap.put( baseAttributes[ i ].getName(), baseAttributes[ i ] );
 		}
 		
-		skills = new Skills( SkillFactory.getCoreSkills( this ) );
+		skills = Skills.defaultSkills( this );
 		skills.sort();
 	}
 		

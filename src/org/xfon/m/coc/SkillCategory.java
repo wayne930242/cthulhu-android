@@ -1,19 +1,14 @@
 package org.xfon.m.coc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SkillCategory implements ISkill {
 	private String name;
 	private int baseValue;		
 	private boolean occupational;
-	private List<Skill> skills;
 	
 	public SkillCategory( String name, int baseValue ) {
 		this.name = name;
 		this.baseValue = baseValue;			
 		this.occupational = false;
-		skills = new ArrayList<Skill>();
 	}
 
 	public String getName() {
@@ -42,14 +37,6 @@ public class SkillCategory implements ISkill {
 
 	public boolean isCategory() {
 		return true;
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-	
-	public void addSkill( Skill skill ) {
-		skills.add( skill );
 	}
 
 	@Override

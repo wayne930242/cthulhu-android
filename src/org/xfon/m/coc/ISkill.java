@@ -4,4 +4,5 @@ public interface ISkill extends Comparable<ISkill> {
 	public String getName();
 	public boolean isCategory();
 	public void setOccupational( boolean isOccupational );
+	public boolean isOccupational();
 }

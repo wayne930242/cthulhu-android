@@ -1,6 +1,8 @@
 package org.xfon.m.coc;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.xfon.m.coc.gui.AttributeReducer;
 import org.xfon.m.coc.gui.CustomNumberPicker;
@@ -90,16 +92,21 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	TableLayout tableSkills = (TableLayout)findViewById( R.id.tableSkills );
     	tableSkills.setShrinkAllColumns( false );
     	tableSkills.setStretchAllColumns( false );
+    	tableSkills.removeAllViews();
+    	Map<String, SkillCategoryEditor> categoryEditors = new HashMap<String, SkillCategoryEditor>();
     	for ( ISkill skill: investigator.getSkills().list() ) {
     		if ( skill.isCategory() ) {
-    			SkillCategoryEditor editor = new SkillCategoryEditor( this, (SkillCategory)skill );
+    			SkillCategoryEditor editor = new SkillCategoryEditor( this, investigator.getSkills(), (SkillCategory)skill );
+    			categoryEditors.put( skill.getName(), editor );
     			editor.addOnSkillChangedListener( this );
     			tableSkills.addView(  editor );
-    		}
+    		}    		
     		else {
-    			SkillEditor editor = new SkillEditor( this, (Skill)skill );
+    			Skill sk = (Skill)skill;
+    			if ( sk.isAdded() )  continue;
+    			SkillEditor editor = new SkillEditor( this, investigator.getSkills(), sk );
     			editor.addOnSkillChangedListener( this );
-    			tableSkills.addView( editor );
+    			tableSkills.addView( editor );    			
     		}
     	}
     	skillChanged( null );
@@ -146,13 +153,6 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	
     	clearErrors();  
     	((Button)findViewById( R.id.btn_roll )).setText( "Reroll" );
-    	
-		//TEST
-    	//LinearLayout ll = (LinearLayout)findViewById( R.id.folding );
-    	//ll.addView( new FoldingLayout( this, "TEST" ) );
-/*		Skill sk = new Skill( "archaeology", "Archaeology", 10 );
-		ViewGroup vg = (ViewGroup)findViewById( R.id.skillsTable );
-		sk.addToView( this, vg );*/
     }
     
     public void saveAttributes( View view ) {
@@ -161,6 +161,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     
     private void saveInvestigator( Investigator investigator, String saveName ) {
     	dbAdapter.saveInvestigator(investigator, saveName );
+    	Log.i( "SAVE_INVESTIGATOR: ", investigator.getSkills().toString() );
     }
     
     public void loadAttributes( View view ) {
@@ -176,6 +177,8 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	resetSeekBars();
     	calculateDerivedAttributes();      	
     	updateMustDrop();
+    	Log.i( "LOAD_INVESTIGATOR: ", investigator.getSkills().toString() );
+    	populateSkillsTable( );
     }
     
     private void notifyUser() {

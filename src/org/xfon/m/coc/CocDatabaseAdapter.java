@@ -54,10 +54,10 @@ public class CocDatabaseAdapter {
 		}			
 		
 		if ( !exists ) {			
-			result = db.insert(table, null, values);
+			db.insert(table, null, values);
 		}
 		else {
-			result = db.update( table, values, where, null );
+			db.update( table, values, where, null );
 		}
 		db.close();
 	}
@@ -67,20 +67,24 @@ public class CocDatabaseAdapter {
 		db = dbHelper.getWritableDatabase();
 		String table = dbHelper.getSkillsTable();
 		boolean exists = false;
-		long result;						
 
+		/* Delete all added skills first */
+		String where = "name='" + saveName + "' and is_added=1";
+		db.delete( table, where, null );
+		
 		ContentValues values = new ContentValues();
 		for ( ISkill skill: investigator.getSkills().list() ) {
 			exists = false;
 			if ( skill.isCategory() ) continue;
 			
 			// Check if exists
-			String where = "name='" + saveName + "' and skill_name='" + skill.getName() + "'";
+			where = "name='" + saveName + "' and skill_name='" + skill.getName() + "'";
 			Cursor c = db.query( true, table, new String[] { "_id" }, where, null, null, null, null, null );
 			if ( c.moveToFirst() ) exists = true;					
 			c.close();
 			
 			Skill sk = (Skill)skill;
+			if ( sk.getName().length() == 0 ) continue;
 			values.put( "name", saveName );
 			values.put( "skill_name", sk.getName() );
 			values.put( "base_value", sk.getBaseValue() );
@@ -90,10 +94,10 @@ public class CocDatabaseAdapter {
 			values.put( "is_added", sk.isAdded() );
 
 			if ( !exists ) {			
-				result = db.insert(table, null, values);
+				long result = db.insert(table, null, values);
 			}
 			else {
-				result = db.update( table, values, where, null );
+				long result = db.update( table, values, where, null );
 			}
 		}
 		db.close();
@@ -104,7 +108,6 @@ public class CocDatabaseAdapter {
 		db = dbHelper.getWritableDatabase();
 		String table = dbHelper.getSkillCategoriesTable();
 		boolean exists = false;
-		long result;						
 
 		ContentValues values = new ContentValues();
 		for ( ISkill skill: investigator.getSkills().list() ) {
@@ -124,10 +127,10 @@ public class CocDatabaseAdapter {
 			values.put( "is_occupational", cat.isOccupational() );
 
 			if ( !exists ) {			
-				result = db.insert(table, null, values);
+				db.insert(table, null, values);
 			}
 			else {
-				result = db.update( table, values, where, null );
+				db.update( table, values, where, null );
 			}
 		}
 		db.close();
@@ -189,7 +192,6 @@ public class CocDatabaseAdapter {
 		String table = dbHelper.getSkillsTable();		
 		String[] colNames = { "skill_name", "base_value", "value", "category_name", "is_occupational", "is_added" };
 		List<String> columns = new ArrayList<String>( Arrays.asList( colNames ) );
-		List<ISkill> skillsList = new ArrayList<ISkill>();
 		
 		Cursor c = db.query( table, columns.toArray( new String[0] ), "name='" + saveName + "'", null, null, null, null, null );
 		boolean exists = c.moveToFirst();
@@ -199,6 +201,7 @@ public class CocDatabaseAdapter {
 			return;
 		}		
 		
+		Skills skills = Skills.emptySkills();
 		do {
 			int nameId = c.getColumnIndex( "skill_name" );
 			int baseValueId = c.getColumnIndex( "base_value" );
@@ -229,11 +232,12 @@ public class CocDatabaseAdapter {
 			}
 			skill.setValue( value );
 			skill.setOccupational( isOccupational );
-			skillsList.add( skill );			
+			skills.add( skill );
 		} while ( c.moveToNext() );
-		
-		skillsList.addAll( categories.values() );
-		Skills skills = new Skills( skillsList );
+
+		for ( SkillCategory cat: categories.values() ) {
+			skills.add( cat );
+		}
 		skills.sort();
 		investigator.setSkills( skills );
 		c.close();

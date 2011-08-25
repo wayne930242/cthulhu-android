@@ -10,7 +10,7 @@ public class Skill implements ISkill {
 	private SkillCategory category;	
 	
 	public Skill( String name, int baseValue ) {
-		this.name = name;
+		setName( name );
 		this.baseValue = baseValue;
 		this.value = baseValue;
 		this.occupational = false;
@@ -29,7 +29,6 @@ public class Skill implements ISkill {
 		this.occupational = false;
 		this.category = category;
 		this.added = true;
-		category.addSkill( this );
 	}
 	
 	public String getName() {
@@ -37,7 +36,7 @@ public class Skill implements ISkill {
 	}
 
 	public void setName( String name ) {
-		this.name = name;
+		this.name = name.trim();
 	}
 	
 	public int getBaseValue() {

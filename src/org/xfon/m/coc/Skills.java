@@ -8,27 +8,39 @@ import java.util.List;
 public class Skills {
 	private List<ISkill> skills;
 	
-	public Skills( List<ISkill> skills ) {
-		this.skills = skills;
+	private Skills() {
+		skills = new ArrayList<ISkill>();
+	}
+	
+	public static Skills defaultSkills( Investigator investigator ) {
+		Skills s = new Skills();		
+		s.skills = SkillFactory.getCoreSkills( investigator );
+		return s;
 	}	
 	
+	public static Skills emptySkills() {
+		return new Skills();
+	}
+	
+	public void add( ISkill skill ) {
+		skills.add( skill );
+	}
+	
+	public Skill newSkill( SkillCategory category ) {
+		Skill skill = new Skill( category );
+		add( skill );
+		return skill;		
+	}
+	
 	public List<ISkill> list() {
-		return skills;
+		return Collections.unmodifiableList( skills );
 	}
 	
 	public int getOccupationalPoints() {
 		int sum = 0;
 		for ( ISkill skill: skills ) {			
-			if ( skill.isCategory() ) {
-				SkillCategory cat = (SkillCategory)skill;
-				if ( !cat.isOccupational() ) continue;
-				for ( Skill sk: cat.getSkills() ) {
-					sum += sk.getValue() - sk.getBaseValue();
-				}
-				continue;
-			}
+			if ( skill.isCategory() ) continue;
 			Skill sk = (Skill)skill;
-			if ( sk.getCategory() != null ) continue; // don't count twice
 			if ( !sk.isOccupational()) continue;
 			sum += sk.getValue() - sk.getBaseValue();
 		}
@@ -38,16 +50,8 @@ public class Skills {
 	public int getPersonalPoints() {
 		int sum = 0;
 		for ( ISkill skill: skills ) {
-			if ( skill.isCategory() ) {
-				SkillCategory cat = (SkillCategory)skill;
-				if ( cat.isOccupational() ) continue;
-				for ( Skill sk: cat.getSkills() ) {
-					sum += sk.getValue() - sk.getBaseValue();
-				}
-				continue;
-			}
+			if ( skill.isCategory() ) continue;
 			Skill sk = (Skill)skill;
-			if ( sk.getCategory() != null ) continue; // don't count twice
 			if ( sk.isOccupational()) continue;
 			sum += sk.getValue() - sk.getBaseValue();
 		}
@@ -57,15 +61,8 @@ public class Skills {
 	public int getTotalPoints() {
 		int sum = 0;
 		for ( ISkill skill: skills ) {
-			if ( skill.isCategory() ) {
-				SkillCategory cat = (SkillCategory)skill;				
-				for ( Skill sk: cat.getSkills() ) {
-					sum += sk.getValue() - sk.getBaseValue();
-				}
-				continue;
-			}
+			if ( skill.isCategory() ) continue;
 			Skill sk = (Skill)skill;			
-			if ( sk.getCategory() != null ) continue; // don't count twice
 			sum += sk.getValue() - sk.getBaseValue();
 		}
 		return sum;
@@ -115,5 +112,25 @@ public class Skills {
 		});
 		if ( pos < 0 ) return null;
 		return skills.get( pos );
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		for ( ISkill skill: list() ) {
+			String type = skill.isCategory() ? " (C) " : " (S) ";
+			String occ = skill.isOccupational() ? " [O] " : " [ ] ";
+			buffer.append( type + occ + skill.getName() + ": " );
+			if ( skill.isCategory() ) {
+				SkillCategory cat = (SkillCategory)skill;
+				buffer.append( cat.getBaseValue() );				
+			}
+			else {
+				Skill sk = (Skill)skill;
+				buffer.append( sk.getBaseValue() + " --> " + sk.getValue() );
+			}
+			buffer.append( "\n" );
+		}
+		return buffer.toString();
 	}
 }
