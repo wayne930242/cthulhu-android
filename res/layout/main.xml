@@ -179,14 +179,8 @@
 						<LinearLayout android:layout_width="wrap_content"
 							android:layout_height="fill_parent" android:layout_marginTop="20dp">
 							<Button android:text="Roll" android:id="@+id/btn_roll"
-								android:layout_width="wrap_content" android:layout_height="wrap_content"
+								android:layout_width="fill_parent" android:layout_height="wrap_content"
 								android:onClick="rerollAttributes"></Button>
-							<Button android:layout_marginLeft="10px" android:text="Save"
-								android:id="@+id/btn_save" android:layout_width="wrap_content"
-								android:layout_height="wrap_content" android:onClick="saveAttributes"></Button>
-							<Button android:layout_marginLeft="10px" android:text="Load"
-								android:id="@+id/btn_load" android:layout_width="wrap_content"
-								android:layout_height="wrap_content" android:onClick="loadAttributes"></Button>
 						</LinearLayout>
 
 					</LinearLayout>

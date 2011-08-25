@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/menu_about" android:title="About..." />    
+	<item android:id="@+id/menu_save" android:title="Quick Save" />
+	<item android:id="@+id/menu_load" android:title="Quick Load" />
+	<item android:id="@+id/menu_about" android:title="About..." />  	 
 </menu>

@@ -137,6 +137,14 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     		textView.setTextSize( 14 );
     		return true;
     	}
+    	else if ( item.getItemId() == R.id.menu_save ) {
+    		saveInvestigator(investigator, "-" );
+    		return true;
+    	}
+    	else if ( item.getItemId() == R.id.menu_load ) {
+    		loadInvestigator(investigator, "-" );
+    		return true;
+    	}
     	else {
     		return super.onOptionsItemSelected(item);
     	}
@@ -268,11 +276,6 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	lo.addView( reducer );
     	lo.requestLayout();
     }    
-    
-    private void resetSkills( ) {
-    	//TableLayout table = (TableLayout)findViewById( R.id.skillsTable );
-    	//table.removeAllViews();    	
-    }
 
     private void setIntValue( int id, int value ) {
     	((TextView)findViewById( id )).setText( "" + value );
