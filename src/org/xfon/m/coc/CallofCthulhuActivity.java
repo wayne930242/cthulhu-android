@@ -126,10 +126,11 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     		builder.setTitle( "About" );
     		String msg = "";
     		msg += "Call of Cthulhu character generator v.1.0";    		
-    		msg += "\n\n" + "Created by: xpapad@gmail.com";
+    		msg += "\n\n" + "Created by: Xenofon Papadopoulos <xpapad@gmail.com>";
     		msg += "\n\n" + "In memory of \"Ruthless\" Derek Arthur Blackwell, R.I.P.";
     		msg += "\n\n\n" + "\"Reincarnation has never been easier!\" ";
     		msg += "\n\n"   + "                              - The Arkham Observer";
+    		msg += "\n\n\n" + "For more information about the Call of Cthulhu role playing game, visit:\nhttp://www.chaosium.com";
     		builder.setMessage( msg );
     		AlertDialog dlg = builder.show();
     		TextView textView = (TextView)dlg.findViewById(android.R.id.message);

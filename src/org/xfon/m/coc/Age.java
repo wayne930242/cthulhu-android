@@ -7,7 +7,6 @@ import java.util.Set;
 import org.xfon.m.coc.gui.CustomNumberPicker;
 
 import android.app.Activity;
-import android.widget.TextView;
 
 public class Age {
 	private Activity activity;	
