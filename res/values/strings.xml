@@ -33,5 +33,28 @@
     	
     	age integer not null    
     );
+    </string>
+    <string name="sqlCreateSkills">    
+    CREATE TABLE skills (
+    	_id integer primary key autoincrement,
+    	name string not null,
+    	
+    	skill_name string not null,
+    	base_value integer not null,
+    	value integer not null,
+    	category_name string,
+    	is_added boolean not null,
+    	is_occupational boolean not null    	
+    );
+    </string>
+    <string name="sqlCreateSkillCategories">    
+    CREATE TABLE skill_categories (
+    	_id integer primary key autoincrement,
+    	name string not null,
+    	
+    	category_name string not null,
+    	base_value integer not null,
+    	is_occupational boolean not null    	
+    );        
     </string>   
 </resources>

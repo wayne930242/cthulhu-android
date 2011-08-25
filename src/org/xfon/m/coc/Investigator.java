@@ -140,6 +140,10 @@ public class Investigator  implements OnChangedListener {
 		}						
 	}
 	
+	public void setSkills( Skills skills ) {
+		this.skills = skills;
+	}
+	
 	public Skills getSkills() {
 		return skills;
 	}

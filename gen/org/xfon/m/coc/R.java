@@ -172,6 +172,8 @@ containing a value of this type.
         public static final int prompt_age=0x7f050005;
         public static final int slash=0x7f050004;
         public static final int sqlCreateAttributes=0x7f050006;
+        public static final int sqlCreateSkillCategories=0x7f050008;
+        public static final int sqlCreateSkills=0x7f050007;
     }
     public static final class styleable {
         /** Attributes that can be used with a FoldingLayout.

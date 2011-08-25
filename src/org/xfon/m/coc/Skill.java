@@ -6,7 +6,8 @@ public class Skill implements ISkill {
 	private int baseValue;
 	private int value;
 	private boolean occupational;
-	private SkillCategory category;
+	private boolean added;
+	private SkillCategory category;	
 	
 	public Skill( String name, int baseValue ) {
 		this.name = name;
@@ -14,6 +15,7 @@ public class Skill implements ISkill {
 		this.value = baseValue;
 		this.occupational = false;
 		this.category = null;
+		this.added = false;
 	}
 	
 	public Skill( String name ) {
@@ -26,6 +28,7 @@ public class Skill implements ISkill {
 		this.value = this.baseValue;
 		this.occupational = false;
 		this.category = category;
+		this.added = true;
 		category.addSkill( this );
 	}
 	
@@ -61,6 +64,9 @@ public class Skill implements ISkill {
 		return false;
 	}
 
+	public boolean isAdded() {
+		return added;
+	}
 
 	public SkillCategory getCategory() {
 		return category;
