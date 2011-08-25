@@ -14,7 +14,72 @@ public class Skills {
 	
 	public static Skills defaultSkills( Investigator investigator ) {
 		Skills s = new Skills();		
-		s.skills = SkillFactory.getCoreSkills( investigator );
+		
+		s.skills.add(new Skill("Accounting", 10));
+		s.skills.add(new Skill("Anthropology"));
+		s.skills.add(new Skill("Archaeology"));
+		s.skills.add(new SkillCategory("Art", 5));
+		s.skills.add(new Skill("Astronomy"));
+		s.skills.add(new Skill("Bargain", 5));
+		s.skills.add(new Skill("Biology"));
+		s.skills.add(new Skill("Chemistry"));
+		s.skills.add(new Skill("Climb", 40));
+		s.skills.add(new Skill("Computer User"));
+		s.skills.add(new Skill("Conceal", 15));
+		s.skills.add(new SkillCategory("Craft", 5));
+		s.skills.add(new Skill("Credit Rating", 15));
+		s.skills.add(new Skill("Cthulhu Mythos", 0));
+		s.skills.add(new Skill("Disguise"));
+		// s.skills.add(new Skill("Dodge", TODO)); 
+		s.skills.add(new Skill("Drive Auto", 20));
+		s.skills.add(new Skill("Electr. Repair", 10));
+		s.skills.add(new Skill("Electronics"));
+		s.skills.add(new Skill("Fast Talk", 5));
+		s.skills.add(new Skill("First Aid", 30));
+		s.skills.add(new Skill("Geology"));
+		s.skills.add(new Skill("Hide", 10));
+		
+		s.skills.add(new Skill("History", 20));
+		s.skills.add(new Skill("Jump", 25));
+		s.skills.add(new Skill("Law", 5));
+		s.skills.add(new Skill("Library Use", 25));
+		s.skills.add(new Skill("Listen", 25));
+		s.skills.add(new Skill("Locksmith"));
+		s.skills.add(new Skill("Martial Arts"));
+		s.skills.add(new Skill("Mech. Repair", 20));
+		s.skills.add(new Skill("Medicine", 5));
+		s.skills.add(new Skill("Natural History", 10));
+		s.skills.add(new Skill("Navigate", 10));
+		s.skills.add(new Skill("Occult", 5));
+		s.skills.add(new Skill("Operate Hv. Mch."));
+		s.skills.add(new SkillCategory("Other Language",1));
+		//s.skills.add(new Skill("Own Language", TODO ));
+		s.skills.add(new Skill("Persuade", 15));
+		s.skills.add(new Skill("Pharmacy"));
+		s.skills.add(new Skill("Photography", 10));
+		s.skills.add(new Skill("Physics"));
+		s.skills.add(new SkillCategory("Pilot", 1));
+		s.skills.add(new Skill("Psychoanalysis"));
+		
+		s.skills.add(new Skill("Psychology", 5));
+		s.skills.add(new Skill("Ride", 5));
+		s.skills.add(new Skill("Sneak", 10));
+		s.skills.add(new Skill("Spot Hidden", 25));
+		s.skills.add(new Skill("Swim", 25));
+		s.skills.add(new Skill("Throw", 25));
+		s.skills.add(new Skill("Track", 10));
+		
+		s.skills.add(new Skill("Firearm: Handgun", 20 ) );
+		s.skills.add(new Skill("Firearm: Machine Gun", 15 ) );
+		s.skills.add(new Skill("Firearm: Rifle", 25 ) );
+		s.skills.add(new Skill("Firearm: Shotgun", 30 ) );
+		s.skills.add(new Skill("Firearm: SMG", 15 ) );
+		
+		s.skills.add(new Skill("Weapon: Fist", 50 ) );
+		s.skills.add(new Skill("Weapon: Grapple", 25 ) );
+		s.skills.add(new Skill("Weapon: Head", 10 ) );
+		s.skills.add(new Skill("Weapon: Kick", 25 ) );
+		
 		return s;
 	}	
 	

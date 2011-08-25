@@ -1,11 +1,17 @@
 package org.xfon.m.coc;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.widget.TextView;
 
 final public class Attribute {
 	private Activity activity;
+	
+	private Set<OnAttributeChangedListener> onAttributeChangedListeners;
 	
 	private String name;	
 	
@@ -15,7 +21,6 @@ final public class Attribute {
 	private int mod;
 	
 	private Dice rollingDice;
-	//private AttributeReducer reducer;
 	
 	public Attribute(Activity activity, String name, int baseTextViewId, Dice rollingDice ) {
 		super();
@@ -27,6 +32,7 @@ final public class Attribute {
 		//this.reducer = null;
 		this.unmodifiedValue = 0;
 		this.mod = 0;
+		this.onAttributeChangedListeners = new HashSet<OnAttributeChangedListener>();
 	}
 		
 	public int getUnmodifiedValue() {
@@ -34,6 +40,7 @@ final public class Attribute {
 	}
 
 	public void setUnmodifiedValue(int unmodifiedValue) {
+		if ( this.unmodifiedValue != unmodifiedValue ) notifyAttributeChangedListeners();
 		this.unmodifiedValue = unmodifiedValue;
 	}
 	
@@ -43,7 +50,8 @@ final public class Attribute {
 
 	public void setMod( int mod ) {
 		int oldMod = this.mod;
-		this.mod = mod;
+		if ( this.mod != mod ) notifyAttributeChangedListeners();
+		this.mod = mod;		
 		if ( baseTextViewId != 0 ) setIntValue( baseTextViewId, unmodifiedValue + mod );
 		
 		TextView tv = (TextView)activity.findViewById( baseTextViewId );
@@ -77,7 +85,16 @@ final public class Attribute {
     	int result = rollingDice.roll();
     	setUnmodifiedValue( result );
     	setMod( 0 );
+    	notifyAttributeChangedListeners();
     	return result;
     }       
-
+    
+	public void addOnAttributeChangedListener( OnAttributeChangedListener listener ) {
+		onAttributeChangedListeners.add( listener );
+	}
+	
+	private void notifyAttributeChangedListeners( ) {
+		Iterator<OnAttributeChangedListener> it = onAttributeChangedListeners.iterator();
+		while ( it.hasNext() ) it.next().attributeChanged( this );
+	}
 }
