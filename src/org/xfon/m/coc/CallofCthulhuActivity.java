@@ -199,6 +199,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     
     private void rerollBasicAttributes() {
     	investigator.rerollBasicAttributes();
+    	populateSkillsTable();
     	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );     	
     }
     
@@ -340,6 +341,11 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 			pointsOccupationalUsed > pointsOccupationalAvail ) 
 		{
 			tv.setTextColor( Color.RED );
+		}
+		else if ( pointsPersonalUsed < pointsPersonalAvail || 
+				pointsOccupationalUsed < pointsOccupationalAvail ) 
+		{
+				tv.setTextColor( Color.BLUE );
 		}
 		else {
 			tv.setTextColor( Color.GREEN );

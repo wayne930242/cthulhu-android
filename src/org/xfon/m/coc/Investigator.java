@@ -84,6 +84,8 @@ public class Investigator  implements OnChangedListener {
     	}    			
 		setBaseAge();		
 		mustDrop = 0;
+		skills = Skills.defaultSkills( this );
+		skills.sort();
 	}
 	
 	public void setBaseAge() {
