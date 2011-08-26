@@ -250,7 +250,11 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 				int selectedAge = newVal;
 				int ageDiff = selectedAge - baseAge;
 				int extraEdu = ageDiff / 10;
-				attrEdu.setMod( extraEdu );				
+				int currentEdu = attrEdu.getMod();
+				attrEdu.setMod( extraEdu );			
+				if ( extraEdu != currentEdu ) {					
+					calculateDynamicSkills( attrEdu, true );					
+				}
 				calculateDerivedAttributes();
 				int newMustDrop = Math.max( 0, ( selectedAge / 10 ) - 3 );
 				if ( newMustDrop != mustDrop ) {

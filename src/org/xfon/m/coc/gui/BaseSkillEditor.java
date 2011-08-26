@@ -48,7 +48,7 @@ public class BaseSkillEditor extends LinearLayout {
 		}
 		CustomNumberPicker picker = (CustomNumberPicker) findViewById(R.id.value);
 		if (picker != null) {
-			Skill sk = (Skill)skill;
+			final Skill sk = (Skill)skill;
 			picker.setCurrent( sk.getValue() );
 	       	picker.setRange( sk.getBaseValue(), 99 );
 	       	picker.setSpeed( 150 );
@@ -57,6 +57,7 @@ public class BaseSkillEditor extends LinearLayout {
 
 				@Override
 				public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {
+					//Log.i( "BaseSkillEditor.picker.onChange", "Skill: " + sk.getValue() + ", oldVal: " + oldVal + ", newVal: " + newVal );
 					if (oldVal == newVal) return;
 					if (!skill.isCategory()) {
 						Skill sk = (Skill) skill;
@@ -80,8 +81,13 @@ public class BaseSkillEditor extends LinearLayout {
 		CustomNumberPicker picker = (CustomNumberPicker) findViewById(R.id.value);
 		if (picker != null) {			
 			int baseValue = getSkill().getBaseValue();
-	       	picker.setRange( baseValue, 99 );
-	       	if ( picker.getCurrent() < baseValue ) picker.setCurrent( baseValue );
+			int currentValue = picker.getCurrent();
+	       	//Log.i( "BaseSkillEditor.updateBaseValue", " - BEFORE: " + picker.getCurrent() );
+			picker.setRange( baseValue, 99 );
+	       	//Log.i( "BaseSkillEditor.updateBaseValue", " - AFTER RANGE: " + picker.getCurrent() );
+	       	if ( currentValue < baseValue ) picker.setCurrent( baseValue );
+	       	else picker.setCurrent( currentValue );
+	       	//Log.i( "BaseSkillEditor.updateBaseValue", " - AFTER: " + picker.getCurrent() );
 	       	notifyOnSkillChangedListeners();
 		}
 	}

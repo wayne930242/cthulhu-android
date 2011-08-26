@@ -1,5 +1,7 @@
 package org.xfon.m.coc;
 
+import android.util.Log;
+
 
 public class Skill implements ISkill {
 	private String name;
@@ -44,8 +46,10 @@ public class Skill implements ISkill {
 	}
 	
 	public void setBaseValue( int baseValue ) {
+		Log.i("Skill.setBaseValue", name + " - BEFORE: " + baseValue + " -> " + value );
 		this.baseValue = baseValue;
 		if ( this.value < baseValue ) this.value = baseValue;
+		Log.i("Skill.setBaseValue", name + " - AFTER: " + baseValue + " -> " + value );
 	}
 
 	public int getValue() {
