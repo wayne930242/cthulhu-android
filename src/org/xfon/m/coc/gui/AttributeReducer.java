@@ -84,6 +84,7 @@ public class AttributeReducer extends TableLayout {
 					return;
 				}
 				int value = - progress;
+				Log.i( "AttributeReducer.onProgressChanged", "Progress: " + progress );
 				mValue.setText( "" + value );
 				attr.setMod( value );		
 				notifyAttributeChangedListeners( attr );				

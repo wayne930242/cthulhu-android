@@ -158,8 +158,10 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	calculateDerivedAttributes();
     	
     	mustDrop = -1;
-    	resetSeekBars();
     	initializeAge();
+    	CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.tv_age );	
+		picker.setCurrentAndNotify( investigator.getAge() );	
+    	resetSeekBars();
     	
     	clearErrors();  
     	((Button)findViewById( R.id.btn_roll )).setText( "Reroll" );
@@ -261,7 +263,8 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     
     public void updateMustDrop() {
     	// TODO: optimize
-    	int totalMods = - investigator.getTotalAgeMods();    	
+    	int totalMods = - investigator.getTotalAgeMods();
+    	Log.i( "updateMustDrop", "totalMods: " + totalMods + ", mustDrop: " + mustDrop );
  
     	if ( mustDrop == totalMods ) {
     		clearErrors();
@@ -321,12 +324,12 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     }
 
 	@Override
-	public void attributeChanged(Attribute attribute) {
+	public void attributeChanged(Attribute attribute) {		
+		calculateDerivedAttributes();
+		updateMustDrop();		
 		if ( attribute.getName().equals( "DEX" ) || attribute.getName().equals( "EDU" ) ) {
 			calculateDynamicSkills( attribute, true );
 		}
-		calculateDerivedAttributes();
-		updateMustDrop();		
 	}
 	
 	// This sucks but it's pretty straightforward for now
