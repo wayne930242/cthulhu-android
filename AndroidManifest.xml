@@ -16,6 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+		<activity android:name="com.quietlycoding.android.picker.Picker"/>
     </application>
 </manifest>

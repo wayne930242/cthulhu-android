@@ -9,22 +9,6 @@ package org.xfon.m.coc;
 
 public final class R {
     public static final class attr {
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int defaultValue=0x7f010002;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int endRange=0x7f010001;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -32,23 +16,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int isCollapsed=0x7f010004;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int maxValue=0x7f010003;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int startRange=0x7f010000;
+        public static final int isCollapsed=0x7f010000;
     }
     public static final class drawable {
         public static final int add=0x7f020000;
@@ -83,24 +51,7 @@ containing a value of this type.
         public static final int lockbox_unlocked_focus=0x7f02001d;
         public static final int minus=0x7f02001e;
         public static final int plus=0x7f02001f;
-        public static final int timepicker_down_btn=0x7f020020;
-        public static final int timepicker_down_disabled=0x7f020021;
-        public static final int timepicker_down_disabled_focused=0x7f020022;
-        public static final int timepicker_down_normal=0x7f020023;
-        public static final int timepicker_down_pressed=0x7f020024;
-        public static final int timepicker_down_selected=0x7f020025;
-        public static final int timepicker_input=0x7f020026;
-        public static final int timepicker_input_disabled=0x7f020027;
-        public static final int timepicker_input_normal=0x7f020028;
-        public static final int timepicker_input_pressed=0x7f020029;
-        public static final int timepicker_input_selected=0x7f02002a;
-        public static final int timepicker_up_btn=0x7f02002b;
-        public static final int timepicker_up_disabled=0x7f02002c;
-        public static final int timepicker_up_disabled_focused=0x7f02002d;
-        public static final int timepicker_up_normal=0x7f02002e;
-        public static final int timepicker_up_pressed=0x7f02002f;
-        public static final int timepicker_up_selected=0x7f020030;
-        public static final int up=0x7f020031;
+        public static final int up=0x7f020020;
     }
     public static final class id {
         public static final int btnAddSkill=0x7f07003a;
@@ -173,9 +124,8 @@ containing a value of this type.
         public static final int folding_layout=0x7f030001;
         public static final int horizontal_number_picker=0x7f030002;
         public static final int main=0x7f030003;
-        public static final int number_picker=0x7f030004;
-        public static final int skill_category_editor=0x7f030005;
-        public static final int skill_editor=0x7f030006;
+        public static final int skill_category_editor=0x7f030004;
+        public static final int skill_editor=0x7f030005;
     }
     public static final class menu {
         public static final int menu=0x7f060000;
@@ -195,7 +145,14 @@ containing a value of this type.
         public static final int sqlCreateSkills=0x7f050007;
     }
     public static final class styleable {
-        /** Attributes that can be used with a FoldingLayout.
+        /**  
+    <declare-styleable name="numberpicker">
+        <attr name="startRange" format="integer" />
+        <attr name="endRange" format="integer" />
+		<attr name="defaultValue" format="integer" />
+		<attr name="maxValue" format="integer" />
+    </declare-styleable>
+     
            <p>Includes the following attributes:</p>
            <table>
            <colgroup align="left" />
@@ -206,7 +163,7 @@ containing a value of this type.
            @see #FoldingLayout_isCollapsed
          */
         public static final int[] FoldingLayout = {
-            0x7f010004
+            0x7f010000
         };
         /**
           <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#isCollapsed}
@@ -222,80 +179,5 @@ containing a value of this type.
           @attr name android:isCollapsed
         */
         public static final int FoldingLayout_isCollapsed = 0;
-        /** Attributes that can be used with a numberpicker.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #numberpicker_defaultValue org.xfon.m.coc:defaultValue}</code></td><td></td></tr>
-           <tr><td><code>{@link #numberpicker_endRange org.xfon.m.coc:endRange}</code></td><td></td></tr>
-           <tr><td><code>{@link #numberpicker_maxValue org.xfon.m.coc:maxValue}</code></td><td></td></tr>
-           <tr><td><code>{@link #numberpicker_startRange org.xfon.m.coc:startRange}</code></td><td></td></tr>
-           </table>
-           @see #numberpicker_defaultValue
-           @see #numberpicker_endRange
-           @see #numberpicker_maxValue
-           @see #numberpicker_startRange
-         */
-        public static final int[] numberpicker = {
-            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003
-        };
-        /**
-          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#defaultValue}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:defaultValue
-        */
-        public static final int numberpicker_defaultValue = 2;
-        /**
-          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#endRange}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:endRange
-        */
-        public static final int numberpicker_endRange = 1;
-        /**
-          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#maxValue}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:maxValue
-        */
-        public static final int numberpicker_maxValue = 3;
-        /**
-          <p>This symbol is the offset where the {@link org.xfon.m.coc.R.attr#startRange}
-          attribute's value can be found in the {@link #numberpicker} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name android:startRange
-        */
-        public static final int numberpicker_startRange = 0;
     };
 }
