@@ -30,7 +30,7 @@ public class Skills {
 		s.skills.add(new Skill("Credit Rating", 15));
 		s.skills.add(new Skill("Cthulhu Mythos", 0));
 		s.skills.add(new Skill("Disguise"));
-		// s.skills.add(new Skill("Dodge", TODO)); 
+		s.skills.add(new Skill("Dodge", -1 ));     // Setup later
 		s.skills.add(new Skill("Drive Auto", 20));
 		s.skills.add(new Skill("Electr. Repair", 10));
 		s.skills.add(new Skill("Electronics"));
@@ -53,7 +53,7 @@ public class Skills {
 		s.skills.add(new Skill("Occult", 5));
 		s.skills.add(new Skill("Operate Hv. Mch."));
 		s.skills.add(new SkillCategory("Other Language",1));
-		//s.skills.add(new Skill("Own Language", TODO ));
+		s.skills.add(new Skill("Own Language", -1 )); // Setup later
 		s.skills.add(new Skill("Persuade", 15));
 		s.skills.add(new Skill("Pharmacy"));
 		s.skills.add(new Skill("Photography", 10));
@@ -99,6 +99,13 @@ public class Skills {
 	
 	public List<ISkill> list() {
 		return Collections.unmodifiableList( skills );
+	}
+	
+	public ISkill get( String name ) {
+		for ( ISkill skill: skills ) {
+			if ( skill.getName().equals( name ) ) return skill;
+		}
+		return null;
 	}
 	
 	public int getOccupationalPoints() {

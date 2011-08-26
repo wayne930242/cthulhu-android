@@ -75,12 +75,24 @@ public class BaseSkillEditor extends LinearLayout {
 	public void addOnSkillChangedListeners(Set<OnSkillChangedListener> listeners) {
 		onSkillChangedListeners.addAll(listeners);
 	}
+	
+	public void updateBaseValue() {
+		CustomNumberPicker picker = (CustomNumberPicker) findViewById(R.id.value);
+		if (picker != null) {			
+			int baseValue = getSkill().getBaseValue();
+	       	picker.setRange( baseValue, 99 );
+	       	if ( picker.getCurrent() < baseValue ) picker.setCurrent( baseValue );
+	       	notifyOnSkillChangedListeners();
+		}
+	}
+	
+	public boolean isEditorFor( ISkill skill ) {
+		return skill == getSkill();
+	}
 
 	private void notifyOnSkillChangedListeners() {
-		Iterator<OnSkillChangedListener> it = onSkillChangedListeners
-				.iterator();
-		while (it.hasNext())
-			it.next().skillChanged(skill);
+		Iterator<OnSkillChangedListener> it = onSkillChangedListeners.iterator();
+		while (it.hasNext()) it.next().skillChanged(skill);
 	}
 
 	protected Set<OnSkillChangedListener> getOnSkillChangedListeners() {

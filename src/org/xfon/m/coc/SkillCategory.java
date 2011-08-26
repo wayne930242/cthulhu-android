@@ -18,6 +18,10 @@ public class SkillCategory implements ISkill {
 	public int getBaseValue() {
 		return baseValue;
 	}
+	
+	public void setBaseValue( int baseValue ) {
+		this.baseValue = baseValue;
+	}
 
 	public int getValue() {
 		return 0;

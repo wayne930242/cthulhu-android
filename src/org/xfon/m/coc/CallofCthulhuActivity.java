@@ -7,6 +7,7 @@ import java.util.Map;
 import org.xfon.m.coc.gui.AttributeReducer;
 import org.xfon.m.coc.gui.CustomNumberPicker;
 import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
+import org.xfon.m.coc.gui.BaseSkillEditor;
 import org.xfon.m.coc.gui.FoldingLayout;
 import org.xfon.m.coc.gui.SkillCategoryEditor;
 import org.xfon.m.coc.gui.SkillEditor;
@@ -187,6 +188,10 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	calculateDerivedAttributes();      	
     	updateMustDrop();
     	Log.i( "LOAD_INVESTIGATOR: ", investigator.getSkills().toString() );
+    	Attribute attrDex = investigator.getAttribute( "DEX" );
+    	Attribute attrEdu = investigator.getAttribute( "EDU" );
+    	calculateDynamicSkills( attrDex, false );
+    	calculateDynamicSkills( attrEdu, false );
     	populateSkillsTable( );
     }
     
@@ -199,7 +204,11 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     
     private void rerollBasicAttributes() {
     	investigator.rerollBasicAttributes();
-    	populateSkillsTable();
+    	Attribute attrDex = investigator.getAttribute( "DEX" );
+    	Attribute attrEdu = investigator.getAttribute( "EDU" );
+    	calculateDynamicSkills( attrDex, false );
+    	calculateDynamicSkills( attrEdu, false );
+    	populateSkillsTable();    	
     	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );     	
     }
     
@@ -313,8 +322,40 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 
 	@Override
 	public void attributeChanged(Attribute attribute) {
+		if ( attribute.getName().equals( "DEX" ) || attribute.getName().equals( "EDU" ) ) {
+			calculateDynamicSkills( attribute, true );
+		}
 		calculateDerivedAttributes();
-		updateMustDrop();
+		updateMustDrop();		
+	}
+	
+	// This sucks but it's pretty straightforward for now
+	private void calculateDynamicSkills( Attribute attribute, boolean updateEditor ) {	
+		ISkill sk = null;
+		if ( attribute.getName().equals( "DEX" ) ) {
+			sk = investigator.getSkills().get( "Dodge" );
+			if ( sk != null ) sk.setBaseValue( attribute.getTotal() * 2 );	
+			else Log.i( this.getClass().getName(), "Skill 'Dodge' not found");
+		}
+		else if ( attribute.getName().equals( "EDU" ) ) {
+			sk = investigator.getSkills().get( "Own Language" );
+			if ( sk != null ) sk.setBaseValue( Math.min( 99, attribute.getTotal() * 5 ) );
+			else Log.i( this.getClass().getName(), "Skill 'Own Language' not found");
+		}
+		if ( updateEditor && sk != null ) {
+			BaseSkillEditor editor = findSkillEditor( sk );
+			editor.updateBaseValue();
+		}					
+	}
+	
+	private BaseSkillEditor findSkillEditor( ISkill sk ) {
+    	TableLayout tableSkills = (TableLayout)findViewById( R.id.tableSkills );
+    	int rows = tableSkills.getChildCount();
+    	for ( int i = 0; i < rows; i++ ) {
+    		BaseSkillEditor editor = (BaseSkillEditor)tableSkills.getChildAt(i);
+    		if ( editor.isEditorFor( sk ) ) return editor;
+    	}
+    	return null;
 	}
 
 	@Override

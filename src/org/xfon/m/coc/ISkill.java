@@ -5,4 +5,6 @@ public interface ISkill extends Comparable<ISkill> {
 	public boolean isCategory();
 	public void setOccupational( boolean isOccupational );
 	public boolean isOccupational();
+	public void setBaseValue( int baseValue );
+	public int getBaseValue();
 }

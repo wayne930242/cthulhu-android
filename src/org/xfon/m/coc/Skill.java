@@ -42,6 +42,11 @@ public class Skill implements ISkill {
 	public int getBaseValue() {
 		return baseValue;
 	}
+	
+	public void setBaseValue( int baseValue ) {
+		this.baseValue = baseValue;
+		if ( this.value < baseValue ) this.value = baseValue;
+	}
 
 	public int getValue() {
 		return value;
