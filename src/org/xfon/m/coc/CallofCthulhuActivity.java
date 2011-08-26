@@ -42,6 +42,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 	private MediaPlayer player = null;
 	
 	private int mustDrop = -1;
+	private boolean sound = true;
 	
     /** Called when the activity is first created. */
     @Override
@@ -116,7 +117,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getMenuInflater();    	
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu, menu);        
         return true;
     }
     
@@ -144,6 +145,12 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	}
     	else if ( item.getItemId() == R.id.menu_load ) {
     		loadInvestigator(investigator, "-" );
+    		return true;
+    	}
+    	else if ( item.getItemId() == R.id.menu_sound ) {
+    		sound = !sound;
+    		String title = "Sound: " + ( sound ? "ON" : "OFF" );
+    		item.setTitle( title );    		
     		return true;
     	}
     	else {
@@ -198,6 +205,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     }
     
     private void notifyUser() {
+    	if ( !sound ) return;
     	Vibrator v = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
     	v.vibrate( 500 );
     	if ( player == null ) player = MediaPlayer.create( this, R.raw.dice );

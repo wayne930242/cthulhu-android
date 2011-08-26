@@ -2,5 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/menu_save" android:title="Quick Save" />
 	<item android:id="@+id/menu_load" android:title="Quick Load" />
+	<item android:id="@+id/menu_sound" android:title="Sound: ON" />
 	<item android:id="@+id/menu_about" android:title="About..." />  	 
 </menu>

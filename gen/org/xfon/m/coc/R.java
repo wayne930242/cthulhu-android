@@ -96,9 +96,10 @@ containing a value of this type.
         public static final int isLocked=0x7f070004;
         public static final int isOccupational=0x7f07003b;
         public static final int mainPanel=0x7f07000a;
-        public static final int menu_about=0x7f07003e;
+        public static final int menu_about=0x7f07003f;
         public static final int menu_load=0x7f07003d;
         public static final int menu_save=0x7f07003c;
+        public static final int menu_sound=0x7f07003e;
         public static final int message=0x7f07000d;
         public static final int messageSkills=0x7f070038;
         public static final int modAttributesLayout=0x7f070036;
