@@ -13,7 +13,7 @@ Chaosium Inc., the publisher of Call of Cthulhu.
 
 The source code of this application is licensed under the Apache 2.0 License.
 If you come across issues with the code, you can file an issue on the GitHub
-project page, or email me directly.
+project page. For any suggestions, don't hesitate to email me: xpapad@gmail.com
 
 ## Special licensing information
 
@@ -21,9 +21,9 @@ project page, or email me directly.
 under an Apache 2.0 License. For more information, see NOTICE.NumberPicker or
 visit https://github.com/mrn/numberpicker
 
-* The icons add.png and button\_cancel.png are part of the Crystal Clear icon
-set by Everaldo Coelho, and are licensed under the GNU Lesser General Public
-License (LGPL). For more information, visit http://www.everaldo.com/crystal/
+* The icons add.png, button\_cancel.png, lockbox\*.png are part of the Crystal 
+Clear icon set by Everaldo Coelho, and are licensed under the LGPL. For more
+information, visit http://www.everaldo.com/crystal/
 
 * Call of Cthulhu is a registered trademark of Chaosium Inc. Permission has
 been kindly granted by Chaosium Inc. to use copyrighted material in this project
