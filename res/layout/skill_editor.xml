@@ -22,6 +22,6 @@
 		android:layout_marginRight="10px"
 		android:singleLine="false"
 		/>
-	<org.xfon.m.coc.gui.CustomNumberPicker android:id="@+id/value" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+	<org.xfon.m.coc.gui.NumberPicker android:id="@+id/value" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 	
 </TableRow>

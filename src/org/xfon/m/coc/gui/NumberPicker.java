@@ -44,7 +44,7 @@ import android.widget.TextView;
  *
  * @author Google
  */
-public class CustomNumberPicker extends LinearLayout implements OnClickListener,
+public class NumberPicker extends LinearLayout implements OnClickListener,
         OnFocusChangeListener, OnLongClickListener {
 
     private static final String TAG = "NumberPicker";
@@ -52,7 +52,7 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
     private static final int DEFAULT_MIN = 0;    
 
     public interface OnChangedListener {
-        void onChanged(CustomNumberPicker picker, int oldVal, int newVal);
+        void onChanged(NumberPicker picker, int oldVal, int newVal);
     }
 
     public interface Formatter {
@@ -65,8 +65,8 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
      * most efficient way to do this; it avoids creating temporary objects
      * on every call to format().
      */
-    public static final CustomNumberPicker.Formatter TWO_DIGIT_FORMATTER =
-            new CustomNumberPicker.Formatter() {
+    public static final NumberPicker.Formatter TWO_DIGIT_FORMATTER =
+            new NumberPicker.Formatter() {
                 final StringBuilder mBuilder = new StringBuilder();
                 final java.util.Formatter mFmt = new java.util.Formatter(mBuilder);
                 final Object[] mArgs = new Object[1];
@@ -107,29 +107,29 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
     private boolean mIncrement;
     private boolean mDecrement;
 
-    public CustomNumberPicker(Context context) {
+    public NumberPicker(Context context) {
         this(context, null);
     }
 
-    public CustomNumberPicker(Context context, AttributeSet attrs) {
+    public NumberPicker(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
-    public CustomNumberPicker(Context context, AttributeSet attrs, int defStyle) {
+    public NumberPicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
         //setOrientation(VERTICAL);
         setGravity(  Gravity.CENTER_VERTICAL );
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.custom_number_picker, this, true);
+        inflater.inflate(R.layout.horizontal_number_picker, this, true);
         mHandler = new Handler();
         InputFilter inputFilter = new NumberPickerInputFilter();
         mNumberInputFilter = new NumberRangeKeyListener();
-        mIncrementButton = (CustomNumberPickerButton) findViewById(R.id.increment);
+        mIncrementButton = (NumberPickerButton) findViewById(R.id.increment);
         mIncrementButton.setOnClickListener(this);
         mIncrementButton.setOnLongClickListener(this);
         mIncrementButton.setNumberPicker(this);
-        mDecrementButton = (CustomNumberPickerButton) findViewById(R.id.decrement);
+        mDecrementButton = (NumberPickerButton) findViewById(R.id.decrement);
         mDecrementButton.setOnClickListener(this);
         mDecrementButton.setOnLongClickListener(this);
         mDecrementButton.setNumberPicker(this);
@@ -312,7 +312,7 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
     }
 
     /**
-     * We start the long click here but rely on the {@link CustomNumberPickerButton}
+     * We start the long click here but rely on the {@link NumberPickerButton}
      * to inform us when the long click has ended.
      */
     public boolean onLongClick(View v) {
@@ -345,8 +345,8 @@ public class CustomNumberPicker extends LinearLayout implements OnClickListener,
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
     };
 
-    private CustomNumberPickerButton mIncrementButton;
-    private CustomNumberPickerButton mDecrementButton;
+    private NumberPickerButton mIncrementButton;
+    private NumberPickerButton mDecrementButton;
 
     private class NumberPickerInputFilter implements InputFilter {
         public CharSequence filter(CharSequence source, int start, int end,

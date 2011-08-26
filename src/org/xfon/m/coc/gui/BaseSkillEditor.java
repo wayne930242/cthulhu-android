@@ -9,7 +9,7 @@ import org.xfon.m.coc.OnSkillChangedListener;
 import org.xfon.m.coc.R;
 import org.xfon.m.coc.Skill;
 import org.xfon.m.coc.Skills;
-import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
+import org.xfon.m.coc.gui.NumberPicker.OnChangedListener;
 
 import android.content.Context;
 import android.util.Log;
@@ -46,7 +46,7 @@ public class BaseSkillEditor extends LinearLayout {
 				}
 			});
 		}
-		CustomNumberPicker picker = (CustomNumberPicker) findViewById(R.id.value);
+		NumberPicker picker = (NumberPicker) findViewById(R.id.value);
 		if (picker != null) {
 			final Skill sk = (Skill)skill;
 			picker.setCurrent( sk.getValue() );
@@ -56,7 +56,7 @@ public class BaseSkillEditor extends LinearLayout {
 			picker.setOnChangeListener(new OnChangedListener() {
 
 				@Override
-				public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {
+				public void onChanged(NumberPicker picker, int oldVal, int newVal) {
 					//Log.i( "BaseSkillEditor.picker.onChange", "Skill: " + sk.getValue() + ", oldVal: " + oldVal + ", newVal: " + newVal );
 					if (oldVal == newVal) return;
 					if (!skill.isCategory()) {
@@ -78,7 +78,7 @@ public class BaseSkillEditor extends LinearLayout {
 	}
 	
 	public void updateBaseValue() {
-		CustomNumberPicker picker = (CustomNumberPicker) findViewById(R.id.value);
+		NumberPicker picker = (NumberPicker) findViewById(R.id.value);
 		if (picker != null) {			
 			int baseValue = getSkill().getBaseValue();
 			int currentValue = picker.getCurrent();

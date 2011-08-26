@@ -17,7 +17,6 @@
 package org.xfon.m.coc.gui;
 
 import org.xfon.m.coc.R;
-import org.xfon.m.coc.R.id;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -28,24 +27,24 @@ import android.widget.ImageButton;
 /**
  * This class exists purely to cancel long click events.
  */
-public class CustomNumberPickerButton extends ImageButton {
+public class NumberPickerButton extends ImageButton {
 
-    private CustomNumberPicker mNumberPicker;
+    private NumberPicker mNumberPicker;
     
-    public CustomNumberPickerButton(Context context, AttributeSet attrs,
+    public NumberPickerButton(Context context, AttributeSet attrs,
             int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public CustomNumberPickerButton(Context context, AttributeSet attrs) {
+    public NumberPickerButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CustomNumberPickerButton(Context context) {
+    public NumberPickerButton(Context context) {
         super(context);
     }
     
-    public void setNumberPicker(CustomNumberPicker picker) {
+    public void setNumberPicker(NumberPicker picker) {
         mNumberPicker = picker;
     }
     

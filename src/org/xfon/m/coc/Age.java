@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.xfon.m.coc.gui.CustomNumberPicker;
+import org.xfon.m.coc.gui.NumberPicker;
 
 import android.app.Activity;
 
@@ -38,7 +38,7 @@ public class Age {
 	public void setBaseAge( int baseAge ) {
 		this.baseAge = baseAge;
 		age = baseAge;
-		CustomNumberPicker picker = (CustomNumberPicker)activity.findViewById( ageNumberPickerId );
+		NumberPicker picker = (NumberPicker)activity.findViewById( ageNumberPickerId );
 		picker.setCurrent( baseAge );
 		picker.setRange( baseAge, MAX_AGE );
 	}
@@ -49,7 +49,7 @@ public class Age {
 	
 	public void setAge( int age ) {
 		this.age = age;		
-		CustomNumberPicker picker = (CustomNumberPicker)activity.findViewById( ageNumberPickerId );
+		NumberPicker picker = (NumberPicker)activity.findViewById( ageNumberPickerId );
 		picker.setCurrent( age );		
 		notifyAgeChangedListeners();
 	}
@@ -58,11 +58,11 @@ public class Age {
 		return age;
 	}
     
-    public boolean isAgeNumberPicker( CustomNumberPicker picker ) {
+    public boolean isAgeNumberPicker( NumberPicker picker ) {
     	return picker.getId() == this.ageNumberPickerId;
     }
     
-    public CustomNumberPicker getAgeNumberPicker() {
-    	return (CustomNumberPicker)activity.findViewById( ageNumberPickerId );
+    public NumberPicker getAgeNumberPicker() {
+    	return (NumberPicker)activity.findViewById( ageNumberPickerId );
     }
 }

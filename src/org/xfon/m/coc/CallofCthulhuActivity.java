@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.xfon.m.coc.gui.AttributeReducer;
-import org.xfon.m.coc.gui.CustomNumberPicker;
-import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
+import org.xfon.m.coc.gui.NumberPicker;
+import org.xfon.m.coc.gui.NumberPicker.OnChangedListener;
 import org.xfon.m.coc.gui.BaseSkillEditor;
 import org.xfon.m.coc.gui.FoldingLayout;
 import org.xfon.m.coc.gui.SkillCategoryEditor;
@@ -166,7 +166,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	
     	mustDrop = -1;
     	initializeAge();
-    	CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.tv_age );	
+    	NumberPicker picker = (NumberPicker)findViewById( R.id.tv_age );	
 		picker.setCurrentAndNotify( investigator.getAge() );	
     	resetSeekBars();
     	
@@ -191,7 +191,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	dbAdapter.loadInvestigator(investigator, saveName );
     	findViewById( R.id.tv_age ).setVisibility( View.VISIBLE );     	
     	initializeAge();
-		CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.tv_age );	
+		NumberPicker picker = (NumberPicker)findViewById( R.id.tv_age );	
 		picker.setCurrentAndNotify( investigator.getAge() );	
     	resetSeekBars();
     	calculateDerivedAttributes();      	
@@ -249,11 +249,11 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     private void initializeAge() {
     	final Attribute attrEdu = investigator.getAttribute( "EDU" );
     	final int baseAge = 6 + attrEdu.getUnmodifiedValue();
-    	CustomNumberPicker agePicker = (CustomNumberPicker)findViewById( R.id.tv_age );    	
+    	NumberPicker agePicker = (NumberPicker)findViewById( R.id.tv_age );    	
     	agePicker.setOnChangeListener( new OnChangedListener() {
 
     		@Override
-			public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {
+			public void onChanged(NumberPicker picker, int oldVal, int newVal) {
     			investigator.setAge( newVal );
 				int selectedAge = newVal;
 				int ageDiff = selectedAge - baseAge;

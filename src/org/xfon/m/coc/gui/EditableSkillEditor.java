@@ -70,7 +70,7 @@ public class EditableSkillEditor extends BaseSkillEditor implements OnClickListe
 	}
 	
 	private void setValue( int value ) {
-		CustomNumberPicker picker = (CustomNumberPicker)findViewById( R.id.value );		
+		NumberPicker picker = (NumberPicker)findViewById( R.id.value );		
 		picker.setCurrent( value );
 	}
 	

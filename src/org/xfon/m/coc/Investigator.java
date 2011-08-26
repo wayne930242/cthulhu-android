@@ -3,8 +3,8 @@ package org.xfon.m.coc;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.xfon.m.coc.gui.CustomNumberPicker;
-import org.xfon.m.coc.gui.CustomNumberPicker.OnChangedListener;
+import org.xfon.m.coc.gui.NumberPicker;
+import org.xfon.m.coc.gui.NumberPicker.OnChangedListener;
 
 import android.app.Activity;
 import android.content.Context;
@@ -127,7 +127,7 @@ public class Investigator  implements OnChangedListener {
 	}
 
 	@Override
-	public void onChanged(CustomNumberPicker picker, int oldVal, int newVal) {
+	public void onChanged(NumberPicker picker, int oldVal, int newVal) {
 		if ( !age.isAgeNumberPicker(picker) )  return;
 		int selectedAge = newVal;
 		int ageDiff = selectedAge - age.getBaseAge();
