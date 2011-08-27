@@ -14,6 +14,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -82,9 +84,15 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     public void onStart() {
     	super.onStart();
     	Log.i("APP", "onStart called" );
-    	loadInvestigator(investigator, "_ONPAUSE_" );
-    	
+    	readPreferences();
+    	loadInvestigator(investigator, "_ONPAUSE_" );    	
     	populateSkillsTable( );
+    }
+    
+    private void readPreferences() {
+    	SharedPreferences prefs = getPreferences(0);
+    	sound = prefs.getBoolean( "SOUND", true );
+    	Log.i("SOUND", "" + sound );
     }
     
     private void populateSkillsTable() {
@@ -115,6 +123,9 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getMenuInflater();    	
         inflater.inflate(R.menu.menu, menu);        
+    	MenuItem menuSound = menu.findItem( R.id.menu_sound );
+    	String title = "Sound: " + ( sound ? "ON" : "OFF" );
+    	menuSound.setTitle( title );
         return true;
     }
     
@@ -147,7 +158,11 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	else if ( item.getItemId() == R.id.menu_sound ) {
     		sound = !sound;
     		String title = "Sound: " + ( sound ? "ON" : "OFF" );
-    		item.setTitle( title );    		
+    		item.setTitle( title );    	
+    		SharedPreferences prefs = getPreferences(0);
+    		Editor editor = prefs.edit();
+    		editor.putBoolean( "SOUND",  sound );
+    		editor.commit();
     		return true;
     	}
     	else {
