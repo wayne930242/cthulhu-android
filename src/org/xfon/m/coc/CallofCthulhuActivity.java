@@ -1,14 +1,12 @@
 package org.xfon.m.coc;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.xfon.m.coc.gui.AttributeReducer;
+import org.xfon.m.coc.gui.BaseSkillEditor;
 import org.xfon.m.coc.gui.NumberPicker;
 import org.xfon.m.coc.gui.NumberPicker.OnChangedListener;
-import org.xfon.m.coc.gui.BaseSkillEditor;
-import org.xfon.m.coc.gui.FoldingLayout;
 import org.xfon.m.coc.gui.SkillCategoryEditor;
 import org.xfon.m.coc.gui.SkillEditor;
 
@@ -25,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -129,7 +126,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     		String msg = "";
     		msg += "Call of Cthulhu character generator v.1.0";    		
     		msg += "\n\n" + "Created by: Xenofon Papadopoulos <xpapad@gmail.com>";
-    		msg += "\n\n" + "In memory of \"Ruthless\" Derek Arthur Blackwell, R.I.P.";
+    		msg += "\n\n" + "In memory of \"Ruthless\" Derek Arthur Blackwell, Maza Operative, R.I.P.";
     		msg += "\n\n\n" + "\"Reincarnation has never been easier!\" ";
     		msg += "\n\n"   + "                              - The Arkham Observer";
     		msg += "\n\n\n" + "For more information about the Call of Cthulhu role playing game, visit:\nhttp://www.chaosium.com";
