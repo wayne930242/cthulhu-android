@@ -2,18 +2,21 @@ Call of Cthulhu Character Generator
 -------
 
 This is a simple character generator for the Call of Cthulhu role-playing game.
-It complies with the 5.5 edition rulebook, which is available from Amazon:
+It is not meant to be used during a game; it just helps players to quickly create
+a new investigator when their previous one meets with an unhappy but inevitable 
+end. It complies with the 5.5 edition rulebook, which is available from Amazon:
 
  http://www.amazon.com/Call-Cthulhu-Roleplaying-Lovecraft-Version/dp/1568821344
 
 This application was mainly meant for internal use by our role-playing group,
 and is released freely as open source software without any guarantee, just in 
-case someone else can somehow benefit from it. It is NOT related with, or endorsed
-by, Chaosium Inc., the publisher of Call of Cthulhu. 
+case anyone else is interested. It is NOT related with, or endorsed by, 
+Chaosium Inc., the publisher of Call of Cthulhu. 
 
 The source code of this application is licensed under the Apache 2.0 License.
 If you come across issues with the code, you can file an issue on the GitHub
-project page. For any suggestions, don't hesitate to email me: xpapad@gmail.com
+project page at https://github.com/xpapad/cthulhu-android. For any suggestions, 
+don't hesitate to email me at xpapad@gmail.com
 
 ## Special licensing information
 
