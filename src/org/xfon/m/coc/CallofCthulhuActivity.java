@@ -75,15 +75,13 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     
     @Override
     public void onPause() {
-    	super.onPause();
-    	Log.i("APP", "onPause called" );
+    	super.onPause();    	
     	saveInvestigator(investigator, "_ONPAUSE_" );
     }
     
     @Override
     public void onStart() {
-    	super.onStart();
-    	Log.i("APP", "onStart called" );
+    	super.onStart();    	
     	readPreferences();
     	loadInvestigator(investigator, "_ONPAUSE_" );    	
     	populateSkillsTable( );
@@ -91,8 +89,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     
     private void readPreferences() {
     	SharedPreferences prefs = getPreferences(0);
-    	sound = prefs.getBoolean( "SOUND", true );
-    	Log.i("SOUND", "" + sound );
+    	sound = prefs.getBoolean( "SOUND", true );    	
     }
     
     private void populateSkillsTable() {
@@ -192,7 +189,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     
     private void saveInvestigator( Investigator investigator, String saveName ) {
     	dbAdapter.saveInvestigator(investigator, saveName );
-    	Log.i( "SAVE_INVESTIGATOR: ", investigator.getSkills().toString() );
+    	//Log.d( "SAVE_INVESTIGATOR: ", investigator.getSkills().toString() );
     }
     
     public void loadAttributes( View view ) {
@@ -208,7 +205,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	resetSeekBars();
     	calculateDerivedAttributes();      	
     	updateMustDrop();
-    	Log.i( "LOAD_INVESTIGATOR: ", investigator.getSkills().toString() );
+    	//Log.d( "LOAD_INVESTIGATOR: ", investigator.getSkills().toString() );
     	Attribute attrDex = investigator.getAttribute( "DEX" );
     	Attribute attrEdu = investigator.getAttribute( "EDU" );
     	calculateDynamicSkills( attrDex, false );
@@ -311,8 +308,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
    		lo.removeAllViews();
     	AttributeReducer reducer = new AttributeReducer( this );    	
     	reducer.addOnAttributeChangedListener( this );
-    	reducer.addAttributes( investigator.getAgeModifiableAttribute() );
-    	Log.i( "ATTRS", "Adding view" );
+    	reducer.addAttributes( investigator.getAgeModifiableAttribute() );    	
     	lo.addView( reducer );
     	lo.requestLayout();
     }    
@@ -364,13 +360,11 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 		ISkill sk = null;
 		if ( attribute.getName().equals( "DEX" ) ) {
 			sk = investigator.getSkills().get( "Dodge" );
-			if ( sk != null ) sk.setBaseValue( attribute.getTotal() * 2 );	
-			else Log.i( this.getClass().getName(), "Skill 'Dodge' not found");
+			if ( sk != null ) sk.setBaseValue( attribute.getTotal() * 2 );				
 		}
 		else if ( attribute.getName().equals( "EDU" ) ) {
 			sk = investigator.getSkills().get( "Own Language" );
-			if ( sk != null ) sk.setBaseValue( Math.min( 99, attribute.getTotal() * 5 ) );
-			else Log.i( this.getClass().getName(), "Skill 'Own Language' not found");
+			if ( sk != null ) sk.setBaseValue( Math.min( 99, attribute.getTotal() * 5 ) );			
 		}
 		if ( updateEditor && sk != null ) {
 			BaseSkillEditor editor = findSkillEditor( sk );
