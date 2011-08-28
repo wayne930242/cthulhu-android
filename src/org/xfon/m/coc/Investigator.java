@@ -78,10 +78,12 @@ public class Investigator  implements OnChangedListener {
 		return baseAttributesMap.get( name );
 	}
 	
-	public void rerollBasicAttributes() {
+	public void rerollBasicAttributes( StringBuffer log ) {
+		if ( log != null ) log.append( "Rolling attributes:\n------------------\n");
 		for ( int i = 0; i < baseAttributes.length; i++ ) {
-    		baseAttributes[i].roll(); // this also clears all mods
-    	}    			
+    		baseAttributes[i].roll( log ); // this also clears all mods
+    	}
+		if ( log != null ) log.append( "\n");
 		setBaseAge();		
 		mustDrop = 0;
 		skills = Skills.defaultSkills( this );

@@ -58,8 +58,8 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 
 	private void initializeTabs() {
 		final int TAB_HEIGHT = 40;
-		int[] tabContentId = { R.id.tab1, R.id.tab2 };
-		String[] tabLabels = { "Main", "Skills" };
+		int[] tabContentId = { R.id.tab1, R.id.tab2, R.id.tab3 };
+		String[] tabLabels = { "Main", "Skills", "Log" };
 				
 		TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
@@ -225,7 +225,10 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     }
     
     private void rerollBasicAttributes() {
-    	investigator.rerollBasicAttributes();
+    	StringBuffer log = new StringBuffer();
+    	investigator.rerollBasicAttributes( log );
+    	((TextView)findViewById(R.id.log)).setText( log.toString() );
+    	
     	Attribute attrDex = investigator.getAttribute( "DEX" );
     	Attribute attrEdu = investigator.getAttribute( "EDU" );
     	calculateDynamicSkills( attrDex, false );

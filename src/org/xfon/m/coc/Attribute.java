@@ -80,14 +80,20 @@ final public class Attribute {
     	return unmodifiedValue + mod;
     }
     
-    public int roll() {
+    public int roll( StringBuffer log ) {
     	if ( rollingDice == null ) return -1;
-    	int result = rollingDice.roll();
+    	if ( log != null ) log.append( name + " " );
+    	int result = rollingDice.roll( log );
+    	if ( log != null ) log.append( "\n" );
     	setUnmodifiedValue( result );
     	setMod( 0 );
     	notifyAttributeChangedListeners();
     	return result;
     }       
+    
+    public int roll() {
+    	return roll( null );
+    }
     
 	public void addOnAttributeChangedListener( OnAttributeChangedListener listener ) {
 		onAttributeChangedListeners.add( listener );
