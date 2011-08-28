@@ -20,14 +20,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 
 public class BaseSkillEditor extends LinearLayout {
-	private Skills skills;
-	private ISkill skill;
+	protected Skills mSkills;
+	protected ISkill mSkill;
 	private Set<OnSkillChangedListener> onSkillChangedListeners;
 
 	public BaseSkillEditor(Context context, int layoutId, final Skills skills, final ISkill skill) {
 		super(context);
-		this.skills = skills;
-		this.skill = skill;
+		this.mSkills = skills;
+		this.mSkill = skill;
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(layoutId, this, true);
@@ -80,7 +80,7 @@ public class BaseSkillEditor extends LinearLayout {
 	public void updateBaseValue() {
 		NumberPicker picker = (NumberPicker) findViewById(R.id.value);
 		if (picker != null) {			
-			int baseValue = getSkill().getBaseValue();
+			int baseValue = mSkill.getBaseValue();
 			int currentValue = picker.getCurrent();
 	       	//Log.i( "BaseSkillEditor.updateBaseValue", " - BEFORE: " + picker.getCurrent() );
 			picker.setRange( baseValue, 99 );
@@ -93,23 +93,15 @@ public class BaseSkillEditor extends LinearLayout {
 	}
 	
 	public boolean isEditorFor( ISkill skill ) {
-		return skill == getSkill();
+		return skill == mSkill;
 	}
 
 	private void notifyOnSkillChangedListeners() {
 		Iterator<OnSkillChangedListener> it = onSkillChangedListeners.iterator();
-		while (it.hasNext()) it.next().skillChanged(skill);
+		while (it.hasNext()) it.next().skillChanged(mSkill);
 	}
 
 	protected Set<OnSkillChangedListener> getOnSkillChangedListeners() {
 		return onSkillChangedListeners;
-	}
-
-	protected ISkill getSkill() {
-		return skill;
-	}
-	
-	protected Skills getSkills() {
-		return skills;
 	}
 }

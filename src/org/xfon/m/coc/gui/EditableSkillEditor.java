@@ -50,14 +50,14 @@ public class EditableSkillEditor extends BaseSkillEditor implements OnClickListe
 	
 	public void lock() {        					
 		String skillName = edit.getText().toString();
-		((Skill)getSkill()).setName( skillName );
+		((Skill)mSkill).setName( skillName );
 		tv.setText( skillName );
 		tv.setVisibility( View.VISIBLE );
 		edit.setVisibility( View.GONE );		
 	}
 	
 	public void unlock() {
-		edit.setText( ((Skill)getSkill()).getName() );
+		edit.setText( mSkill.getName() );
 		tv.setVisibility( View.GONE );
 		edit.setVisibility( View.VISIBLE );		
 	}

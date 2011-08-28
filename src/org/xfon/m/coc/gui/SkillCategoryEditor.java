@@ -35,15 +35,11 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 	
 	@Override
 	protected void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		List<ISkill> skills = getSkills().list();
-		for ( ISkill skill: skills ) {
+		super.onAttachedToWindow();		
+		for ( ISkill skill: mSkills.list() ) {
 			if ( skill.isCategory() ) continue;
 			Skill sk = (Skill)skill;
-       		if ( sk.isAdded() && sk.getCategory() == (SkillCategory)getSkill() ) {
-       			Log.d("SkillCategoryEditor", "Skill category: " + sk.getCategory() );
-       			Log.d("SkillCategoryEditor", "Editor category: " + (SkillCategory)getSkill() );
-       			Log.d( "SkillCategoryEditor", "Adding subSkill: " + skill.getName() );
+       		if ( sk.isAdded() && sk.getCategory() == (SkillCategory)mSkill ) {
        			addNewSkill( sk, true );
        		}
        	}
@@ -60,12 +56,12 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 	@Override
 	public void onClick(View v) {
 		if ( v != btnAddSkill ) return;				
-		addNewSkill( getSkills().newSkill( (SkillCategory)getSkill() ), false );
+		addNewSkill( mSkills.newSkill( (SkillCategory)mSkill ), false );
 	}
 	
 	private void addNewSkill( Skill newSkill, boolean lock ) {
 		int index = getIndexInParent();
-		EditableSkillEditor editor = new EditableSkillEditor( getContext(), getSkills(), newSkill );		
+		EditableSkillEditor editor = new EditableSkillEditor( getContext(), mSkills, newSkill );		
 		TableLayout table = (TableLayout)this.getParent();
 		table.addView( editor, index + 1 );
 		editor.addOnSkillChangedListeners( getOnSkillChangedListeners() );		
