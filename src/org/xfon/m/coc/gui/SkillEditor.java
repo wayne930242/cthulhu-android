@@ -14,18 +14,6 @@ public class SkillEditor extends BaseSkillEditor {
 	
 	public void initialize( Skills skills, Skill skill ) {
 		super.initialize( skills, skill );
-        setValue( skill.getValue() );
-        setName( skill.getName() );
     }
-		
-	private void setName( String title ) {
-		TextView tv = (TextView)this.findViewById( R.id.name );		
-		tv.setText( title );
-	}
-	
-	private void setValue( int value ) {
-		NumberPicker picker = (NumberPicker)findViewById( R.id.value );		
-		picker.setCurrent( value );
-	}
-	
+
 }

@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListener {
 	private Button btnAddSkill;
-	private SkillCategory category;
 	private SkillEditorFactory factory;
 	
 	public SkillCategoryEditor(Context context, SkillEditorFactory factory ) {
@@ -27,8 +26,6 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 			
 	public void initialize( Skills skills, SkillCategory category ) {
 		super.initialize( skills, category );
-		this.category = category;
-        setName( category.getName() );        
         btnAddSkill = (Button)findViewById( R.id.btnAddSkill );
        	btnAddSkill.setOnClickListener( this );
 	}
@@ -44,11 +41,6 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
        			addNewSkill( sk, true );
        		}
        	}
-	}
-	
-	private void setName( String title ) {
-		TextView tv = (TextView)this.findViewById( R.id.name );		
-		tv.setText( title );
 	}
 	
 	/**

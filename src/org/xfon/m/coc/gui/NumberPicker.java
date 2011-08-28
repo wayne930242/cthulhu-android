@@ -178,6 +178,20 @@ public class NumberPicker extends LinearLayout implements OnClickListener,
     }
     
     /**
+     * Set range and current, avoid calling updateView() twice
+     * 
+     * @param start the start of the range (inclusive)
+     * @param end the end of the range (inclusive)
+     * @param current the current value
+     */
+    public void setRangeAndCurrent( int start, int end, int current ) {
+    	mStart = start;
+        mEnd = end;
+        mCurrent = current;
+        updateView();
+    }
+    
+    /**
      * Specify if numbers should wrap after the edge has been reached.
      * 
      * @param wrap values

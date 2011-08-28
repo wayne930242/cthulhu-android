@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class BaseSkillEditor extends LinearLayout {
 	private Context context;
@@ -43,6 +44,10 @@ public class BaseSkillEditor extends LinearLayout {
 		this.mAvailable = false;
 
 		onSkillChangedListeners = new HashSet<OnSkillChangedListener>();
+		
+		TextView tv = (TextView) findViewById(R.id.name);
+		tv.setText( skill.getName() );
+		
 		CheckBox cb = (CheckBox) findViewById(R.id.isOccupational);
 		if (cb != null) {
 			cb.setChecked( skill.isOccupational() );			
@@ -57,9 +62,8 @@ public class BaseSkillEditor extends LinearLayout {
 		}
 		NumberPicker picker = (NumberPicker) findViewById(R.id.value);
 		if (picker != null) {
-			final Skill sk = (Skill)skill;
-			picker.setCurrent( sk.getValue() );
-	       	picker.setRange( sk.getBaseValue(), 99 );
+			final Skill sk = (Skill)skill;			
+	       	picker.setRangeAndCurrent( sk.getBaseValue(), 99, sk.getValue() );
 	       	picker.setSpeed( 150 );
 	       	picker.setWrap( false );	       			
 			picker.setOnChangeListener(new OnChangedListener() {

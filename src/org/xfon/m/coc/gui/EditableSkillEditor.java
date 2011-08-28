@@ -27,9 +27,6 @@ public class EditableSkillEditor extends BaseSkillEditor implements OnClickListe
 	
 	public void initialize( final Skills skills, final Skill skill ) {
 		super.initialize( skills, skill );		
-                
-        setValue( skill.getValue() );
-        setName( skill.getName() );
         
         tv = (TextView)this.findViewById( R.id.name );
 		edit = (EditText)this.findViewById( R.id.editableName );
@@ -62,18 +59,6 @@ public class EditableSkillEditor extends BaseSkillEditor implements OnClickListe
 		edit.setVisibility( View.VISIBLE );		
 	}
 
-	private void setName( String title ) {
-      	final TextView tv = (TextView)this.findViewById( R.id.name );
-		final EditText edit = (EditText)this.findViewById( R.id.editableName );
-		tv.setText( title );
-		edit.setText( title );
-	}
-	
-	private void setValue( int value ) {
-		NumberPicker picker = (NumberPicker)findViewById( R.id.value );		
-		picker.setCurrent( value );
-	}
-	
 	public void setEditFocus() {
 		final EditText edit = (EditText)this.findViewById( R.id.editableName );
 		edit.requestFocus();
