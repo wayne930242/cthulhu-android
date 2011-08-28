@@ -64,7 +64,8 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 		TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
         
-        for ( int i = 0; i < tabContentId.length; i++ ) {
+        int length = tabContentId.length; 
+        for ( int i = 0; i < length; i++ ) {
         	TabSpec spec=tabHost.newTabSpec( tabLabels[ i ] );
         	spec.setContent( tabContentId[ i ] );
         	spec.setIndicator( tabLabels[ i ] );

@@ -46,8 +46,7 @@ public class CocDatabaseAdapter {
 		values.put( "age", investigator.getAge() );
 		Attribute[] attributes = investigator.getBaseAttributes();
 		
-		for ( int i = 0; i < attributes.length; i++ ) {
-			Attribute attr = attributes[ i ];
+		for ( Attribute attr: attributes ) {			
 			String name = attr.getName().toLowerCase();
 			values.put( "base_" + name, attr.getUnmodifiedValue() );
 			values.put( "mod_" + name, attr.getMod() );
@@ -73,7 +72,8 @@ public class CocDatabaseAdapter {
 		db.delete( table, where, null );
 		
 		ContentValues values = new ContentValues();
-		for ( ISkill skill: investigator.getSkills().list() ) {
+		List<ISkill> skills = investigator.getSkills().list();
+		for ( ISkill skill: skills ) {
 			exists = false;
 			if ( skill.isCategory() ) continue;
 			
@@ -110,7 +110,8 @@ public class CocDatabaseAdapter {
 		boolean exists = false;
 
 		ContentValues values = new ContentValues();
-		for ( ISkill skill: investigator.getSkills().list() ) {
+		List<ISkill> skills = investigator.getSkills().list();
+		for ( ISkill skill: skills ) {
 			exists = false;
 			if ( !skill.isCategory() ) continue;
 			
@@ -151,8 +152,7 @@ public class CocDatabaseAdapter {
 				
 		columns.add( "age" );
 		Attribute[] attributes = investigator.getBaseAttributes();
-		for ( int i = 0; i < attributes.length; i++ ) {
-			Attribute attr = attributes[ i ];
+		for ( Attribute attr: attributes ) {			
 			String name = attr.getName().toLowerCase();
 			columns.add( "base_" + name );
 			columns.add( "mod_" + name );
@@ -166,8 +166,7 @@ public class CocDatabaseAdapter {
 			return;
 		}		
 		
-		for ( int i = 0; i < attributes.length; i++ ) {
-			Attribute attr = attributes[ i ];
+		for ( Attribute attr: attributes ) {			
 			String name = attr.getName().toLowerCase();
 			String baseName = "base_" + name;
 			String modName = "mod_" + name;

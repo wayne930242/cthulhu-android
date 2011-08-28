@@ -1,15 +1,11 @@
 package org.xfon.m.coc;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import org.xfon.m.coc.gui.NumberPicker;
 import org.xfon.m.coc.gui.NumberPicker.OnChangedListener;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.widget.TextView;
 
 public class Investigator  implements OnChangedListener {
 	private Activity activity;
@@ -80,8 +76,8 @@ public class Investigator  implements OnChangedListener {
 	
 	public void rerollBasicAttributes( StringBuffer log ) {
 		if ( log != null ) log.append( "Rolling attributes:\n------------------\n");
-		for ( int i = 0; i < baseAttributes.length; i++ ) {
-    		baseAttributes[i].roll( log ); // this also clears all mods
+		for ( Attribute attr: baseAttributes ) {
+    		attr.roll( log ); // this also clears all mods
     	}
 		if ( log != null ) log.append( "\n");
 		setBaseAge();		
@@ -112,7 +108,7 @@ public class Investigator  implements OnChangedListener {
 
 	public int getTotalAgeMods() {
 		int sum = 0;
-    	for ( int i = 0; i < ageModifiableAttributes.length; i++ ) sum += ageModifiableAttributes[ i ].getMod();
+    	for ( Attribute attr: ageModifiableAttributes ) sum += attr.getMod();
     	return sum;
 	}
 	
@@ -135,12 +131,10 @@ public class Investigator  implements OnChangedListener {
 		int ageDiff = selectedAge - age.getBaseAge();
 		int extraEdu = ageDiff / 10;
 		attrEdu.setMod( extraEdu );
-		// calculateDerivedAttributes(); // TODO 
 		
 		int newMustDrop = Math.max( 0, ( selectedAge / 10 ) - 3 );
 		if ( newMustDrop != mustDrop ) {
 			mustDrop = newMustDrop;
-			//updateMustDrop();
 		}						
 	}
 	

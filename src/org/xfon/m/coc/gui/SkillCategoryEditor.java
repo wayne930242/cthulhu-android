@@ -1,5 +1,7 @@
 package org.xfon.m.coc.gui;
 
+import java.util.List;
+
 import org.xfon.m.coc.ISkill;
 import org.xfon.m.coc.R;
 import org.xfon.m.coc.Skill;
@@ -34,7 +36,8 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		for ( ISkill skill: getSkills().list() ) {
+		List<ISkill> skills = getSkills().list();
+		for ( ISkill skill: skills ) {
 			if ( skill.isCategory() ) continue;
 			Skill sk = (Skill)skill;
        		if ( sk.isAdded() && sk.getCategory() == (SkillCategory)getSkill() ) {
