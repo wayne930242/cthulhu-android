@@ -22,11 +22,11 @@ public class EditableSkillEditor extends BaseSkillEditor implements OnClickListe
 	private CheckBox lockBox;
 		
 	public EditableSkillEditor(Context context) {
-		super(context, -1, null, null);
+		super(context );
 	}
 	
-	public EditableSkillEditor(Context context, final Skills skills, final Skill skill ) {
-		super(context, R.layout.editable_skill_editor, skills, skill);		
+	public void initialize( final Skills skills, final Skill skill ) {
+		super.initialize( R.layout.editable_skill_editor, skills, skill );		
                 
         setValue( skill.getValue() );
         setName( skill.getName() );
@@ -78,7 +78,6 @@ public class EditableSkillEditor extends BaseSkillEditor implements OnClickListe
 		final EditText edit = (EditText)this.findViewById( R.id.editableName );
 		edit.requestFocus();
 	}
-
 
 	@Override
 	public void onClick(View v) {			

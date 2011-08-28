@@ -20,12 +20,17 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 
 public class BaseSkillEditor extends LinearLayout {
+	private Context context;
 	protected Skills mSkills;
 	protected ISkill mSkill;
 	private Set<OnSkillChangedListener> onSkillChangedListeners;
 
-	public BaseSkillEditor(Context context, int layoutId, final Skills skills, final ISkill skill) {
-		super(context);
+	public BaseSkillEditor(Context context ) {
+		super(context);		
+		this.context = context;
+	}
+	
+	public void initialize( int layoutId, final Skills skills, final ISkill skill ) {
 		this.mSkills = skills;
 		this.mSkill = skill;
 

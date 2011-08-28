@@ -9,12 +9,11 @@ import android.widget.TextView;
 
 public class SkillEditor extends BaseSkillEditor {
 	public SkillEditor(Context context) {
-		super(context, -1, null, null); 
+		super(context ); 
 	}
 	
-	public SkillEditor(Context context, Skills skills, Skill skill ) {
-		super(context, R.layout.skill_editor, skills, skill);
-
+	public void initialize( Skills skills, Skill skill ) {
+		super.initialize( R.layout.skill_editor, skills, skill );
         setValue( skill.getValue() );
         setName( skill.getName() );
     }

@@ -9,6 +9,7 @@ import org.xfon.m.coc.gui.NumberPicker;
 import org.xfon.m.coc.gui.NumberPicker.OnChangedListener;
 import org.xfon.m.coc.gui.SkillCategoryEditor;
 import org.xfon.m.coc.gui.SkillEditor;
+import org.xfon.m.coc.gui.SkillEditorFactory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +20,7 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
@@ -43,11 +45,14 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
 	private int mustDrop = -1;
 	private boolean sound = true;
 	
+	private SkillEditorFactory skillEditorFactory;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbAdapter = new CocDatabaseAdapter(this);
+        skillEditorFactory = new SkillEditorFactory();
         Age age = new Age( this, R.id.tv_age );
         investigator = new Investigator( this, age );            
         clearErrors();                       
@@ -101,7 +106,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	Map<String, SkillCategoryEditor> categoryEditors = new HashMap<String, SkillCategoryEditor>();
     	for ( ISkill skill: investigator.getSkills().list() ) {
     		if ( skill.isCategory() ) {
-    			SkillCategoryEditor editor = new SkillCategoryEditor( this, investigator.getSkills(), (SkillCategory)skill );
+    			SkillCategoryEditor editor = skillEditorFactory.newSkillCategoryEditor( this, investigator.getSkills(), (SkillCategory)skill );
     			categoryEditors.put( skill.getName(), editor );
     			editor.addOnSkillChangedListener( this );
     			tableSkills.addView(  editor );
@@ -109,7 +114,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     		else {
     			Skill sk = (Skill)skill;
     			if ( sk.isAdded() )  continue;
-    			SkillEditor editor = new SkillEditor( this, investigator.getSkills(), sk );
+    			SkillEditor editor = skillEditorFactory.newSkillEditor( this, investigator.getSkills(), sk );
     			editor.addOnSkillChangedListener( this );
     			tableSkills.addView( editor );    			
     		}
@@ -170,6 +175,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
             
     public void rerollAttributes( View view ) {
     	if ( view.getId() != R.id.btn_roll ) return;    	
+    	//Debug.startMethodTracing( "reroll" );
     	notifyUser();
     	rerollBasicAttributes();
     	calculateDerivedAttributes();
@@ -182,6 +188,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	
     	clearErrors();  
     	((Button)findViewById( R.id.btn_roll )).setText( "Reroll" );
+    	//Debug.stopMethodTracing();
     }
     
     public void saveAttributes( View view ) {

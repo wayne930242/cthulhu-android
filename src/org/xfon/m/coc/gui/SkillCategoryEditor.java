@@ -1,7 +1,5 @@
 package org.xfon.m.coc.gui;
 
-import java.util.List;
-
 import org.xfon.m.coc.ISkill;
 import org.xfon.m.coc.R;
 import org.xfon.m.coc.Skill;
@@ -20,19 +18,21 @@ import android.widget.TextView;
 public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListener {
 	private Button btnAddSkill;
 	private SkillCategory category;
+	private SkillEditorFactory factory;
 	
-	public SkillCategoryEditor(Context context) {
-		super(context, -1, null, null);
+	public SkillCategoryEditor(Context context, SkillEditorFactory factory ) {
+		super(context );		
 	}
-	
-	public SkillCategoryEditor(Context context, Skills skills, SkillCategory category ) {
-		super(context, R.layout.skill_category_editor, skills, category);
+			
+	public void initialize( Skills skills, SkillCategory category ) {
+		super.initialize( R.layout.skill_category_editor, skills, category );
 		this.category = category;
         setName( category.getName() );        
         btnAddSkill = (Button)findViewById( R.id.btnAddSkill );
-       	btnAddSkill.setOnClickListener( this );       	       
+       	btnAddSkill.setOnClickListener( this );
 	}
 	
+	// TODO fix this
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();		
@@ -61,7 +61,7 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 	
 	private void addNewSkill( Skill newSkill, boolean lock ) {
 		int index = getIndexInParent();
-		EditableSkillEditor editor = new EditableSkillEditor( getContext(), mSkills, newSkill );		
+		EditableSkillEditor editor = factory.newEditableSkillEditor( getContext(), mSkills, newSkill );		
 		TableLayout table = (TableLayout)this.getParent();
 		table.addView( editor, index + 1 );
 		editor.addOnSkillChangedListeners( getOnSkillChangedListeners() );		
