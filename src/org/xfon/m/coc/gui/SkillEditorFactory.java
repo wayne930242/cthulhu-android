@@ -1,7 +1,5 @@
 package org.xfon.m.coc.gui;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +32,14 @@ public class SkillEditorFactory {
 		Log.i( getClass().getName(), "Requesting editor: " + cl.getName() );
 		for ( BaseSkillEditor editor: editors ) {
 			if ( editor.isAvailable() && cl.isAssignableFrom( editor.getClass() ) ) {
-				Log.i( getClass().getName(), "Returning existing: " + editor.toString() );
+				//Log.i( getClass().getName(), "Returning existing: " + editor.toString() );
 				return (T)editor;
 			}
 		}
 		T ret = null;
 		try {
 			ret = cl.getConstructor( cnstrSignature ).newInstance( cnstrArgs );
-			Log.i( getClass().getName(), "Adding new: " + ret.toString() );
+			//Log.i( getClass().getName(), "Adding new: " + ret.toString() );
 			editors.add( ret );
 		}
 		catch ( Exception e ) {

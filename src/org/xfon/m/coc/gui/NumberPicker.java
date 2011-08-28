@@ -185,10 +185,11 @@ public class NumberPicker extends LinearLayout implements OnClickListener,
      * @param current the current value
      */
     public void setRangeAndCurrent( int start, int end, int current ) {
+    	int oldCurrent = mCurrent;
     	mStart = start;
         mEnd = end;
         mCurrent = current;
-        updateView();
+        if ( mCurrent != oldCurrent ) updateView();
     }
     
     /**
@@ -212,8 +213,8 @@ public class NumberPicker extends LinearLayout implements OnClickListener,
     public void setRange(int start, int end, String[] displayedValues) {
         mDisplayedValues = displayedValues;
         mStart = start;
-        mEnd = end;
-        mCurrent = start;
+        mEnd = end;        
+        mCurrent = start;        
         updateView();
     }
 

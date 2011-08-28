@@ -176,7 +176,6 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
             
     public void rerollAttributes( View view ) {
     	if ( view.getId() != R.id.btn_roll ) return;    	
-    	Debug.startMethodTracing( "reroll" );
     	notifyUser();
     	rerollBasicAttributes();
     	calculateDerivedAttributes();
@@ -189,7 +188,6 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	
     	clearErrors();  
     	((Button)findViewById( R.id.btn_roll )).setText( "Reroll" );
-    	Debug.stopMethodTracing();
     }
     
     public void saveAttributes( View view ) {
