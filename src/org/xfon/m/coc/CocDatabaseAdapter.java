@@ -6,31 +6,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class CocDatabaseAdapter {	
-	private Context context;
-	private SQLiteDatabase db;
-	private CocDatabaseHelper dbHelper;
+	private Context context;	
 	
 	public CocDatabaseAdapter( Context context ) {		
 		this.context = context;			
 	}
 		
 	public synchronized void saveInvestigator( Investigator investigator, String saveName ) {
-		saveAttributes( investigator, saveName );
-		saveSkillCategories( investigator, saveName );
-		saveSkills( investigator, saveName );
+		CocDatabaseHelper dbHelper = new CocDatabaseHelper(context);
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		try {
+			db.beginTransaction();
+			saveAttributes( db, dbHelper, investigator, saveName );
+			saveSkillCategories( db, dbHelper, investigator, saveName );
+			saveSkills( db, dbHelper, investigator, saveName );
+			db.setTransactionSuccessful();
+		}
+		finally {
+			db.endTransaction();
+			db.close();
+		}
 	}
 	
 	
-	private void saveAttributes( Investigator investigator, String saveName ) {
-		dbHelper = new CocDatabaseHelper(context);				
-		db = dbHelper.getWritableDatabase();
+	private void saveAttributes( SQLiteDatabase db, CocDatabaseHelper dbHelper, Investigator investigator, String saveName ) {
 		String table = dbHelper.getAttributesTable();
 		boolean exists = false;
 		long result;
@@ -57,13 +62,10 @@ public class CocDatabaseAdapter {
 		}
 		else {
 			db.update( table, values, where, null );
-		}
-		db.close();
+		}		
 	}
 	
-	private void saveSkills( Investigator investigator, String saveName ) {
-		dbHelper = new CocDatabaseHelper(context);				
-		db = dbHelper.getWritableDatabase();
+	private void saveSkills( SQLiteDatabase db, CocDatabaseHelper dbHelper, Investigator investigator, String saveName ) {
 		String table = dbHelper.getSkillsTable();
 		boolean exists = false;
 
@@ -99,13 +101,10 @@ public class CocDatabaseAdapter {
 			else {
 				long result = db.update( table, values, where, null );
 			}
-		}
-		db.close();
+		}		
 	}
 	
-	private void saveSkillCategories( Investigator investigator, String saveName ) {
-		dbHelper = new CocDatabaseHelper(context);				
-		db = dbHelper.getWritableDatabase();
+	private void saveSkillCategories( SQLiteDatabase db, CocDatabaseHelper dbHelper, Investigator investigator, String saveName ) {		
 		String table = dbHelper.getSkillCategoriesTable();
 		boolean exists = false;
 
@@ -133,20 +132,28 @@ public class CocDatabaseAdapter {
 			else {
 				db.update( table, values, where, null );
 			}
-		}
-		db.close();
+		}		
 	}
 	
 	public synchronized void loadInvestigator( Investigator investigator, String saveName ) {
-		loadAttributes( investigator, saveName );
-		// ORDER IS IMPORTANT! Categories must be loaded first.
-		Map<String,SkillCategory> categories = loadSkillCategories( investigator, saveName );
-		loadSkills( investigator, saveName, categories );
+		CocDatabaseHelper dbHelper = new CocDatabaseHelper(context);
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		
+		// ORDER IS IMPORTANT! Categories must be loaded before skills	
+		try {
+			db.beginTransaction();
+			loadAttributes( db, dbHelper, investigator, saveName );
+			Map<String,SkillCategory> categories = loadSkillCategories( db, dbHelper, investigator, saveName );
+			loadSkills( db, dbHelper, investigator, saveName, categories );
+			db.setTransactionSuccessful();
+		}
+		finally {
+			db.endTransaction();
+			db.close();
+		}		
 	}
 	
-	private void loadAttributes( Investigator investigator, String saveName ) {
-		dbHelper = new CocDatabaseHelper(context);				
-		db = dbHelper.getReadableDatabase();
+	private void loadAttributes( SQLiteDatabase db, CocDatabaseHelper dbHelper, Investigator investigator, String saveName ) {
 		String table = dbHelper.getAttributesTable();
 		List<String> columns = new ArrayList<String>();
 				
@@ -161,8 +168,7 @@ public class CocDatabaseAdapter {
 		Cursor c = db.query( table, columns.toArray( new String[0] ), "name='" + saveName + "'", null, null, null, null, null );
 		boolean exists = c.moveToFirst();
 		if ( !exists ) {
-			c.close();
-			db.close();
+			c.close();			
 			return;
 		}		
 		
@@ -181,13 +187,10 @@ public class CocDatabaseAdapter {
 		int age = c.getInt( ageId );
 		investigator.setBaseAge();
 		investigator.setAge( age );
-		c.close();
-		db.close();
+		c.close();		
 	}
 	
-	private void loadSkills( Investigator investigator, String saveName, Map<String,SkillCategory> categories ) {
-		dbHelper = new CocDatabaseHelper(context);				
-		db = dbHelper.getReadableDatabase();
+	private void loadSkills( SQLiteDatabase db, CocDatabaseHelper dbHelper, Investigator investigator, String saveName, Map<String,SkillCategory> categories ) {
 		String table = dbHelper.getSkillsTable();		
 		String[] colNames = { "skill_name", "base_value", "value", "category_name", "is_occupational", "is_added" };
 		List<String> columns = new ArrayList<String>( Arrays.asList( colNames ) );
@@ -195,8 +198,7 @@ public class CocDatabaseAdapter {
 		Cursor c = db.query( table, columns.toArray( new String[0] ), "name='" + saveName + "'", null, null, null, null, null );
 		boolean exists = c.moveToFirst();
 		if ( !exists ) {
-			c.close();
-			db.close();
+			c.close();			
 			return;
 		}		
 		
@@ -239,13 +241,10 @@ public class CocDatabaseAdapter {
 		}
 		skills.sort();
 		investigator.setSkills( skills );
-		c.close();
-		db.close();
+		c.close();		
 	}
 	
-	private Map<String,SkillCategory> loadSkillCategories( Investigator investigator, String saveName ) {
-		dbHelper = new CocDatabaseHelper(context);				
-		db = dbHelper.getReadableDatabase();
+	private Map<String,SkillCategory> loadSkillCategories( SQLiteDatabase db, CocDatabaseHelper dbHelper, Investigator investigator, String saveName ) {
 		String table = dbHelper.getSkillCategoriesTable();
 		String[] colNames = { "category_name", "base_value", "is_occupational" };
 		List<String> columns = new ArrayList<String>( Arrays.asList( colNames ) );
@@ -254,8 +253,7 @@ public class CocDatabaseAdapter {
 		Cursor c = db.query( table, columns.toArray( new String[0] ), "name='" + saveName + "'", null, null, null, null, null );
 		boolean exists = c.moveToFirst();
 		if ( !exists ) {
-			c.close();
-			db.close();
+			c.close();			
 			return categories;
 		}		
 		
@@ -273,8 +271,7 @@ public class CocDatabaseAdapter {
 			categories.put( name, cat );
 			// TODO
 		} while ( c.moveToNext() );
-		c.close();
-		db.close();
+		c.close();		
 		return categories;
 	}
 }
