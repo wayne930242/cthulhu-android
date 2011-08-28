@@ -22,11 +22,11 @@ public class EditableSkillEditor extends BaseSkillEditor implements OnClickListe
 	private CheckBox lockBox;
 		
 	public EditableSkillEditor(Context context) {
-		super(context );
+		super(context, R.layout.editable_skill_editor );
 	}
 	
 	public void initialize( final Skills skills, final Skill skill ) {
-		super.initialize( R.layout.editable_skill_editor, skills, skill );		
+		super.initialize( skills, skill );		
                 
         setValue( skill.getValue() );
         setName( skill.getName() );

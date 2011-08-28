@@ -24,19 +24,23 @@ public class BaseSkillEditor extends LinearLayout {
 	protected Skills mSkills;
 	protected ISkill mSkill;
 	private Set<OnSkillChangedListener> onSkillChangedListeners;
+	private boolean mAvailable;
 
-	public BaseSkillEditor(Context context ) {
+	public BaseSkillEditor(Context context, int layoutId ) {
 		super(context);		
 		this.context = context;
-	}
-	
-	public void initialize( int layoutId, final Skills skills, final ISkill skill ) {
-		this.mSkills = skills;
-		this.mSkill = skill;
 
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(layoutId, this, true);
 		if (!isEnabled()) setEnabled(true);
+		
+		this.mAvailable = true;
+	}
+	
+	public void initialize( final Skills skills, final ISkill skill ) {
+		this.mSkills = skills;
+		this.mSkill = skill;
+		this.mAvailable = false;
 
 		onSkillChangedListeners = new HashSet<OnSkillChangedListener>();
 		CheckBox cb = (CheckBox) findViewById(R.id.isOccupational);
@@ -73,6 +77,11 @@ public class BaseSkillEditor extends LinearLayout {
 			});
 		}
 	}
+	
+	public void reset() {
+		// Just ignore this for now, as the editor will be removed anyway
+		mAvailable = true;
+	}
 
 	public void addOnSkillChangedListener(OnSkillChangedListener listener) {
 		onSkillChangedListeners.add(listener);
@@ -108,5 +117,9 @@ public class BaseSkillEditor extends LinearLayout {
 
 	protected Set<OnSkillChangedListener> getOnSkillChangedListeners() {
 		return onSkillChangedListeners;
+	}
+	
+	public boolean isAvailable() {
+		return mAvailable;
 	}
 }

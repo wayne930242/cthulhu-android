@@ -52,7 +52,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbAdapter = new CocDatabaseAdapter(this);
-        skillEditorFactory = new SkillEditorFactory();
+        skillEditorFactory = new SkillEditorFactory( this );
         Age age = new Age( this, R.id.tv_age );
         investigator = new Investigator( this, age );            
         clearErrors();                       
@@ -103,6 +103,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     	tableSkills.setShrinkAllColumns( false );
     	tableSkills.setStretchAllColumns( false );
     	tableSkills.removeAllViews();
+    	skillEditorFactory.resetEditors();
     	Map<String, SkillCategoryEditor> categoryEditors = new HashMap<String, SkillCategoryEditor>();
     	for ( ISkill skill: investigator.getSkills().list() ) {
     		if ( skill.isCategory() ) {
@@ -114,7 +115,7 @@ public class CallofCthulhuActivity extends Activity implements OnAttributeChange
     		else {
     			Skill sk = (Skill)skill;
     			if ( sk.isAdded() )  continue;
-    			SkillEditor editor = skillEditorFactory.newSkillEditor( this, investigator.getSkills(), sk );
+    			SkillEditor editor = skillEditorFactory.newSkillEditor( investigator.getSkills(), sk );
     			editor.addOnSkillChangedListener( this );
     			tableSkills.addView( editor );    			
     		}

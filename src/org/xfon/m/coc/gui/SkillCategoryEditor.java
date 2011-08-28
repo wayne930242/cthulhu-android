@@ -21,11 +21,12 @@ public class SkillCategoryEditor extends BaseSkillEditor implements OnClickListe
 	private SkillEditorFactory factory;
 	
 	public SkillCategoryEditor(Context context, SkillEditorFactory factory ) {
-		super(context );		
+		super(context, R.layout.skill_category_editor );
+		this.factory = factory;
 	}
 			
 	public void initialize( Skills skills, SkillCategory category ) {
-		super.initialize( R.layout.skill_category_editor, skills, category );
+		super.initialize( skills, category );
 		this.category = category;
         setName( category.getName() );        
         btnAddSkill = (Button)findViewById( R.id.btnAddSkill );
